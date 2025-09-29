@@ -1,0 +1,220 @@
+[
+    {
+      "id": "ssc-cgl-2024",
+      "title": "SSC CGL 2024 Recruitment Notification",
+      "examName": "Staff Selection Commission Combined Graduate Level",
+      "department": "Various Central Government Departments",
+      "organization": "Staff Selection Commission (SSC)",
+      "releaseDate": "24 June 2024",
+      "eligibility": "Bachelor's degree from a recognized university or equivalent qualification",
+      "publishedDate": "24 June 2024",
+      "examDate": "September-October 2024 (Tentative)",
+      "category": "Government",
+      "status": "Active",
+      "details": "The Staff Selection Commission will conduct Combined Graduate Level Examination, 2024 for recruitment to various Group \"B\" and Group \"C\" posts in different Ministries/ Departments/ Organizations of Government of India.",
+      "importantDates": [
+        {
+          "label": "Notification Release",
+          "value": "24 June 2024"
+        },
+        {
+          "label": "Online Application Start",
+          "value": "24 June 2024"
+        },
+        {
+          "label": "Online Application End",
+          "value": "24 July 2024",
+          "highlight": true
+        },
+        {
+          "label": "Last Date for Online Fee Payment",
+          "value": "25 July 2024"
+        },
+        {
+          "label": "Last Date for Generation of Offline Challan",
+          "value": "25 July 2024"
+        },
+        {
+          "label": "Last Date for Payment through Challan",
+          "value": "26 July 2024"
+        },
+        {
+          "label": "Tier-I Exam Date",
+          "value": "September-October 2024"
+        },
+        {
+          "label": "Tier-II Exam Date",
+          "value": "To be notified later"
+        }
+      ],
+      "officialLink": "https://ssc.nic.in"
+    },
+    {
+      "id": "upsc-cse-2024",
+      "title": "UPSC Civil Services Examination 2024",
+      "examName": "Civil Services Examination",
+      "department": "Indian Administrative Service, Indian Police Service, Indian Foreign Service",
+      "organization": "Union Public Service Commission (UPSC)",
+      "releaseDate": "14 February 2024",
+      "eligibility": "Bachelor's degree from a recognized university. Age limit: 21-32 years (with age relaxation for reserved categories as per rules)",
+      "publishedDate": "14 February 2024",
+      "examDate": "26 May 2024",
+      "category": "Government",
+      "status": "Completed",
+      "details": "The Civil Services Examination is conducted by UPSC annually in three stages - Preliminary, Main and Interview - for recruitment to various civil services of the Government of India including IAS, IPS, IFS and other central services.",
+      "importantDates": [
+        {
+          "label": "Notification Release",
+          "value": "14 February 2024"
+        },
+        {
+          "label": "Online Application Start",
+          "value": "14 February 2024"
+        },
+        {
+          "label": "Online Application End",
+          "value": "05 March 2024",
+          "highlight": true
+        },
+        {
+          "label": "Preliminary Exam",
+          "value": "26 May 2024"
+        },
+        {
+          "label": "Main Exam",
+          "value": "20 September 2024"
+        },
+        {
+          "label": "Result Declaration",
+          "value": "To be announced"
+        }
+      ],
+      "officialLink": "https://upsc.gov.in"
+    },
+    {
+      "id": "ibps-po-xiv",
+      "title": "IBPS PO XIV Recruitment 2024",
+      "examName": "Institute of Banking Personnel Selection Probationary Officer",
+      "department": "Public Sector Banks",
+      "organization": "Institute of Banking Personnel Selection (IBPS)",
+      "releaseDate": "To be announced",
+      "eligibility": "Graduate degree in any discipline from a recognized University or equivalent qualification. Age limit: 20-30 years",
+      "publishedDate": "August 2024 (Expected)",
+      "examDate": "October-November 2024 (Tentative)",
+      "category": "Banking",
+      "status": "Upcoming",
+      "details": "Common Recruitment Process for Probationary Officers/Management Trainees in Participating Banks is conducted by IBPS to recruit eligible candidates for PO/MT posts in various public sector banks.",
+      "importantDates": [
+        {
+          "label": "Notification Release",
+          "value": "August 2024 (Expected)"
+        },
+        {
+          "label": "Online Application Start",
+          "value": "August 2024 (Expected)"
+        },
+        {
+          "label": "Online Application End",
+          "value": "To be announced",
+          "highlight": true
+        },
+        {
+          "label": "Preliminary Exam",
+          "value": "October 2024 (Tentative)"
+        },
+        {
+          "label": "Main Exam",
+          "value": "November 2024 (Tentative)"
+        }
+      ],
+      "officialLink": "https://ibps.in"
+    },
+    {
+      "id": "cds-ii-2024",
+      "title": "UPSC CDS II 2024 Notification",
+      "examName": "Combined Defence Services Examination (II)",
+      "department": "Indian Military Academy, Indian Naval Academy, Air Force Academy, Officers Training Academy",
+      "organization": "Union Public Service Commission (UPSC)",
+      "releaseDate": "15 May 2024",
+      "eligibility": "For IMA: Degree from a recognized university. For OTA: Degree from a recognized university. Age limits vary by academy",
+      "publishedDate": "15 May 2024",
+      "examDate": "01 September 2024",
+      "category": "Defense",
+      "status": "Active",
+      "details": "The Combined Defence Services Examination (II) is conducted by UPSC for admission to the Indian Military Academy, Indian Naval Academy, Air Force Academy, and Officers Training Academy.",
+      "importantDates": [
+        {
+          "label": "Notification Release",
+          "value": "15 May 2024"
+        },
+        {
+          "label": "Online Application Start",
+          "value": "15 May 2024"
+        },
+        {
+          "label": "Online Application End",
+          "value": "04 June 2024",
+          "highlight": true
+        },
+        {
+          "label": "Last Date for Fee Payment",
+          "value": "04 June 2024"
+        },
+        {
+          "label": "Admit Card Release",
+          "value": "August 2024"
+        },
+        {
+          "label": "Exam Date",
+          "value": "01 September 2024"
+        }
+      ],
+      "officialLink": "https://upsc.gov.in"
+    },
+    {
+      "id": "neet-ug-2024",
+      "title": "NEET UG 2024",
+      "examName": "National Eligibility cum Entrance Test (Undergraduate)",
+      "department": "Medical Education",
+      "organization": "National Testing Agency (NTA)",
+      "releaseDate": "09 February 2024",
+      "eligibility": "Class 12 or equivalent with Physics, Chemistry, Biology/Biotechnology. Minimum 50% marks (40% for reserved categories). Age limit: 17-25 years",
+      "publishedDate": "09 February 2024",
+      "examDate": "05 May 2024",
+      "category": "Medical",
+      "status": "Completed",
+      "details": "NEET (UG) is the single entrance examination for admission to MBBS, BDS, BAMS, BSMS, BUMS, BHMS and other undergraduate medical courses in approved/recognized Medical/Dental/AYUSH and other Colleges/Deemed Universities/Institutes (AIIMS & JIPMER) in India.",
+      "importantDates": [
+        {
+          "label": "Notification Release",
+          "value": "09 February 2024"
+        },
+        {
+          "label": "Online Application Start",
+          "value": "09 February 2024"
+        },
+        {
+          "label": "Online Application End",
+          "value": "09 March 2024",
+          "highlight": true
+        },
+        {
+          "label": "Last Date for Fee Payment",
+          "value": "10 March 2024"
+        },
+        {
+          "label": "Correction Window",
+          "value": "12-15 March 2024"
+        },
+        {
+          "label": "Exam Date",
+          "value": "05 May 2024"
+        },
+        {
+          "label": "Result Declaration",
+          "value": "04 June 2024"
+        }
+      ],
+      "officialLink": "https://neet.nta.nic.in"
+    }
+  ]
