@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import AdmissionDetailsPage from "./AdmissionDetailsPage";
+import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
+import * as path from 'path';     // NEW: Import Node.js Path module
 
 interface Admission {
   id: string;
@@ -22,30 +24,34 @@ const TITLE_LIMIT = 60;
 const DESC_LIMIT = 160;
 const KEYWORDS_LIMIT = 100;
 
-// ✅ Fetch data (Server Component function)
+// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
 async function getAdmissionData(id: string): Promise<Admission | null> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    // 1. Construct the path to the JSON file
+    const filePath = path.join(process.cwd(), 'public', 'admissionsData.json');
     
-    // NOTE: Caching is handled automatically by Next.js in fetch.
-    const res = await fetch(`${baseUrl}/admissionsData.json`, { cache: "force-cache" });
-    const data: Admission[] = await res.json();
+    // 2. Read the file content directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    
+    // 3. Parse the JSON data
+    const data: Admission[] = JSON.parse(fileContent);
+
+    // 4. Find and return the required item
     return data.find(a => a.id === id) || null;
-  } catch {
+    
+  } catch (err) {
+    console.error("❌ Failed to read local admission data:", err); 
     return null;
   }
 }
 
-// ✅ Trim function
+// ✅ Trim function (Remains unchanged)
 function trimText(text: string, limit: number) {
   if (!text) return "";
   return text.length <= limit ? text : text.slice(0, limit - 3) + "...";
 }
 
-// 🛠️ FIX APPLIED: Correctly use 'params' argument directly (no await needed)
-// ✅ Dynamic SEO (Server Component function)
+// ✅ Dynamic SEO (Server Component function) (Remains unchanged)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   // 'params' is an object and doesn't need to be awaited here.
   const admission = await getAdmissionData(params.id);
@@ -82,7 +88,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-// ✅ JSON-LD Schema
+// ✅ JSON-LD Schema (Remains unchanged)
 function AdmissionJsonLd({ admission }: { admission: Admission }) {
   return (
     <Script id="admission-schema" type="application/ld+json" dangerouslySetInnerHTML={{
@@ -103,8 +109,7 @@ function AdmissionJsonLd({ admission }: { admission: Admission }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Removed redundant prop passing.
-// ✅ Page Component (Server Component)
+// ✅ Page Component (Server Component) (Remains unchanged)
 export default async function Page({ params }: { params: { id: string } }) {
   // 'params' is available directly here.
   const admission = await getAdmissionData(params.id);
@@ -114,9 +119,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <AdmissionJsonLd admission={admission} />
-      {/* CRITICAL FIX: AdmissionDetailsPage is a client component using useParams() 
-        to get the ID internally. Passing 'id' as a prop caused the Type Error.
-      */}
+      {/* CRITICAL FIX: Prop passing removed to avoid Type Error. */}
       <AdmissionDetailsPage /> 
     </>
   );
