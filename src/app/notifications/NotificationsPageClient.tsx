@@ -4,14 +4,28 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Bell, Calendar } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIX ---
+
+interface Notification {
+  id: string;
+  title: string;
+  publishedDate: string;
+  [key: string]: any; // Allow other properties from JSON
+}
+
+// --- END OF TYPESCRIPT FIX ---
+
+
 const NotificationsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [notificationsData, setNotificationsData] = useState([]);
+  // Apply Notification interface to state
+  const [notificationsData, setNotificationsData] = useState<Notification[]>([]);
 
   useEffect(() => {
     fetch("/notificationsData.json") // fetch from public folder
       .then((res) => res.json())
-      .then((data) => setNotificationsData(data))
+      // Cast fetched data
+      .then((data: Notification[]) => setNotificationsData(data)) 
       .catch((err) => console.error(err));
   }, []);
 
