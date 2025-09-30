@@ -1,9 +1,9 @@
 // app/syllabus/page.tsx
 
 import SyllabusPage from "./SyllabusPageClient"; // your client component
+import { Metadata } from "next"; // Import Metadata type explicitly
 
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "Latest Exam Syllabus 2025 | Govt & Competitive Exams Portal",
   description:
     "Download detailed syllabus for government and competitive exams. Stay updated with official exam syllabus for UPSC, SSC, JEE, NEET, and more.",
@@ -14,11 +14,13 @@ export const metadata = {
     title: "Latest Exam Syllabus 2025 | Govt & Competitive Exams Portal",
     description:
       "Download detailed syllabus for government and competitive exams. Stay updated with official exam syllabus for UPSC, SSC, JEE, NEET, and more.",
-    url: "https://yourwebsite.com/syllabus",
+    // FIX APPLIED: Updated URL to Netlify domain
+    url: "https://sarkariportl.netlify.app/syllabus",
     siteName: "Govt & Competitive Exams Portal",
     images: [
       {
-        url: "https://yourwebsite.com/default-og-syllabus.png",
+        // FIX APPLIED: Updated URL to Netlify domain
+        url: "https://sarkariportl.netlify.app/default-og-syllabus.png",
         width: 1200,
         height: 630,
         alt: "Exam Syllabus",
@@ -32,11 +34,13 @@ export const metadata = {
     title: "Latest Exam Syllabus 2025 | Govt & Competitive Exams Portal",
     description:
       "Download detailed syllabus for government and competitive exams. Stay updated with official exam syllabus for UPSC, SSC, JEE, NEET, and more.",
-    images: ["https://yourwebsite.com/default-og-syllabus.png"],
+    // FIX APPLIED: Updated URL to Netlify domain
+    images: ["https://sarkariportl.netlify.app/default-og-syllabus.png"],
     creator: "@YourTwitterHandle",
   },
   alternates: {
-    canonical: "https://yourwebsite.com/syllabus",
+    // FIX APPLIED: Updated canonical URL
+    canonical: "https://sarkariportl.netlify.app/syllabus",
   },
 };
 
