@@ -14,6 +14,7 @@ interface Admission {
   seats: string;
   contact: { website: string };
   imageUrl?: string;
+  // Add other properties used in JSON-LD if necessary
 }
 
 // Max character limits
@@ -21,12 +22,14 @@ const TITLE_LIMIT = 60;
 const DESC_LIMIT = 160;
 const KEYWORDS_LIMIT = 100;
 
-// ✅ Fetch data
+// ✅ Fetch data (Server Component function)
 async function getAdmissionData(id: string): Promise<Admission | null> {
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    
+    // NOTE: Caching is handled automatically by Next.js in fetch.
     const res = await fetch(`${baseUrl}/admissionsData.json`, { cache: "force-cache" });
     const data: Admission[] = await res.json();
     return data.find(a => a.id === id) || null;
@@ -41,12 +44,11 @@ function trimText(text: string, limit: number) {
   return text.length <= limit ? text : text.slice(0, limit - 3) + "...";
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
-// ✅ Dynamic SEO
+// 🛠️ FIX APPLIED: Correctly use 'params' argument directly (no await needed)
+// ✅ Dynamic SEO (Server Component function)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const admission = await getAdmissionData(resolvedParams.id);
+  // 'params' is an object and doesn't need to be awaited here.
+  const admission = await getAdmissionData(params.id);
   
   if (!admission) return { title: "Admission Not Found", description: "Admission not found", robots: "noindex, follow" };
 
@@ -101,18 +103,21 @@ function AdmissionJsonLd({ admission }: { admission: Admission }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
-// ✅ Page Component
+// 🛠️ FIX APPLIED: Removed redundant prop passing.
+// ✅ Page Component (Server Component)
 export default async function Page({ params }: { params: { id: string } }) {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const admission = await getAdmissionData(resolvedParams.id);
+  // 'params' is available directly here.
+  const admission = await getAdmissionData(params.id);
   
   if (!admission) return <div className="p-6 text-red-600">Admission not found.</div>;
   
-  return <>
-    <AdmissionJsonLd admission={admission} />
-    {/* Use resolvedParams.id for the client component */}
-    <AdmissionDetailsPage id={resolvedParams.id} />
-  </>;
+  return (
+    <>
+      <AdmissionJsonLd admission={admission} />
+      {/* CRITICAL FIX: AdmissionDetailsPage is a client component using useParams() 
+        to get the ID internally. Passing 'id' as a prop caused the Type Error.
+      */}
+      <AdmissionDetailsPage /> 
+    </>
+  );
 }
