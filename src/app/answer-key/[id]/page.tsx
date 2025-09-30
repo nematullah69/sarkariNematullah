@@ -53,16 +53,15 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
 // ✅ Dynamic Metadata for Answer Key Details
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const key = await getAnswerKey(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const key = await getAnswerKey(params.id);
 
   if (!key) {
     return {
@@ -152,12 +151,11 @@ function AnswerKeyJsonLd({ answerKey }: { answerKey: AnswerKey }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const key = await getAnswerKey(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const key = await getAnswerKey(params.id);
 
   if (!key) {
     return <div className="p-6 text-red-600">Answer Key not found.</div>;
@@ -166,8 +164,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <AnswerKeyJsonLd answerKey={key} />
-      {/* Pass the resolved ID to the client component if it needs to fetch data */}
-      <AnswerKeyDetailsPageClient answerKeyId={resolvedParams.id} />
+      {/* Client Component: Passing the ID as a prop is now the best practice, 
+          assuming you've removed useParams() from the client component. 
+          If the client component still uses useParams(), remove the prop entirely.
+      */}
+      <AnswerKeyDetailsPageClient answerKeyId={key.id} /> 
     </>
   );
 }
