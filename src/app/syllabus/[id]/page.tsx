@@ -94,11 +94,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       title: seoTitle,
       description: seoDesc,
-      url: `https://yourwebsite.com/syllabus/${syllabus.id}`,
+      url: `https://sarkariportl.netlify.app/syllabus/${syllabus.id}`,
       siteName: "Govt Exams Portal",
       images: [
         {
-          url: "https://yourwebsite.com/default-og-syllabus.png",
+          url: "https://sarkariportl.netlify.app/default-og-syllabus.png",
           width: 1200,
           height: 630,
           alt: syllabus.examName,
@@ -111,11 +111,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       card: "summary_large_image",
       title: seoTitle,
       description: seoDesc,
-      images: ["https://yourwebsite.com/default-og-syllabus.png"],
+      images: ["https://sarkariportl.netlify.app/default-og-syllabus.png"],
       creator: "@YourTwitterHandle",
     },
     alternates: {
-      canonical: `https://yourwebsite.com/syllabus/${syllabus.id}`,
+      canonical: `https://sarkariportl.netlify.app/syllabus/${syllabus.id}`,
     },
   };
 }
