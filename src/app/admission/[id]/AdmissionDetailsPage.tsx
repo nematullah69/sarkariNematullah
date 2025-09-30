@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation"; // useParams is from next/navigation for client components
 import Link from "next/link";
-// ... all your icon imports remain ...
+// --- Removed unused imports: FileText, UserCheck, AdmissionPageProps ---
 import { 
   ArrowLeft, 
   Building, 
@@ -12,7 +12,6 @@ import {
   ExternalLink,
   Home,
   ChevronRight,
-  FileText,
   Clock,
   Users,
   DollarSign,
@@ -24,11 +23,10 @@ import {
   Phone,
   Mail,
   Globe,
-  UserCheck,
   ClipboardList
 } from "lucide-react";
 
-// --- START OF TYPESCRIPT FIX ---
+// --- START OF TYPESCRIPT FIX (Interfaces kept as they are) ---
 
 // 1. Define the props structure for your component based on the URL params.
 // The file is in [id]/page.tsx, so the params object contains 'id'.
@@ -39,7 +37,6 @@ interface AdmissionPageProps {
 }
 
 // 2. Define the expected structure of a single 'admission' object
-// (You'll need to define this accurately based on your JSON data structure)
 interface Admission {
   id: string;
   title: string;
@@ -75,12 +72,8 @@ interface Admission {
   };
 }
 
-// NOTE: We are removing the old AdmissionDetailsPage component entirely
-// and replacing it with the standard Next.js page component function.
-// Since you are using Client Hooks (useParams, useState, useEffect), 
-// we'll keep the logic that uses 'useParams()'.
+// --- END OF TYPESCRIPT FIX ---
 
-// We rename the main function to reflect that it is the default export
 const AdmissionDetailsContent = () => {
   // We MUST use useParams here because this is a client component
   const { id } = useParams() as { id: string };
@@ -418,7 +411,7 @@ const AdmissionDetailsContent = () => {
                 <div>
                   <h4 className="font-medium text-red-800 mb-1">Application Deadline</h4>
                   <p className="text-sm text-red-700 mb-3">
-                    The last date to apply is {admission.applicationEnd}. Don't miss the opportunity!
+                    The last date to apply is {admission.applicationEnd}. Don&apos;t miss the opportunity!
                   </p>
                   <a
                     href={admission.applyLink}
