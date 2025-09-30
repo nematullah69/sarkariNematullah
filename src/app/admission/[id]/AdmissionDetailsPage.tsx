@@ -1,8 +1,9 @@
-"use client"
+"use client" // This remains as you need hooks like useState, useEffect, useParams
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams } from "next/navigation"; // useParams is from next/navigation for client components
 import Link from "next/link";
+// ... all your icon imports remain ...
 import { 
   ArrowLeft, 
   Building, 
@@ -27,23 +28,70 @@ import {
   ClipboardList
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIX ---
 
+// 1. Define the props structure for your component based on the URL params.
+// The file is in [id]/page.tsx, so the params object contains 'id'.
+interface AdmissionPageProps {
+  params: {
+    id: string;
+  };
+}
 
+// 2. Define the expected structure of a single 'admission' object
+// (You'll need to define this accurately based on your JSON data structure)
+interface Admission {
+  id: string;
+  title: string;
+  university: string;
+  organization: string;
+  status: 'Open' | 'Closed' | 'Coming Soon';
+  category: string;
+  courseType: string;
+  seats: string;
+  fees: string;
+  overview: string;
+  courseName: string;
+  applicationStart: string;
+  applicationEnd: string;
+  applyLink: string;
+  brochureLink: string;
+  syllabusLink: string;
+  eligibility: string[];
+  importantDates: { label: string; value: string; highlight: boolean }[];
+  applicationProcess: { title: string; description: string }[];
+  selectionProcess: string[];
+  requiredDocuments: string[];
+  courseDetails: {
+      structure: string;
+      duration: string;
+      specializations: string[];
+  };
+  contact: {
+      phone: string;
+      email: string;
+      website: string;
+      address: string;
+  };
+}
 
+// NOTE: We are removing the old AdmissionDetailsPage component entirely
+// and replacing it with the standard Next.js page component function.
+// Since you are using Client Hooks (useParams, useState, useEffect), 
+// we'll keep the logic that uses 'useParams()'.
 
-
-
-
-const AdmissionDetailsPage = () => {
-  const { id } = useParams();
-  const [admissions, setAdmissions] = useState([]);
-  const [admission, setAdmission] = useState(null);
+// We rename the main function to reflect that it is the default export
+const AdmissionDetailsContent = () => {
+  // We MUST use useParams here because this is a client component
+  const { id } = useParams() as { id: string };
+  const [admissions, setAdmissions] = useState<Admission[]>([]);
+  const [admission, setAdmission] = useState<Admission | null>(null);
 
   // Load data from public folder JSON
   useEffect(() => {
     fetch("/admissionsData.json")
       .then(res => res.json())
-      .then(data => setAdmissions(data))
+      .then((data: Admission[]) => setAdmissions(data))
       .catch(err => console.error(err));
   }, []);
 
@@ -51,10 +99,12 @@ const AdmissionDetailsPage = () => {
   useEffect(() => {
     if (admissions.length > 0) {
       const found = admissions.find(a => a.id === id);
-      setAdmission(found);
+      setAdmission(found || null);
     }
   }, [admissions, id]);
 
+  // --- REST OF YOUR ORIGINAL CODE (UNCHANGED) ---
+  
   if (!admission) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -71,7 +121,7 @@ const AdmissionDetailsPage = () => {
     );
   }
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: Admission['status']) => {
     switch (status) {
       case "Open": return "bg-green-100 text-green-800";
       case "Closed": return "bg-red-100 text-red-800";
@@ -265,8 +315,6 @@ const AdmissionDetailsPage = () => {
               </div>
             </div>
 
- 
-
             {/* Important Links */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-lg font-bold text-gray-800 mb-4">Important Links</h3>
@@ -283,11 +331,9 @@ const AdmissionDetailsPage = () => {
               </div>
             </div>
 
-
-
             {/* Contact Info & Action Buttons */}
-               {/* Contact Information */}
-               <div className="bg-white rounded-lg shadow-md p-6">
+            {/* Contact Information */}
+            <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">Contact Information</h2>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
@@ -333,7 +379,6 @@ const AdmissionDetailsPage = () => {
                 <span>Download Brochure</span>
               </a>
             </div>
-
           </div>
 
           {/* Sidebar */}
@@ -366,8 +411,6 @@ const AdmissionDetailsPage = () => {
               </div>
             </div>
 
- 
-
             {/* Deadline Alert */}
             <div className="bg-red-50 border border-red-200 rounded-lg p-4">
               <div className="flex items-start space-x-3">
@@ -390,11 +433,10 @@ const AdmissionDetailsPage = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   );
 };
 
-export default AdmissionDetailsPage;
+export default AdmissionDetailsContent;
