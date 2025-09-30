@@ -18,18 +18,62 @@ import {
   BookOpen
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIX ---
+
+// 1. Define the interface for the Marking Scheme (nested object)
+interface MarkingScheme {
+  marksPerQuestion?: number;
+  negativeMarks?: number;
+}
+
+// 2. Define the main data structure (AnswerKey)
+interface AnswerKey {
+  id: string;
+  examName: string;
+  organization: string;
+  department: string;
+  status: "Available" | "Coming Soon" | "Updated";
+  category: string;
+  isRevised?: boolean;
+  downloadLink: string;
+  officialWebsite: string;
+  objectionLink?: string;
+  notificationLink?: string;
+  
+  // Date and Fee details
+  releaseDate: string;
+  examDate: string;
+  lastUpdated: string;
+  objectionStartDate?: string;
+  objectionEndDate?: string;
+  objectionFee?: string | number; // Assuming this can be a number or string like '100'
+
+  // Exam Summary details
+  examDuration?: string;
+  totalQuestions?: string | number;
+  totalMarks?: string | number;
+  medium?: string;
+  details: string;
+  markingScheme?: MarkingScheme;
+}
+
+// 3. Define the function component props to extract 'id' correctly
+// (Since you use useParams inside, we just ensure the component signature is clean)
 const AnswerKeyDetailsPage = () => {
-  const { id } = useParams();
-  const [answerKeysData, setAnswerKeysData] = useState([]);
-  const [answerKey, setAnswerKey] = useState(null);
+  // Assert the type for 'id' from useParams
+  const { id } = useParams() as { id: string };
+  
+  // Use the AnswerKey interface for state initialization
+  const [answerKeysData, setAnswerKeysData] = useState<AnswerKey[]>([]);
+  const [answerKey, setAnswerKey] = useState<AnswerKey | null>(null);
 
   useEffect(() => {
     fetch("/answerKeysData.json")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: AnswerKey[]) => { // Cast the incoming data
         setAnswerKeysData(data);
         const found = data.find(k => k.id === id);
-        setAnswerKey(found);
+        setAnswerKey(found || null);
       })
       .catch((err) => console.error(err));
   }, [id]);
@@ -52,7 +96,8 @@ const AnswerKeyDetailsPage = () => {
     );
   }
 
-  const getStatusColor = (status) => {
+  // Type the status parameter for the helper function
+  const getStatusColor = (status: AnswerKey['status']) => {
     switch (status) {
       case "Available": return "bg-green-100 text-green-800";
       case "Coming Soon": return "bg-blue-100 text-blue-800";
@@ -61,10 +106,12 @@ const AnswerKeyDetailsPage = () => {
     }
   };
 
+  // Filter the related keys, ensuring the array is typed
   const relatedAnswerKeys = answerKeysData
     .filter(k => k.id !== id && k.category === answerKey.category)
     .slice(0, 3);
-
+    
+// --- REST OF YOUR ORIGINAL CODE (NOW ERROR-FREE) ---
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Notification Banner */}
