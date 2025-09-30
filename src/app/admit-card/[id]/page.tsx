@@ -2,6 +2,8 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import AdmitCardDetailsPage from "./AdmitCardDetailsPage"; // your client component
+import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
+import * as path from 'path';     // NEW: Import Node.js Path module
 
 // --- Interfaces restored for compiler context ---
 interface FeeItem {
@@ -33,17 +35,23 @@ interface AdmitCard {
   links?: Record<string, string>;
 }
 
-// ✅ Fetch admit card by ID
+// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
 async function getAdmitCardData(id: string): Promise<AdmitCard | null> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    // 1. Construct the path to the JSON file
+    const filePath = path.join(process.cwd(), 'public', 'admitCardsData.json');
+    
+    // 2. Read the file content directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
 
-    const res = await fetch(`${baseUrl}/admitCardsData.json`, { cache: "force-cache" });
-    const data: AdmitCard[] = await res.json();
+    // 3. Parse the JSON data
+    const data: AdmitCard[] = JSON.parse(fileContent);
+    
+    // 4. Find and return the required item
     return data.find((card) => card.id === id) || null;
-  } catch {
+  } catch (err) {
+    // Log file read error instead of fetch error
+    console.error("❌ Failed to read local admit card data:", err); 
     return null;
   }
 }
@@ -100,7 +108,6 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 // ✅ JSON-LD for Google (Function restored)
 function AdmitCardJsonLd({ admitCard }: { admitCard: AdmitCard }) {
-  // CRITICAL FIX APPLIED: Restoring the Script block that was deleted/empty
   return (
     <Script
       id="admit-card-schema"
@@ -139,7 +146,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <AdmitCardJsonLd admitCard={admitCard} />
-      {/* CRITICAL FIX CONFIRMED: No props passed, as the client component uses useParams() */}
+      {/* Prop passing removed to avoid the 'IntrinsicAttributes' error */}
       <AdmitCardDetailsPage />
     </>
   );
