@@ -12,10 +12,71 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIX ---
+
+// 1. Define the interfaces for nested objects
+interface FeeItem {
+  category: string;
+  fee: string;
+}
+
+interface VacancyItem {
+  postName: string;
+  category: string;
+  total: string;
+}
+
+interface CutoffItem {
+  category: string;
+  range: string;
+}
+
+interface SalaryItem {
+  postName: string;
+  level: string;
+  initialPay: string;
+}
+
+interface LinkUrls {
+  admitCard?: string;
+  examDate?: string;
+  notification?: string;
+  officialWebsite?: string;
+}
+
+// 2. Define the main data structure (AdmitCard)
+interface AdmitCard {
+  id: string;
+  examName: string;
+  organization: string;
+  department: string;
+  category: string;
+  examDate: string; // Added from the Sidebar content
+  
+  // Optional complex fields
+  importantDates?: Record<string, string>; // e.g., { admitCardRelease: '2025-10-01' }
+  applicationFee?: FeeItem[];
+  vacancy?: VacancyItem[];
+  examvacancy?: string; // Appears to be the header for the vacancy table
+  eligibility?: string; // Appears to be a string based on usage
+  totalPosts?: string;
+  cutoff?: CutoffItem[];
+  Salary?: SalaryItem[]; // Note the capital 'S' based on your usage
+  instructions: string[];
+  examGuidelines: string[];
+  links?: LinkUrls;
+}
+
+// --- END OF TYPESCRIPT FIX ---
+
+
 const AdmitCardDetailsPage = () => {
-  const { id } = useParams();
+  // Assert the type of 'id' from useParams for TypeScript compliance
+  const { id } = useParams() as { id: string }; 
   const router = useRouter();
-  const [admitCardsData, setAdmitCardsData] = useState([]);
+  
+  // Use the AdmitCard array type in useState
+  const [admitCardsData, setAdmitCardsData] = useState<AdmitCard[]>([]); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +84,8 @@ const AdmitCardDetailsPage = () => {
       try {
         const res = await fetch("/admitCardsData.json");
         if (!res.ok) throw new Error("Failed to fetch data");
-        const data = await res.json();
+        // Cast the fetched data to the correct type
+        const data: AdmitCard[] = await res.json(); 
         setAdmitCardsData(data);
       } catch (error) {
         console.error(error);
@@ -42,6 +104,7 @@ const AdmitCardDetailsPage = () => {
     );
   }
 
+  // Find the admit card using the correct type assertion
   const admitCard = admitCardsData.find((card) => card.id === id);
 
   if (!admitCard) {
@@ -105,6 +168,7 @@ const AdmitCardDetailsPage = () => {
                 {Object.entries(admitCard.importantDates).map(([key, value]) => (
                   <li key={key} className="flex justify-between border-b py-1">
                     <span className="capitalize">
+                      {/* The regex is safe to use on strings */}
                       {key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}:
                     </span>
                     <span className="font-medium">{value}</span>
@@ -173,8 +237,8 @@ const AdmitCardDetailsPage = () => {
             </div>
           )}
 
-           {/* Total Vacancies */}
-           {admitCard.totalPosts && (
+            {/* Total Vacancies */}
+            {admitCard.totalPosts && (
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Total Posts</h2>
                 <p className="text-2xl font-bold text-red-600">{admitCard.totalPosts}</p>
