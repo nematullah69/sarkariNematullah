@@ -21,7 +21,7 @@ import {
 interface ImportantDate {
   label: string;
   value: string;
-  highlight?: boolean; // Highlight is optional
+  highlight?: boolean;
 }
 
 // 2. Main Notification Interface
@@ -223,7 +223,7 @@ const NotificationDetailsPage = () => {
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-green-600 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-green-800 mb-1">Don't Miss Out!</h4>
+                  <h4 className="font-medium text-green-800 mb-1">Don&apos;t Miss Out!</h4>
                   <p className="text-sm text-green-700 mb-3">
                     Check the official notification for complete details and application process.
                   </p>
