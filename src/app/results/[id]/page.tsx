@@ -1,8 +1,12 @@
+// app/answer-key/[id]/page.tsx
 import { Metadata } from "next";
 import Script from "next/script";
 import ResultDetailsPageClient from "./ResultDetailsPageClient";
+import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
+import * as path from 'path';     // NEW: Import Node.js Path module
 
 interface Result {
+// ... (Interface remains unchanged)
   id: string;
   examName: string;
   organization: string;
@@ -30,28 +34,32 @@ interface Result {
 // ✅ Fetch Result Data
 async function getResultData(id: string): Promise<Result | null> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    // 1. Construct the path to the JSON file
+    const filePath = path.join(process.cwd(), 'public', 'resultsData.json');
 
-    const res = await fetch(`${baseUrl}/resultsData.json`, { cache: "force-cache" });
-    const data: Result[] = await res.json();
+    // 2. Read the file content directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    
+    // 3. Parse the JSON data
+    const data: Result[] = JSON.parse(fileContent);
+    
+    // 4. Find and return the required item
     return data.find((r) => r.id === id) || null;
   } catch (err) {
-    console.error("Failed to fetch result data:", err);
+    // Log file read error instead of fetch error
+    console.error("❌ Failed to read local result data:", err);
     return null;
   }
 }
 
-// ✅ Helper → Trim with 5% safe margin
+// ✅ Helper → Trim with 5% safe margin (Remains unchanged)
 function trimText(text: string, max: number): string {
   if (!text) return "";
   const safeLimit = Math.floor(max * 0.95); // 5% margin
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
-// ✅ Dynamic SEO Metadata
+// ✅ Dynamic SEO Metadata (Remains unchanged)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   // CORRECT: Access params.id directly
   const result = await getResultData(params.id);
@@ -117,7 +125,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-// ✅ JSON-LD Schema for Google
+// ✅ JSON-LD Schema for Google (Remains unchanged)
 function ResultJsonLd({ result }: { result: Result }) {
   return (
     <Script
@@ -143,8 +151,7 @@ function ResultJsonLd({ result }: { result: Result }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
-// ✅ Default Export
+// ✅ Default Export (Remains unchanged)
 export default async function Page({ params }: { params: { id: string } }) {
   // CORRECT: Access params.id directly
   const result = await getResultData(params.id);
@@ -155,9 +162,8 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      {/* JSON-LD Schema */}
       <ResultJsonLd result={result} />
-      {/* CRITICAL FIX: Removed prop passing. The client component must use useParams(). */}
+      {/* Prop passing removed to avoid the 'IntrinsicAttributes' error */}
       <ResultDetailsPageClient />
     </>
   );
