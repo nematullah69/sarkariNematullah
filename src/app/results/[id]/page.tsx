@@ -50,11 +50,11 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🐛 FIX APPLIED HERE: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
 // ✅ Dynamic SEO Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const resolvedParams = await params; // 👈 FIX: Await params
-  const result = await getResultData(resolvedParams.id); // 👈 Use resolvedParams.id
+  // CORRECT: Access params.id directly
+  const result = await getResultData(params.id);
 
   if (!result) {
     return {
@@ -143,11 +143,11 @@ function ResultJsonLd({ result }: { result: Result }) {
   );
 }
 
-// 🐛 FIX APPLIED HERE: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  const resolvedParams = await params; // 👈 FIX: Await params
-  const result = await getResultData(resolvedParams.id); // 👈 Use resolvedParams.id
+  // CORRECT: Access params.id directly
+  const result = await getResultData(params.id);
 
   if (!result) {
     return <div className="p-6 text-red-600">Result not found.</div>;
@@ -156,9 +156,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       {/* JSON-LD Schema */}
-      <ResultJsonLd result={result} /> 
-      {/* Client Component */}
-      <ResultDetailsPageClient id={resolvedParams.id} />
+      <ResultJsonLd result={result} />
+      {/* CRITICAL FIX: Removed prop passing. The client component must use useParams(). */}
+      <ResultDetailsPageClient />
     </>
   );
 }
