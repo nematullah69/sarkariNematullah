@@ -1,8 +1,6 @@
-// app/notifications/[id]/page.tsx
-
-import NotificationDetailsPageClient from "./NotificationDetailsPageClient"; // your client component
-import Script from "next/script";
 import { Metadata } from "next";
+import Script from "next/script";
+import NotificationDetailsPageClient from "./NotificationDetailsPageClient"; // your client component
 
 interface Notification {
   id: string;
@@ -45,12 +43,11 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
 // ✅ Dynamic Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // FIX: Await params to resolve the dynamic segment
-  const resolvedParams = await params;
-  const notification = await getNotification(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const notification = await getNotification(params.id);
 
   if (!notification) {
     return {
@@ -130,12 +127,11 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
 // ✅ Default Page
 export default async function Page({ params }: { params: { id: string } }) {
-  // FIX: Await params to resolve the dynamic segment
-  const resolvedParams = await params;
-  const notification = await getNotification(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const notification = await getNotification(params.id);
 
   if (!notification) {
     return <div className="p-6 text-red-600">Notification not found.</div>;
@@ -144,8 +140,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <NotificationJsonLd notification={notification} />
-      {/* Pass the resolved ID to the client component */}
-      <NotificationDetailsPageClient id={resolvedParams.id} /> 
+      {/* CRITICAL FIX: Removed the prop passing. The client component must get ID via useParams(). */}
+      <NotificationDetailsPageClient /> 
     </>
   );
 }
