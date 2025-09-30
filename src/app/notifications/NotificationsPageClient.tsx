@@ -10,10 +10,10 @@ interface Notification {
   id: string;
   title: string;
   publishedDate: string;
-  [key: string]: any; // Allow other properties from JSON
+ 
 }
 
-// --- END OF TYPESCRIPT FIX ---
+
 
 
 const NotificationsPage = () => {
