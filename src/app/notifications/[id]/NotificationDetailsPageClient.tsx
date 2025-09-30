@@ -15,14 +15,50 @@ import {
   Clock
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIXES ---
+
+// 1. Nested Interface
+interface ImportantDate {
+  label: string;
+  value: string;
+  highlight?: boolean; // Highlight is optional
+}
+
+// 2. Main Notification Interface
+interface Notification {
+  id: string;
+  title: string;
+  organization: string;
+  department: string;
+  status: "Active" | "Closed" | "Coming Soon";
+  category: string;
+  eligibility: string;
+  details: string;
+  officialLink: string;
+
+  // Key Dates for Sidebar
+  releaseDate: string;
+  applicationStart: string;
+  applicationEnd: string;
+  examDate: string;
+
+  // Important Dates array for Main Content
+  importantDates: ImportantDate[];
+}
+
+// --- END OF TYPESCRIPT FIXES ---
+
 const NotificationDetailsPage = () => {
-  const { id } = useParams();
-  const [notification, setNotification] = useState(null);
+  // Assert the type for 'id' from useParams
+  const { id } = useParams() as { id: string };
+
+  // Use the Notification interface for state initialization
+  const [notification, setNotification] = useState<Notification | null>(null);
 
   useEffect(() => {
     fetch("/notificationsData.json") // fetch from public folder
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: Notification[]) => { // Cast the incoming data array
         const found = data.find((n) => n.id === id);
         setNotification(found || null);
       })
@@ -45,7 +81,8 @@ const NotificationDetailsPage = () => {
     );
   }
 
-  const getStatusColor = (status) => {
+  // Type the status parameter for the helper function
+  const getStatusColor = (status: Notification['status']) => {
     switch (status) {
       case "Active": return "bg-green-100 text-green-800";
       case "Closed": return "bg-red-100 text-red-800";
@@ -121,6 +158,7 @@ const NotificationDetailsPage = () => {
                 Important Dates
               </h2>
               <div className="space-y-3">
+                {/* The map function is now correctly typed against ImportantDate interface */}
                 {notification.importantDates.map((date, index) => (
                   <div key={index} className={`flex items-center justify-between p-3 rounded-lg ${date.highlight ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50'}`}>
                     <span className="font-medium text-gray-800">{date.label}</span>
