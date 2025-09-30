@@ -64,13 +64,16 @@ function trimText(text: string, max: number): string {
     : text;
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Dynamic SEO Metadata
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const job = await getJobData(params.id);
+  // FIX: Await params before accessing its properties
+  const resolvedParams = await params; 
+  const job = await getJobData(resolvedParams.id);
 
   if (!job) {
     return {
@@ -171,6 +174,8 @@ function JobJsonLd({ job }: { job: Job }) {
               addressCountry: "IN",
             },
           },
+          // NOTE: The salary parsing here is basic and assumes job.salary contains a number. 
+          // You might need a more robust parsing function for production data.
           baseSalary: {
             "@type": "MonetaryAmount",
             currency: "INR",
@@ -186,9 +191,12 @@ function JobJsonLd({ job }: { job: Job }) {
   );
 }
 
-// ✅ Default Export
+// 🛠️ FIX APPLIED: Await 'params'
+// ✅ Default Export (The main Page component)
 export default async function Page({ params }: { params: { id: string } }) {
-  const job = await getJobData(params.id);
+  // FIX: Await params before accessing its properties
+  const resolvedParams = await params; 
+  const job = await getJobData(resolvedParams.id);
 
   if (!job) {
     return <div className="p-6 text-red-600">Job not found.</div>;
@@ -197,7 +205,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <JobJsonLd job={job} />
-      <JobDetailsPage id={params.id} />
+      <JobDetailsPage id={resolvedParams.id} />
     </>
   );
 }

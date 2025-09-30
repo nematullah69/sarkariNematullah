@@ -45,9 +45,12 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Dynamic Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const notification = await getNotification(params.id);
+  // FIX: Await params to resolve the dynamic segment
+  const resolvedParams = await params;
+  const notification = await getNotification(resolvedParams.id);
 
   if (!notification) {
     return {
@@ -127,9 +130,12 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
   );
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Default Page
 export default async function Page({ params }: { params: { id: string } }) {
-  const notification = await getNotification(params.id);
+  // FIX: Await params to resolve the dynamic segment
+  const resolvedParams = await params;
+  const notification = await getNotification(resolvedParams.id);
 
   if (!notification) {
     return <div className="p-6 text-red-600">Notification not found.</div>;
@@ -138,7 +144,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <NotificationJsonLd notification={notification} />
-      <NotificationDetailsPageClient />
+      {/* Pass the resolved ID to the client component */}
+      <NotificationDetailsPageClient id={resolvedParams.id} /> 
     </>
   );
 }

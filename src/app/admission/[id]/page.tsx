@@ -41,9 +41,13 @@ function trimText(text: string, limit: number) {
   return text.length <= limit ? text : text.slice(0, limit - 3) + "...";
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Dynamic SEO
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const admission = await getAdmissionData(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const admission = await getAdmissionData(resolvedParams.id);
+  
   if (!admission) return { title: "Admission Not Found", description: "Admission not found", robots: "noindex, follow" };
 
   const title = trimText(`${admission.title} | ${admission.university} Admission 2025`, TITLE_LIMIT);
@@ -97,12 +101,18 @@ function AdmissionJsonLd({ admission }: { admission: Admission }) {
   );
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Page Component
 export default async function Page({ params }: { params: { id: string } }) {
-  const admission = await getAdmissionData(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const admission = await getAdmissionData(resolvedParams.id);
+  
   if (!admission) return <div className="p-6 text-red-600">Admission not found.</div>;
+  
   return <>
     <AdmissionJsonLd admission={admission} />
-    <AdmissionDetailsPage id={params.id} />
+    {/* Use resolvedParams.id for the client component */}
+    <AdmissionDetailsPage id={resolvedParams.id} />
   </>;
 }

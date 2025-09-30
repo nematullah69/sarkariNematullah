@@ -50,9 +50,11 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
+// 🐛 FIX APPLIED HERE: Await 'params'
 // ✅ Dynamic SEO Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const result = await getResultData(params.id);
+  const resolvedParams = await params; // 👈 FIX: Await params
+  const result = await getResultData(resolvedParams.id); // 👈 Use resolvedParams.id
 
   if (!result) {
     return {
@@ -141,9 +143,11 @@ function ResultJsonLd({ result }: { result: Result }) {
   );
 }
 
+// 🐛 FIX APPLIED HERE: Await 'params'
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  const result = await getResultData(params.id);
+  const resolvedParams = await params; // 👈 FIX: Await params
+  const result = await getResultData(resolvedParams.id); // 👈 Use resolvedParams.id
 
   if (!result) {
     return <div className="p-6 text-red-600">Result not found.</div>;
@@ -151,8 +155,10 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <ResultJsonLd result={result} />
-      <ResultDetailsPageClient id={params.id} />
+      {/* JSON-LD Schema */}
+      <ResultJsonLd result={result} /> 
+      {/* Client Component */}
+      <ResultDetailsPageClient id={resolvedParams.id} />
     </>
   );
 }

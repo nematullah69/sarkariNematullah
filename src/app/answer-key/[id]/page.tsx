@@ -1,3 +1,4 @@
+// app/answer-key/[id]/page.tsx
 import { Metadata } from "next";
 import Script from "next/script";
 import AnswerKeyDetailsPageClient from "./AnswerKeyDetailsPageClient";
@@ -52,13 +53,16 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Dynamic Metadata for Answer Key Details
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const key = await getAnswerKey(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const key = await getAnswerKey(resolvedParams.id);
 
   if (!key) {
     return {
@@ -148,9 +152,12 @@ function AnswerKeyJsonLd({ answerKey }: { answerKey: AnswerKey }) {
   );
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  const key = await getAnswerKey(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const key = await getAnswerKey(resolvedParams.id);
 
   if (!key) {
     return <div className="p-6 text-red-600">Answer Key not found.</div>;
@@ -159,7 +166,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <AnswerKeyJsonLd answerKey={key} />
-      <AnswerKeyDetailsPageClient />
+      {/* Pass the resolved ID to the client component if it needs to fetch data */}
+      <AnswerKeyDetailsPageClient answerKeyId={resolvedParams.id} />
     </>
   );
 }

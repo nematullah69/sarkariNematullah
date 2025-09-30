@@ -50,9 +50,12 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Dynamic SEO Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const syllabus = await getSyllabusById(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const syllabus = await getSyllabusById(resolvedParams.id);
 
   if (!syllabus) {
     return {
@@ -140,9 +143,12 @@ function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
   );
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  const syllabus = await getSyllabusById(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const syllabus = await getSyllabusById(resolvedParams.id);
 
   if (!syllabus) {
     return <div className="p-6 text-red-600">Syllabus not found.</div>;
@@ -151,7 +157,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <SyllabusJsonLd syllabus={syllabus} />
-      <SyllabusDetailsPage syllabusId={params.id} />
+      {/* Pass the resolved ID to the client component */}
+      <SyllabusDetailsPage syllabusId={resolvedParams.id} /> 
     </>
   );
 }

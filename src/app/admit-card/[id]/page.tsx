@@ -40,7 +40,10 @@ async function getAdmitCardData(id: string): Promise<AdmitCard | null> {
 
 // ✅ Dynamic Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const admitCard = await getAdmitCardData(params.id);
+  // 🛠️ FIX APPLIED: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const admitCard = await getAdmitCardData(resolvedParams.id);
+  
   if (!admitCard) {
     return {
       title: "Admit Card Not Found | Admit Card Portal",
@@ -117,9 +120,12 @@ function AdmitCardJsonLd({ admitCard }: { admitCard: AdmitCard }) {
   );
 }
 
+// 🛠️ FIX APPLIED: Await 'params'
 // ✅ Page Component
 export default async function Page({ params }: { params: { id: string } }) {
-  const admitCard = await getAdmitCardData(params.id);
+  // FIX: Await params to resolve the dynamic segment ID
+  const resolvedParams = await params;
+  const admitCard = await getAdmitCardData(resolvedParams.id);
 
   if (!admitCard) {
     return <div className="p-6 text-red-600">Admit card not found.</div>;
@@ -128,7 +134,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <AdmitCardJsonLd admitCard={admitCard} />
-      <AdmitCardDetailsPage />
+      {/* Pass the resolved ID to the client component if needed, 
+          though the current client component doesn't take props */}
+      <AdmitCardDetailsPage /> 
     </>
   );
 }
