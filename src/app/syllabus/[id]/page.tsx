@@ -2,7 +2,7 @@
 
 import { Metadata } from "next";
 import Script from "next/script";
-import SyllabusDetailsPage from "./SyllabusDetailsPage";
+import SyllabusDetailsPage from "./SyllabusDetailsPage"; // Your client component
 
 interface Syllabus {
   id: string;
@@ -50,12 +50,11 @@ function trimText(text: string, max: number): string {
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
 // ✅ Dynamic SEO Metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const syllabus = await getSyllabusById(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const syllabus = await getSyllabusById(params.id);
 
   if (!syllabus) {
     return {
@@ -143,12 +142,11 @@ function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Await 'params'
+// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
 // ✅ Default Export
 export default async function Page({ params }: { params: { id: string } }) {
-  // FIX: Await params to resolve the dynamic segment ID
-  const resolvedParams = await params;
-  const syllabus = await getSyllabusById(resolvedParams.id);
+  // CORRECT: Use params.id directly
+  const syllabus = await getSyllabusById(params.id);
 
   if (!syllabus) {
     return <div className="p-6 text-red-600">Syllabus not found.</div>;
@@ -157,8 +155,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <SyllabusJsonLd syllabus={syllabus} />
-      {/* Pass the resolved ID to the client component */}
-      <SyllabusDetailsPage syllabusId={resolvedParams.id} /> 
+      {/* CRITICAL FIX: Removed prop passing. The client component must get the ID via useParams(). */}
+      <SyllabusDetailsPage />
     </>
   );
 }
