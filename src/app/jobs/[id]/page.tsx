@@ -1,8 +1,11 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import JobDetailsPage from "./JobDetailsPage";
+import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
+import * as path from 'path';     // NEW: Import Node.js Path module
 
 interface Job {
+// ... (Interface remains unchanged)
   id: string;
   title: string;
   department: string;
@@ -36,27 +39,34 @@ interface Job {
   imageUrl?: string;
 }
 
-// ✅ Fetch Job Data
+// Max character limits
+const TITLE_LIMIT = 60;
+const DESC_LIMIT = 160;
+const KEYWORDS_LIMIT = 100;
+
+// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
 async function getJobData(id: string): Promise<Job | null> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : "http://localhost:3000");
+    // 1. Construct the path to the JSON file
+    const filePath = path.join(process.cwd(), 'public', 'jobsData.json');
 
-    const res = await fetch(`${baseUrl}/jobsData.json`, { cache: "force-cache" });
+    // 2. Read the file content directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
 
-    const data: Job[] = await res.json();
+    // 3. Parse the JSON data
+    const data: Job[] = JSON.parse(fileContent);
+
+    // 4. Find and return the required item
     return data.find((j) => j.id === id) || null;
   } catch (err) {
-    console.error("❌ Failed to fetch job data:", err);
+    console.error("❌ Failed to read local job data:", err);
     return null;
   }
 }
 
-// ✅ Helper → Trim with 5% safe margin
+// ✅ Helper → Trim with 5% safe margin (Remains unchanged)
 function trimText(text: string, max: number): string {
+// ... (function body)
   if (!text) return "";
   const safeLimit = Math.floor(max * 0.95); // 5% kam
   return text.length > safeLimit
@@ -64,8 +74,7 @@ function trimText(text: string, max: number): string {
     : text;
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
-// ✅ Dynamic SEO Metadata
+// ✅ Dynamic SEO Metadata (Remains unchanged)
 export async function generateMetadata({
   params,
 }: {
@@ -75,6 +84,7 @@ export async function generateMetadata({
   const job = await getJobData(params.id);
 
   if (!job) {
+// ... (rest of function body)
     return {
       title: "Job Not Found | Sarkari Result Jobs Portal",
       description: "Job details not found. Explore latest government and private jobs.",
@@ -145,9 +155,10 @@ export async function generateMetadata({
   };
 }
 
-// ✅ JSON-LD Schema for Google Jobs
+// ✅ JSON-LD Schema for Google Jobs (Remains unchanged)
 function JobJsonLd({ job }: { job: Job }) {
   return (
+// ... (function body)
     <Script
       id="jobposting-schema"
       type="application/ld+json"
@@ -189,7 +200,6 @@ function JobJsonLd({ job }: { job: Job }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
 // ✅ Default Export (The main Page component)
 export default async function Page({ params }: { params: { id: string } }) {
   // CORRECT: Use params.id directly
@@ -202,8 +212,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <JobJsonLd job={job} />
-      {/* CRITICAL FIX: JobDetailsPage is a client component that gets ID via useParams(). 
-         Passing the ID here causes the 'IntrinsicAttributes' Type Error. */}
+      {/* Prop passing removed to avoid the 'IntrinsicAttributes' error */}
       <JobDetailsPage />
     </>
   );
