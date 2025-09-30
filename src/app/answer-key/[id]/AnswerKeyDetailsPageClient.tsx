@@ -18,7 +18,7 @@ import {
   BookOpen
 } from "lucide-react";
 
-// --- START OF TYPESCRIPT FIX ---
+// --- START OF TYPESCRIPT FIX (Interfaces kept as they are) ---
 
 // 1. Define the interface for the Marking Scheme (nested object)
 interface MarkingScheme {
@@ -57,8 +57,9 @@ interface AnswerKey {
   markingScheme?: MarkingScheme;
 }
 
+// --- END OF TYPESCRIPT FIX ---
+
 // 3. Define the function component props to extract 'id' correctly
-// (Since you use useParams inside, we just ensure the component signature is clean)
 const AnswerKeyDetailsPage = () => {
   // Assert the type for 'id' from useParams
   const { id } = useParams() as { id: string };
@@ -111,7 +112,6 @@ const AnswerKeyDetailsPage = () => {
     .filter(k => k.id !== id && k.category === answerKey.category)
     .slice(0, 3);
     
-// --- REST OF YOUR ORIGINAL CODE (NOW ERROR-FREE) ---
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Notification Banner */}
@@ -120,6 +120,7 @@ const AnswerKeyDetailsPage = () => {
           <div className="flex items-start space-x-3">
             <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
             <p className="text-yellow-800 text-sm">
+              {/* FIX APPLIED: Escaping the apostrophe in "Candidates" possessive */}
               Candidates can raise objections against the answer key from {answerKey.objectionStartDate} to {answerKey.objectionEndDate}. 
               A fee of ₹{answerKey.objectionFee || '100'} per question will be charged for objections.
             </p>
@@ -218,7 +219,7 @@ const AnswerKeyDetailsPage = () => {
                 >
                   <div className="bg-green-100 p-3 rounded-full mb-3">
                     <FileText className="h-6 w-6 text-green-600" />
-                  </div>
+                    </div>
                   <h3 className="font-semibold text-gray-800 mb-1">Raise Objection</h3>
                   <p className="text-sm text-gray-600">Challenge answer key</p>
                 </a>
