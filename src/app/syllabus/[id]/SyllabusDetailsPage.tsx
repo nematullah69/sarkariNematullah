@@ -19,18 +19,66 @@ import {
   Users
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIXES ---
+
+// 1. Nested Interfaces
+interface ExamSection {
+  name: string;
+  questions: string | number;
+  marks: string | number;
+}
+
+interface ExamPattern {
+  totalQuestions: string | number;
+  totalMarks: string | number;
+  duration: string;
+  negativeMarking: string;
+  sections: ExamSection[];
+}
+
+// 2. Main Syllabus Interface
+interface Syllabus {
+  id: string;
+  examName: string;
+  organization: string;
+  department: string;
+  examType: string;
+  category: string;
+  year: string | number;
+  lastUpdated: string;
+  syllabusOverview: string;
+  subjects: string[];
+  importantNotes: string[];
+  downloadLink: string;
+  officialWebsite: string;
+  
+  // Objection Details (used in the banner)
+  objectionStartDate?: string;
+  objectionEndDate?: string;
+  objectionFee?: string | number;
+
+  // Complex Nested Object
+  examPattern: ExamPattern;
+}
+
+// --- END OF TYPESCRIPT FIXES ---
+
+
 const SyllabusDetailsPage = () => {
-  const { id } = useParams();
-  const [syllabiData, setSyllabiData] = useState([]);
-  const [syllabus, setSyllabus] = useState(null);
+  // Assert the type for 'id' from useParams
+  const { id } = useParams() as { id: string };
+  
+  // Use the Syllabus interface for state initialization
+  const [syllabiData, setSyllabiData] = useState<Syllabus[]>([]);
+  const [syllabus, setSyllabus] = useState<Syllabus | null>(null);
 
   useEffect(() => {
     fetch("/syllabusData.json")
       .then(res => res.json())
-      .then(data => {
+      .then((data: Syllabus[]) => { // Cast the fetched data
         setSyllabiData(data);
         const found = data.find(s => s.id === id);
-        setSyllabus(found);
+        setSyllabus(found || null);
       })
       .catch(err => console.error(err));
   }, [id]);
@@ -51,6 +99,7 @@ const SyllabusDetailsPage = () => {
     );
   }
 
+  // Related exams filter now correctly uses typed properties
   const relatedExams = syllabiData
     .filter(s => s.id !== id && (
       s.category === syllabus.category || 
@@ -61,6 +110,22 @@ const SyllabusDetailsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Notification Banner */}
+      {/* Added check to ensure objection dates are present before showing banner */}
+      {syllabus.objectionStartDate && syllabus.objectionEndDate && (
+        <div className="bg-yellow-50 border-b border-yellow-200">
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-start space-x-3">
+              <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+              <p className="text-yellow-800 text-sm">
+                Candidates can raise objections against the answer key from {syllabus.objectionStartDate} to {syllabus.objectionEndDate}. 
+                A fee of ₹{syllabus.objectionFee || '100'} per question will be charged for objections.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
