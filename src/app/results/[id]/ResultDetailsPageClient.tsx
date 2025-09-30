@@ -17,21 +17,89 @@ import {
   Award,
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIXES ---
+
+// 1. Nested Interfaces
+interface VacancyItem {
+  postName: string;
+  category?: string; // Optional since it's wrapped in a check and might be missing
+  total: string | number;
+  eligibility?: string; // Appears to be used in the table 
+}
+
+interface SalaryItem {
+  postName: string;
+  level: string;
+  initialPay: string;
+}
+
+interface SalaryDetail {
+  allowance: string;
+  amount: string | number;
+}
+
+interface CutoffItem {
+  category: string;
+  range: string; // e.g., "70-75" or "150 Marks"
+}
+
+interface RrbResultData {
+  name: string;
+  exam: string;
+  status: string;
+  statusLink?: string;
+}
+
+interface FeeItem {
+  category: string;
+  fee: string | number;
+}
+
+// 2. Main Result Interface
+interface Result {
+  id: string | number;
+  examName: string;
+  organization: string;
+  department?: string;
+  status: "Published" | "Awaited" | "Updated" | "Pending";
+  category?: string;
+  downloadLink?: string;
+  officialWebsite?: string;
+  resultDetails?: string;
+  resultDate?: string;
+  totalPosts?: string | number;
+
+  // Optional complex fields
+  importantDates?: Record<string, string>; // { key: value } structure
+  vacancy?: VacancyItem[];
+  examvacancy?: string; // Header for vacancy table
+  Salary?: SalaryItem[]; // Post-wise salary table (Note the capital 'S')
+  salaryDetails?: SalaryDetail[]; // Detailed allowance table
+  examNameS?: string; // Header for detailed allowance table
+  cutoff?: CutoffItem[];
+  rrbResultsData?: RrbResultData[];
+  applicationFee?: FeeItem[];
+}
+
+// --- END OF TYPESCRIPT FIXES ---
+
 const ResultDetailsPage = () => {
-  const { id } = useParams(); // Dynamic route param
-  const [results, setResults] = useState([]);
+  // Assert the type for 'id' from useParams
+  const { id } = useParams() as { id: string }; 
+  
+  // Use the Result interface for state initialization
+  const [results, setResults] = useState<Result[]>([]); 
   const [loading, setLoading] = useState(true);
 
   // Fetch JSON data from /public/resultsData.json
   useEffect(() => {
     const loadData = async () => {
       try {
-        // NOTE: In Next.js App Router, ensure resultsData.json is in the 'public' directory
         const res = await fetch("/resultsData.json");
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);
         }
-        const data = await res.json();
+        const data: Result[] = await res.json(); // Cast the fetched data
         setResults(data);
       } catch (err) {
         console.error("Error loading results data:", err);
@@ -50,7 +118,7 @@ const ResultDetailsPage = () => {
     );
   }
 
-  // Match id correctly (params are strings)
+  // Find the result using the correct type assertion and comparison
   const result = results.find((r) => String(r.id) === String(id));
 
   if (!result) {
@@ -71,23 +139,23 @@ const ResultDetailsPage = () => {
     );
   }
 
-  const getStatusColor = (status) => {
+  // Type the status parameter for the helper function
+  const getStatusColor = (status: Result['status']) => {
     switch (status) {
       case "Published":
         return "bg-green-100 text-green-800";
       case "Awaited":
+      case "Pending": // Grouping 'Pending' and 'Awaited' for color consistency
         return "bg-yellow-100 text-yellow-800";
       case "Updated":
         return "bg-blue-100 text-blue-800";
-      case "Pending":
-        return "bg-yellow-100 text-yellow-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
   };
 
   // Helper function to format camelCase keys for display
-  const formatKey = (key) => {
+  const formatKey = (key: string) => {
     switch (key) {
         case 'postName': return 'Post Name';
         case 'category': return 'Category';
@@ -174,8 +242,7 @@ const ResultDetailsPage = () => {
               </div>
             </div>
 
-          
-
+            
             {/* 3. Result Details / Summary */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
@@ -242,6 +309,7 @@ const ResultDetailsPage = () => {
                         className="border-t hover:bg-gray-50"
                       >
                         <td className="p-3 font-medium">{item.postName}</td>
+                        {/* Only render category if it exists on the item type */}
                         {item.category && <td className="p-3">{item.category}</td>}
                         <td className="p-3 text-center font-bold">{item.total}</td>
                         <td className="p-3 text-sm text-gray-600">{item.eligibility}</td>
@@ -351,7 +419,7 @@ const ResultDetailsPage = () => {
               <div className="bg-white rounded-lg shadow-md p-6 overflow-x-auto">
                 <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                     <Building className="h-5 w-5 mr-2" />
-                    RRB Zone Wise Results / Links
+                  RRB Zone Wise Results / Links
                 </h2>
                 <table className="w-full border border-gray-300 text-left min-w-[700px]">
                   <thead>
@@ -392,7 +460,6 @@ const ResultDetailsPage = () => {
             )}
 
             
-
             {/* 9. Application Fee Section (if available) */}
             {result.applicationFee && (
               <div className="bg-white rounded-lg shadow-md p-6 overflow-x-auto">
@@ -429,8 +496,8 @@ const ResultDetailsPage = () => {
               </div>
             )}
 
-              {/* 2. Important Links (Top Action Section) */}
-              <div className="bg-white rounded-lg shadow-md p-6">
+            {/* 2. Important Links (Top Action Section) */}
+            <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">
                 Action Links
               </h2>
