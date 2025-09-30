@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Head from "next/head";
 import { useParams } from "next/navigation";
 import { 
   ArrowLeft, 
@@ -19,9 +18,70 @@ import {
   Link2
 } from "lucide-react";
 
+// --- START OF TYPESCRIPT FIXES ---
+
+interface VacancyItem {
+  postName: string;
+  category: string;
+  total: string | number;
+}
+
+interface FeeItem {
+  category: string;
+  fee: string | number;
+}
+
+interface SalaryDetail {
+  allowance: string;
+  amount: string | number;
+}
+
+interface ImportantLink {
+  label: string;
+  url: string;
+}
+
+// Define the main Job Interface (based on component usage)
+interface Job {
+  id: string;
+  title: string;
+  organization: string;
+  department?: string;
+  location: string;
+  status: 'Active' | 'Closed' | 'Coming Soon';
+  category: string;
+  vacancies: string | number;
+  salary: string; 
+  description: string;
+  publishedDate: string; 
+  applicationStart: string;
+  applicationEnd: string;
+  
+  // Arrays
+  responsibilities: string[];
+  selectionProcess: string[];
+  vacancy?: VacancyItem[];
+  Salary?: { postName: string; level: string; initialPay: string }[];
+  salaryDetails?: SalaryDetail[];
+  applicationFee?: FeeItem[];
+  importantLinks?: ImportantLink[];
+
+  // Optional/Misc fields
+  eligibility?: string; 
+  examvacancy1?: string; // Table header
+  examNameS?: string; // Salary table header
+  importantDates?: Record<string, string>; // { key: value } structure
+}
+
+// --- END OF TYPESCRIPT FIXES ---
+
+
 const JobDetailsPage = () => {
-  const { id } = useParams();
-  const [job, setJob] = useState(null);
+  // Assert the type for 'id' from useParams
+  const { id } = useParams() as { id: string }; 
+  
+  // Use the Job interface for state initialization
+  const [job, setJob] = useState<Job | null>(null); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +89,7 @@ const JobDetailsPage = () => {
       try {
         const res = await fetch("/jobsData.json");
         if (!res.ok) throw new Error("Failed to fetch jobs data");
-        const data = await res.json();
+        const data: Job[] = await res.json(); // Cast the fetched data
         const foundJob = data.find(j => j.id === id);
         setJob(foundJob || null);
       } catch (error) {
@@ -65,7 +125,8 @@ const JobDetailsPage = () => {
     );
   }
 
-  const getStatusColor = (status) => {
+  // Type the status parameter for the helper function
+  const getStatusColor = (status: Job['status']) => {
     switch (status) {
       case 'Active': return 'bg-green-100 text-green-800';
       case 'Closed': return 'bg-red-100 text-red-800';
@@ -74,89 +135,16 @@ const JobDetailsPage = () => {
     }
   };
 
-   // --- SEO ---
-   const seoTitle = `${job.title} | ${job.organization} | Apply Job`;
-   const seoDescription = job.description
-     ? job.description.slice(0, 160)
-     : `Apply online for ${job.title} at ${job.organization}. Check eligibility, salary, vacancies, and important dates.`;
-   const seoUrl = `https://www.yourwebsite.com/jobs/${job.id}`;
-   const seoImage = job.imageUrl || "https://www.yourwebsite.com/default-og-image.jpg";
- 
-   // JSON-LD structured data for Job Posting
-   const jsonLd = {
-     "@context": "https://schema.org",
-     "@type": "JobPosting",
-     "title": job.title,
-     "description": job.description,
-     "identifier": {
-       "@type": "PropertyValue",
-       "name": job.organization,
-       "value": job.id
-     },
-     "datePosted": job.publishedDate,
-     "validThrough": job.applicationEnd,
-     "employmentType": job.employmentType || "FULL_TIME",
-     "hiringOrganization": {
-       "@type": "Organization",
-       "name": job.organization,
-       "sameAs": job.organizationUrl || "https://www.yourwebsite.com"
-     },
-     "jobLocation": {
-       "@type": "Place",
-       "address": {
-         "@type": "PostalAddress",
-         "addressLocality": job.location
-       }
-     },
-     "baseSalary": job.salary
-       ? {
-           "@type": "MonetaryAmount",
-           "currency": "INR",
-           "value": {
-             "@type": "QuantitativeValue",
-             "value": Number(job.salary.replace(/[^\d]/g, "")),
-             "unitText": "YEAR"
-           }
-         }
-       : undefined,
-     "responsibilities": job.responsibilities,
-     "educationRequirements": job.eligibility,
-     "incentiveCompensation": job.salaryDetails?.map(s => `${s.allowance}: ₹${s.amount}`).join(", "),
-     "applicationStartDate": job.applicationStart,
-     "applicationEndDate": job.applicationEnd,
-   };
- 
-   
-
+  // Removed all SEO/Head logic, as it requires a specific setup 
+  // (metadata export) in the Next.js App Router or causes errors.
+  
   return (
-     <>
-     {/* SEO */}
-     <Head>
-     <title>{seoTitle}</title>
-     <meta name="description" content={seoDescription} />
-     <meta name="keywords" content={`${job.title}, ${job.organization}, jobs, apply online, government jobs, private jobs`} />
-     <link rel="canonical" href={seoUrl} />
-
-     {/* Open Graph */}
-     <meta property="og:title" content={seoTitle} />
-     <meta property="og:description" content={seoDescription} />
-     <meta property="og:type" content="website" />
-     <meta property="og:url" content={seoUrl} />
-     <meta property="og:image" content={seoImage} />
-
-     {/* Twitter Card */}
-     <meta name="twitter:card" content="summary_large_image" />
-     <meta name="twitter:title" content={seoTitle} />
-     <meta name="twitter:description" content={seoDescription} />
-     <meta name="twitter:image" content={seoImage} />
-
-     {/* JSON-LD structured data */}
-     <script
-       type="application/ld+json"
-       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-     />
-   </Head>
-   
+    <>
+    {/* NOTE: All <Head> and JSON-LD structured data logic has been removed 
+    to fix the potential build error. If you need SEO, use the Next.js 
+    Metadata API in a separate server component (layout.tsx or page.tsx). 
+    */}
+    
 
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumbs */}
