@@ -1,8 +1,12 @@
+// app/notifications/[id]/page.tsx
 import { Metadata } from "next";
 import Script from "next/script";
-import NotificationDetailsPageClient from "./NotificationDetailsPageClient"; // your client component
+import NotificationDetailsPageClient from "./NotificationDetailsPageClient";
+import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
+import * as path from 'path';     // NEW: Import Node.js Path module
 
 interface Notification {
+// ... (Interface remains unchanged)
   id: string;
   title: string;
   organization: string;
@@ -20,31 +24,34 @@ interface Notification {
   imageUrl?: string;
 }
 
-// ✅ Fetch Notification by ID
+// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
 async function getNotification(id: string): Promise<Notification | null> {
   try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    // 1. Construct the path to the JSON file
+    const filePath = path.join(process.cwd(), 'public', 'notificationsData.json');
+    
+    // 2. Read the file content directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
 
-    const res = await fetch(`${baseUrl}/notificationsData.json`, { cache: "force-cache" });
-    const data: Notification[] = await res.json();
+    // 3. Parse the JSON data
+    const data: Notification[] = JSON.parse(fileContent);
+    
+    // 4. Find and return the required item
     return data.find((n) => n.id === id) || null;
   } catch (err) {
-    console.error("❌ Failed to fetch notification data:", err);
+    console.error("❌ Failed to read local notification data:", err); 
     return null;
   }
 }
 
-// ✅ Helper → Trim text with safe margin
+// ✅ Helper → Trim text with safe margin (Remains unchanged)
 function trimText(text: string, max: number): string {
   if (!text) return "";
   const safeLimit = Math.floor(max * 0.95);
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params'
-// ✅ Dynamic Metadata
+// ✅ Dynamic Metadata (Remains unchanged)
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   // CORRECT: Use params.id directly
   const notification = await getNotification(params.id);
@@ -102,7 +109,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-// ✅ JSON-LD Schema
+// ✅ JSON-LD Schema (Remains unchanged)
 function NotificationJsonLd({ notification }: { notification: Notification }) {
   return (
     <Script
@@ -127,8 +134,7 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
   );
 }
 
-// 🛠️ FIX APPLIED: Removed unnecessary 'await params' and removed prop passing to client component
-// ✅ Default Page
+// ✅ Default Page (Remains unchanged)
 export default async function Page({ params }: { params: { id: string } }) {
   // CORRECT: Use params.id directly
   const notification = await getNotification(params.id);
@@ -140,7 +146,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <NotificationJsonLd notification={notification} />
-      {/* CRITICAL FIX: Removed the prop passing. The client component must get ID via useParams(). */}
+      {/* Prop passing removed to avoid the 'IntrinsicAttributes' error */}
       <NotificationDetailsPageClient /> 
     </>
   );
