@@ -180,7 +180,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-2">
         <div className="container mx-auto px-2 text-center">
-          <h1 className="text-2xl font-bold text-white mb-1">SarkariResult Portal</h1>
+          <h1 className="text-2xl font-bold text-white mb-1">Government Results Hub</h1>
           <p className="text-sm text-blue-100 max-w-xl mx-auto mb-2">
             Your comprehensive destination for government exam results, admit cards, notifications & job opportunities
           </p>
