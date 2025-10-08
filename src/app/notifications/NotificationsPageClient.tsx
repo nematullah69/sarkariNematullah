@@ -10,10 +10,10 @@ interface Notification {
   id: string;
   title: string;
   publishedDate: string;
- 
+  // Note: Add other fields here if they exist in notificationsData.json
 }
 
-
+// --- END OF TYPESCRIPT FIX ---
 
 
 const NotificationsPage = () => {
@@ -29,9 +29,18 @@ const NotificationsPage = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const filteredNotifications = notificationsData.filter((notification) =>
-    notification.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // --- FIX APPLIED HERE (Lines 32-37) ---
+  const filteredNotifications = notificationsData
+    .filter(notification => notification && notification.id) // Filter out items missing an 'id'
+    .filter((notification) => {
+      // Safely get the title, defaulting to an empty string if null/undefined.
+      const titleToSearch = (notification?.title || "").toLowerCase();
+      const searchLower = searchTerm.toLowerCase();
+
+      // Perform the inclusion check safely
+      return titleToSearch.includes(searchLower);
+    });
+  // ----------------------------------------
 
   return (
     <div className="min-h-[80vh] bg-gray-50">
@@ -63,8 +72,8 @@ const NotificationsPage = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg 
-                           focus:ring-2 focus:ring-purple-500 focus:border-transparent 
-                           pl-8 text-sm"
+                                focus:ring-2 focus:ring-purple-500 focus:border-transparent 
+                                pl-8 text-sm"
               />
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
             </div>
@@ -112,3 +121,4 @@ const NotificationsPage = () => {
 };
 
 export default NotificationsPage;
+
