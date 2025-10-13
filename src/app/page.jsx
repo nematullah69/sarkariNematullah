@@ -180,7 +180,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-2">
         <div className="container mx-auto px-2 text-center">
-          <h1 className="text-2xl font-bold text-white mb-1">Government Results Hub</h1>
+          <h1 className="text-2xl font-bold text-white mb-1">Government Exam</h1>
           <p className="text-sm text-blue-100 max-w-xl mx-auto mb-2">
             Your comprehensive destination for government exam results, admit cards, notifications & job opportunities
           </p>
@@ -214,7 +214,7 @@ const HomePage = () => {
 
       {/* Sections */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap gap-5 justify-center">
+        <div className="flex flex-wrap gap-5 ">
           <Section title="Latest Jobs" icon={<Briefcase className="h-5 w-5 mr-2 text-purple-600" />} link="/jobs" data={filterData(latestJobs)} buttonColor="bg-purple-600 hover:bg-purple-700" buttonText="Apply" />
           <Section title="Latest Results" icon={<FileText className="h-5 w-5 mr-2 text-blue-600" />} link="/results" data={filterData(latestResults)} buttonColor="bg-blue-600 hover:bg-blue-700" buttonText="Result" />
           <Section title="Latest Admit Cards" icon={<CreditCard className="h-5 w-5 mr-2 text-green-600" />} link="/admit-card" data={filterData(latestAdmitCards)} buttonColor="bg-green-600 hover:bg-green-700" buttonText="Admit" />

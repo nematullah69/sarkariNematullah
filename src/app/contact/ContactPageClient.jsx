@@ -29,18 +29,18 @@ const ContactPage = () => {
   };
 
   const contactInfo = [
-    {
-      icon: Phone,
-      title: "Phone Number",
-      details: ["+91-9472476058", "+91-9718876355"],
-      description: "Mon-Fri: 10:00 AM - 6:00 PM",
-    },
-    {
-      icon: Mail,
-      title: "Email Address",
-      details: ["mdnematullah1020@gmail.com", "mdchandraj6895@gmail.com"],
-      description: "We reply within 24 hours",
-    },
+    // {
+    //   icon: Phone,
+    //   title: "Phone Number",
+    //   details: ["+91-9472476058", "+91-9718876355"],
+    //   description: "Mon-Fri: 10:00 AM - 6:00 PM",
+    // },
+    // {
+    //   icon: Mail,
+    //   title: "Email Address",
+    //   details: ["mdnematullah1020@gmail.com", "mdchandraj6895@gmail.com"],
+    //   description: "We reply within 24 hours",
+    // },
     {
       icon: MapPin,
       title: "Office Address",

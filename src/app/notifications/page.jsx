@@ -3,42 +3,47 @@
 import NotificationsPage from "./NotificationsPageClient"; // Your client component
 
 export const metadata = {
-  title: "Latest Notifications & Circulars 2025 | Govt Exams Portal", // 57/60
-  description:
-    "Stay updated with latest government notifications & circulars. View official notifications for exams, recruitment, and results.", // 155/160
-  keywords:
-    "Government Notifications, Exam Notifications, Official Notifications, Recruitment Alerts", // 99/100
-  robots: "index, follow",
-  openGraph: {
-    title: "Latest Notifications & Circulars 2025 | Govt Exams Portal",
-    description:
-      "Stay updated with latest government notifications & circulars. View official notifications for exams, recruitment, and results.",
-    url: "https://yourwebsite.com/notifications",
-    siteName: "Govt Exams Portal",
-    images: [
-      {
-        url: "https://yourwebsite.com/default-og-notifications.png",
-        width: 1200,
-        height: 630,
-        alt: "Government Notifications",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Latest Notifications & Circulars 2025 | Govt Exams Portal",
-    description:
-      "Stay updated with latest government notifications & circulars. View official notifications for exams, recruitment, and results.",
-    images: ["https://yourwebsite.com/default-og-notifications.png"],
-    creator: "@YourTwitterHandle",
-  },
-  alternates: {
-    canonical: "https://yourwebsite.com/notifications",
-  },
+  // ✅ Title ~55 chars (limit 60 - 5%) - Updated Site Name
+  title: "Latest Govt Job Notifications & Circulars 2025 | Government Exam", 
+  
+  // ✅ Description ~150 chars (limit 160 - 5%) - Updated for clarity
+  description:
+    "Stay updated with the latest official government job notifications, circulars, and announcements for exams, recruitment, results, and admit cards.", 
+  
+  // ✅ Keywords ~99 chars (limit 100 - 5%) - Focused on Sarkari/Govt
+  keywords:
+    "Sarkari Notifications, Government Notifications, Exam Notifications 2025, Official Circulars, Recruitment Alerts, Govt Job News", 
+  robots: "index, follow",
+  openGraph: {
+    title: "Latest Govt Job Notifications & Circulars 2025 | Government Exam",
+    description:
+      "Stay updated with the latest official government job notifications, circulars, and announcements for exams, recruitment, results, and admit cards.",
+    url: "https://governmentexam.online/notifications",
+    siteName: "Government Exam", // ➡️ Updated Site Name
+    images: [
+      {
+        url: "https://governmentexam.online/default-og-notifications.png",
+        width: 1200,
+        height: 630,
+        alt: "Government Notifications",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Latest Govt Job Notifications & Circulars 2025 | Government Exam",
+    description:
+      "Stay updated with the latest official government job notifications, circulars, and announcements for exams, recruitment, results, and admit cards.",
+    images: ["https://governmentexam.online/default-og-notifications.png"],
+    creator: "@YourTwitterHandle",
+  },
+  alternates: {
+    canonical: "https://governmentexam.online/notifications",
+  },
 };
 
 export default function Page() {
-  return <NotificationsPage />;
+  return <NotificationsPage />;
 }

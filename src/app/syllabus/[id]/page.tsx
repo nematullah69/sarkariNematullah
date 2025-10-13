@@ -94,11 +94,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       title: seoTitle,
       description: seoDesc,
-      url: `https://sarkariportl.netlify.app/syllabus/${syllabus.id}`,
+      url: `https://governmentexam.online/syllabus/${syllabus.id}`,
       siteName: "Govt Exams Portal",
       images: [
         {
-          url: "https://sarkariportl.netlify.app/default-og-syllabus.png",
+          url: "default-og-syllabus.png",
           width: 1200,
           height: 630,
           alt: syllabus.examName,

@@ -17,7 +17,7 @@ export const metadata = {
     "exam portal",
   ],
 
-  authors: [{ name: "Results Portal", url: "https://www.yourwebsite.com" }],
+  authors: [{ name: "Results Portal", url: "https://governmentexam.online/" }],
   creator: "Results Portal",
   publisher: "Results Portal",
 
@@ -25,11 +25,11 @@ export const metadata = {
     title: "Examination Results 2025 | Results Portal",
     description:
       "View and download examination results for 2025 from various government and private exams online.",
-    url: "https://www.yourwebsite.com/results",
+    url: "https://governmentexam.online/results",
     siteName: "Results Portal",
     images: [
       {
-        url: "https://www.yourwebsite.com/og-results.png",
+        url: "https://governmentexam.online/og-results.png",
         width: 1200,
         height: 630,
         alt: "Results Portal - Exam Results 2025",
@@ -44,13 +44,13 @@ export const metadata = {
     title: "Examination Results 2025 | Results Portal",
     description:
       "View and download examination results for 2025 from various government and private exams online.",
-    images: ["https://www.yourwebsite.com/og-results.png"],
+    images: ["https://governmentexam.online/og-results.png"],
     site: "@YourTwitterHandle",
     creator: "@YourTwitterHandle",
   },
 
   alternates: {
-    canonical: "https://www.yourwebsite.com/results",
+    canonical: "https://governmentexam.online/results",
   },
 };
 

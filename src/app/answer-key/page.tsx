@@ -1,3 +1,4 @@
+// app/answer-key/page.tsx
 import { Metadata } from "next";
 import Script from "next/script";
 import AnswerKeyPageClient from "./AnswerKeyPageClient";
@@ -19,6 +20,7 @@ async function getAnswerKeysData(): Promise<AnswerKey[]> {
       process.env.NEXT_PUBLIC_BASE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
+    // NOTE: This assumes the JSON is available at the root URL
     const res = await fetch(`${baseUrl}/answerKeysData.json`, { cache: "force-cache" });
     const data: AnswerKey[] = await res.json();
     return data;
@@ -39,16 +41,16 @@ function trimText(text: string, max: number): string {
 export async function generateMetadata(): Promise<Metadata> {
   const keys = await getAnswerKeysData();
 
-  // --- UPDATED SEO TITLE ---
-  const seoTitle = trimText("Government Exams Portal: Official Answer Keys for 2025 Examinations", 60);
+  // --- UPDATED SEO TITLE (Using site name 'Government Exam') ---
+  const seoTitle = trimText("Official Answer Keys 2025 for Govt Exams | Government Exam", 60);
   // -------------------------
   
   const seoDesc = trimText(
-    `Download official answer keys for the latest government exams in India. Check release dates and verify your answers for exams in 2025.`,
+    `Download official answer keys (Sarkari Answer Key) for the latest government exams in India. Check challenge dates and verify your answers for exams in 2025.`,
     160
   );
   const seoKeywords = trimText(
-    ["Answer Keys 2025", "Government Exams", "Official Answer Keys", "Exam Solutions", "RSMSSB", "SSC", "UPSC"].join(
+    ["Official Answer Keys 2025", "Government Exams Answer Key", "Sarkari Answer Key", "Exam Solutions", "SSC Answer Key", "UPSC Answer Key"].join(
       ", "
     ),
     100
@@ -61,11 +63,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: seoTitle,
       description: seoDesc,
-      url: "https://yourwebsite.com/answer-keys",
-      siteName: "Government Exams Portal",
+      // ➡️ Updated URL
+      url: "https://governmentexam.online/answer-keys",
+      // ➡️ Updated Site Name
+      siteName: "Government Exam",
       images: [
         {
-          url: keys[0]?.imageUrl || "https://yourwebsite.com/default-og-answerkey.png",
+          // ➡️ Updated URL
+          url: keys[0]?.imageUrl || "https://governmentexam.online/default-og-answerkey.png",
           width: 1200,
           height: 630,
           alt: "Official Answer Keys Portal",
@@ -78,11 +83,13 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: seoTitle,
       description: seoDesc,
-      images: [keys[0]?.imageUrl || "https://yourwebsite.com/default-og-answerkey.png"],
+      // ➡️ Updated URL
+      images: [keys[0]?.imageUrl || "https://governmentexam.online/default-og-answerkey.png"],
       creator: "@YourTwitterHandle",
     },
     alternates: {
-      canonical: "https://yourwebsite.com/answer-keys",
+      // ➡️ Updated URL
+      canonical: "https://governmentexam.online/answer-keys",
     },
   };
 }
@@ -100,7 +107,8 @@ function AnswerKeyJsonLd({ keys }: { keys: AnswerKey[] }) {
           itemListElement: keys.map((key, index) => ({
             "@type": "ListItem",
             position: index + 1,
-            url: `https://yourwebsite.com/answer-key/${key.id}`,
+            // ➡️ Updated URL in schema
+            url: `https://governmentexam.online/answer-key/${key.id}`,
             name: key.examName,
             datePublished: key.releaseDate,
           })),
@@ -110,14 +118,15 @@ function AnswerKeyJsonLd({ keys }: { keys: AnswerKey[] }) {
   );
 }
 
-// ✅ Default Export
+// ✅ Default Export (Fixed Prop Passing)
 export default async function Page() {
   const keys = await getAnswerKeysData();
 
   return (
     <>
       <AnswerKeyJsonLd keys={keys} />
-      <AnswerKeyPageClient />
+      {/* ➡️ CRITICAL FIX: The fetched keys array must be passed to the client component */}
+      <AnswerKeyPageClient keys={keys} />
     </>
   );
 }

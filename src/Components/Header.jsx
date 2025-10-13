@@ -50,7 +50,7 @@ const Header = () => {
               <GraduationCap className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Government Results Hub</h1>
+              <h1 className="text-2xl font-bold">Government Exam</h1>
               <p className="text-blue-200 text-sm">
                 Government Examination Results & Information
               </p>

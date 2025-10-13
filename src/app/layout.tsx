@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Government Results Hub – Latest Govt Jobs, Results, Admit Cards 2025",
+  title: "Government Exam  – Latest Govt Jobs, Results, Admit Cards 2025",
   description:
     "Your one-stop portal for latest government jobs, exam notifications, admit cards, results, answer keys, and syllabus updates. Stay updated with Sarkari Result Point for SSC, UPSC, Banking, Railway, Defence, Police, Teaching jobs and more.",
   keywords: [
-    "Sarkari Result",
+    "Government Result",
     "Govt Jobs 2025",
     "SSC Jobs",
     "UPSC Jobs",
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
     "Admission"
   ],
   openGraph: {
-    title: "Government Results Hub - Govt Jobs & Exam Updates 2025",
+    title: "Government Exam - Govt Jobs & Exam Updates 2025",
     description:
       "Check latest government job notifications, exam results, admit cards, and syllabus updates at Sarkari Result Point.",
-    url: "https://govermentresulthub.netlify.app/",
+    url: "https://governmentexam.online/",
     siteName: "Sarkari Result Point",
     images: [
       {
-        url: "https://sarkariresultpoint.com/seo-banner.png",
+        url: "https://governmentexam.online/seo-banner.png",
         width: 1200,
         height: 630,
-        alt: "Government Results Hub - Latest Government Jobs & Exam Notifications",
+        alt: "Government Exam  - Latest Government Jobs & Exam Notifications",
       },
     ],
     type: "website",
@@ -55,10 +55,10 @@ export const metadata: Metadata = {
     title: "Government Results Hub - Latest Govt Jobs 2025",
     description:
       "Stay updated with Government Results Hub for latest government job openings, exam results, and admit cards.",
-    images: ["https://sarkariresultpoint.com/seo-banner.png"],
+    images: ["https://governmentexam.online/seo-banner.png"],
   },
   alternates: {
-    canonical: "https://govermentresulthub.netlify.app",
+    canonical: "https://governmentexam.online/",
   },
 
   // ✅ Multiple Google verification tags
