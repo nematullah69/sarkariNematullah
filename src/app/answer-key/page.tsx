@@ -16,6 +16,8 @@ interface AnswerKey {
 // ✅ Fetch Answer Key Data
 async function getAnswerKeysData(): Promise<AnswerKey[]> {
   try {
+    // Using direct file system access is generally preferred in non-API routes
+    // but keeping your original fetch logic for now, as it's not the error source.
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
@@ -125,8 +127,8 @@ export default async function Page() {
   return (
     <>
       <AnswerKeyJsonLd keys={keys} />
-      {/* ➡️ CRITICAL FIX: The fetched keys array must be passed to the client component */}
-      <AnswerKeyPageClient keys={keys} />
+      {/* ❌ CRITICAL FIX: The prop passing is REMOVED to match the Client Component's internal fetching */}
+      <AnswerKeyPageClient />
     </>
   );
 }

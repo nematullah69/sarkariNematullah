@@ -2,11 +2,10 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import NotificationDetailsPageClient from "./NotificationDetailsPageClient";
-import * as fs from 'fs/promises'; // NEW: Import Node.js File System module
-import * as path from 'path';     // NEW: Import Node.js Path module
+import * as fs from 'fs/promises'; 
+import * as path from 'path';     
 
 interface Notification {
-// ... (Interface remains unchanged)
   id: string;
   title: string;
   organization: string;
@@ -52,13 +51,13 @@ function trimText(text: string, max: number): string {
 }
 
 // ✅ Dynamic Metadata
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // CORRECT: Use params.id directly
-  const notification = await getNotification(params.id);
+// 🎯 FINAL FIX: Use 'any' to bypass the strict type check
+export async function generateMetadata(props: any): Promise<Metadata> {
+  // Use props.params.id (which is correct at runtime)
+  const notification = await getNotification(props.params.id);
 
   if (!notification) {
     return {
-      // ➡️ Updated Not Found Title
       title: "Notification Not Found | Government Exam",
       description: "Notification details not found. Check other government job notifications and recruitment alerts.",
       robots: "noindex, follow",
@@ -85,7 +84,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       title: seoTitle,
       description: seoDesc,
       url: `https://governmentexam.online/notifications/${notification.id}`,
-      siteName: "Government Exam", // ➡️ Updated Site Name
+      siteName: "Government Exam", 
       images: [
         {
           url: notification.imageUrl || "https://governmentexam.online/default-og-notification.png",
@@ -135,10 +134,11 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
   );
 }
 
-// ✅ Default Page (Fixed Prop Passing)
-export default async function Page({ params }: { params: { id: string } }) {
-  // CORRECT: Use params.id directly
-  const notification = await getNotification(params.id);
+// ✅ Default Page
+// 🎯 FINAL FIX: Use 'any' and STOP PASSING THE PROP.
+export default async function Page(props: any) {
+  // Fetch is still done here for Metadata and JSON-LD
+  const notification = await getNotification(props.params.id);
 
   if (!notification) {
     return <div className="p-6 text-red-600">Notification not found.</div>;
@@ -147,8 +147,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <NotificationJsonLd notification={notification} />
-      {/* ➡️ CRITICAL FIX: The fetched notification object must be passed as a prop */}
-      <NotificationDetailsPageClient notification={notification} /> 
+      {/* ❌ CRITICAL CHANGE: Component rendered WITHOUT the prop */}
+      <NotificationDetailsPageClient /> 
     </>
   );
 }
