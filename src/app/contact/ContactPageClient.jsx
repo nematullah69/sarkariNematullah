@@ -35,30 +35,30 @@ const ContactPage = () => {
     //   details: ["+91-9472476058", "+91-9718876355"],
     //   description: "Mon-Fri: 10:00 AM - 6:00 PM",
     // },
-    // {
-    //   icon: Mail,
-    //   title: "Email Address",
-    //   details: ["mdnematullah1020@gmail.com", "mdchandraj6895@gmail.com"],
-    //   description: "We reply within 24 hours",
-    // },
+    {
+      icon: Mail,
+      title: "Email Address",
+      details: ["nematullah6895@gmail.com"],
+      // description: "We reply within 24 hours",
+    },
     {
       icon: MapPin,
       title: "Office Address",
       details: [
         "123 Government Plaza",
-        "Connaught Place, New Delhi - 110001",
+        "Connaught Place, New Delhi - 110025",
       ],
       description: "India",
     },
-    {
-      icon: Clock,
-      title: "Office Hours",
-      details: [
-        "Monday - Friday: 10:00 AM - 6:00 PM",
-        "Saturday: 10:00 AM - 2:00 PM",
-      ],
-      description: "Sunday: Closed",
-    },
+    // {
+    //   icon: Clock,
+    //   title: "Office Hours",
+    //   details: [
+    //     "Monday - Friday: 10:00 AM - 6:00 PM",
+    //     "Saturday: 10:00 AM - 2:00 PM",
+    //   ],
+    //   description: "Sunday: Closed",
+    // },
   ];
 
   const faqs = [

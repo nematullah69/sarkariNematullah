@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Government Exam  – Latest Govt Jobs, Results, Admit Cards 2025",
   description:
-    "Your one-stop portal for latest government jobs, exam notifications, admit cards, results, answer keys, and syllabus updates. Stay updated with Sarkari Result Point for SSC, UPSC, Banking, Railway, Defence, Police, Teaching jobs and more.",
+    "GovernmentExam.online – Get the latest government job alerts, exam notifications, results, admit cards, and syllabus updates for SSC, UPSC, Banking, Railway, Defence, and more",
   keywords: [
     "Government Result",
     "Govt Jobs 2025",

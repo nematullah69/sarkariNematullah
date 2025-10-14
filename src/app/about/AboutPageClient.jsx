@@ -51,7 +51,7 @@ const AboutPage = () => {
       {/* Hero Section */}
       <div className="bg-blue-800 text-white py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">About SarkariResult Portal</h1>
+          <h1 className="text-3xl font-bold mb-2">About Government Exam</h1>
           <p className="text-blue-200">Learn more about our mission and services</p>
         </div>
       </div>
@@ -63,10 +63,9 @@ const AboutPage = () => {
             <Target className="h-16 w-16 text-blue-600 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              SarkariResult Portal is dedicated to providing accurate, timely, and reliable information
-              about government examination results, admit cards, and notifications. We strive to be the
-              most trusted source for millions of aspirants across India, helping them achieve their
-              career goals through easy access to examination information.
+            GovernmentExam.online is dedicated to providing accurate,
+             timely, and reliable updates about all government examinations in India.
+              From job notifications and exam dates to admit cards, results, and syllabus details — we aim to be the most trusted source for millions of aspirants. Our mission is to help candidates stay informed and achieve their career goals with easy access to verified government exam information.
             </p>
           </div>
         </div>

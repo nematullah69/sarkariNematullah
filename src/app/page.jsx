@@ -19,6 +19,63 @@ import {
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  // New ScrollingBanner Component
+const ScrollingBanner = ({ items }) => {
+  const totalContent = items.length;
+  // Speed is based on content length for consistent scroll time
+  const scrollSpeed = totalContent *1
+  return (
+    <div className="bg-orange-600 text-white py-2 overflow-hidden whitespace-nowrap">
+      <style jsx>{`
+        .scrolling-content {
+          display: inline-block;
+          padding-left: 100%; /* Start off-screen */
+          animation: scroll-left var(--scroll-speed) linear infinite;
+        }
+        .scrolling-content:hover {
+          animation-play-state: paused; /* Pause on hover */
+        }
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+      `}</style>
+      <div className="scrolling-content" style={{ '--scroll-speed': `${items.length * 5}s` }}>
+        {items.map((item, index) => (
+          <span key={index} className="mx-4 text-sm">
+            <Link href={item.link} className="hover:underline">
+              {item.text}
+            </Link>
+            {index < items.length - 1 && <span className="text-red-300 mx-2">||</span>}
+          </span>
+        ))}
+        {/* Duplicate items to ensure continuous loop without a gap */}
+        {items.map((item, index) => (
+          <span key={`duplicate-${index}`} className="mx-4 text-sm">
+            <Link href={item.link} className="hover:underline">
+              {item.text}
+            </Link>
+            {index < items.length - 1 && <span className="text-red-300 mx-2">||</span>}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const bannerItems = [
+  { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
+  { text: "DSSSB Assistant Teacher (Primary) Recruitment 2025", link: "https://governmentexam.online/jobs/dsssb-prt-2025" },
+  { text: "SSC CPO Paper 2 Result 2025 OUT", link: "https://governmentexam.online/results/ssc-CPO-2024-result" },
+  { text: "MPESB Excise Constable Admit Card 2025", link: "https://governmentexam.online/admit-card/MPESB-EXC-2025" },
+  { text: "CLAT 2026 Admission Online Form – Start", link: "https://governmentexam.online/admission/clat-2026" },
+
+];
+
   const latestJobs = [
     { id: "dsssb-prt-2025", title: "DSSSB Assistant Teacher (Primary) Recruitment 2025", organization: "DSSSB", date: "10 Sep 2025" },
     { id: "bom-so-2025", title: "Bank of Maharashtra Specialist Officer (SO) Recruitment 2025", organization: "Bank of Maharashtra", date: "10 Sep 2025" },
@@ -69,6 +126,7 @@ const HomePage = () => {
   ];
 
   const latestAdmitCards = [
+    {id: "rbi-gradeb-prelims-2025", title: "RBI Officer Grade B Prelims 2025 Admid-card", organization: "Reserve Bank of India (RBI)", date: "12 October 2025"},
     { id: "upsc-pre-2025", title: "UPSC Civil Services Preliminary Exam 2025", organization: "UPSC", date: "01 May 2025" },
     { id: "IB-ACIO-2025", title: "IB ACIO Admit Card 2025", organization: "Intelligence Bureau", date: "3-4 Days Before Exam" },
     { id: "CHD-JBT-2025", title: "Chandigarh JBT Teacher Admit Card 2025", organization: "Chandigarh Education Dept", date: "30 September 2025" },
@@ -211,6 +269,9 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+            {/* Scrolling Banner */}
+            <ScrollingBanner items={bannerItems} />
 
       {/* Sections */}
       <div className="container mx-auto px-4 py-8">

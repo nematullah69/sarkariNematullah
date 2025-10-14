@@ -9,8 +9,7 @@ const ResultsPage = () => {
   const [loading, setLoading] = useState(true);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOrganization, setSelectedOrganization] = useState("all");
-  const [selectedYear, setSelectedYear] = useState("all");
+  // Removed state for selectedOrganization and selectedYear
 
   // ✅ Fetch JSON data from public folder
   useEffect(() => {
@@ -28,23 +27,17 @@ const ResultsPage = () => {
     fetchData();
   }, []);
 
-  // ✅ Extract unique organizations & years
-  const organizations = [
-    "all",
-    ...Array.from(new Set(resultsData.map((r) => r.organization))),
-  ];
-  const years = ["all", ...Array.from(new Set(resultsData.map((r) => r.year)))];
+  // Removed logic for extracting unique organizations & years
 
-  // ✅ Filtering logic
+  // ✅ Filtering logic (MODIFIED: Only includes search term matching)
   const filteredResults = resultsData.filter((result) => {
+    // Keeps the search logic with the necessary null/undefined checks
     const matchesSearch =
-      result.examName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      result.organization.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesOrganization =
-      selectedOrganization === "all" ||
-      result.organization === selectedOrganization;
-    const matchesYear = selectedYear === "all" || result.year === selectedYear;
-    return matchesSearch && matchesOrganization && matchesYear;
+      (result.examName || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (result.organization || "").toLowerCase().includes(searchTerm.toLowerCase());
+      
+    // The filter now only returns based on the search term
+    return matchesSearch;
   });
 
   const getStatusColor = (status) => {
@@ -84,14 +77,16 @@ const ResultsPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        {/* Search + Filters */}
+        {/* Search Only */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4"> 
+            {/* The grid is now a single column */}
+            
             {/* Search */}
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search by exam name..."
+                placeholder="Search by exam name or organization..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pl-10"
@@ -99,39 +94,7 @@ const ResultsPage = () => {
               <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
             </div>
 
-            {/* Organization */}
-            <div className="relative">
-              <select
-                value={selectedOrganization}
-                onChange={(e) => setSelectedOrganization(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none pr-10"
-              >
-                <option value="all">All Organizations</option>
-                {organizations.slice(1).map((org, index) => (
-                  <option key={`${org}-${index}`} value={org}>
-                    {org}
-                  </option>
-                ))}
-              </select>
-              <Filter className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
-            </div>
-
-            {/* Year */}
-            <div className="relative">
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none pr-10"
-              >
-                <option value="all">All Years</option>
-                {years.slice(1).map((year, index) => (
-                  <option key={`${year}-${index}`} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-              <Filter className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
-            </div>
+            {/* Organization and Year filters REMOVED */}
           </div>
         </div>
 
@@ -144,9 +107,10 @@ const ResultsPage = () => {
 
         {/* Results */}
         <div className="flex flex-col items-center gap-6">
-          {filteredResults.map((result) => (
+          {filteredResults.map((result, index) => (
             <Link
-              key={result.id}
+              // Using a fallback for the key just in case 'result.id' is missing
+              key={result.id || index} 
               href={`/results/${result.id}`}
               className="w-full max-w-2xl bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition block no-underline"
             >

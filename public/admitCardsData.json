@@ -1,4 +1,122 @@
 [
+
+  {
+    "id": "rbi-gradeb-prelims-2025",
+    "examName": "RBI Officer Grade B Prelims 2025 Admid-card",
+    "examNameS": "RBI Officer Grade B Prelims 2025",
+    "examvacancy": "RBI Officer Grade B Vacancy 2025 Details",
+    "organization": "Reserve Bank of India (RBI)",
+    "department": "Officer Grade B (DR) – General / DEPR / DSIM",
+    "releaseDate": "12 October 2025",
+    "examDate": "18 October 2025, 19 October 2025", 
+    "downloadPeriodStart": "12 October 2025",
+    "downloadPeriodEnd": "onwards until exam",
+    "totalPosts": "120",
+    "instructions": [
+      "Download admit card from official website using application number and date of birth.",
+      "Bring a valid photo ID along with printed admit card."
+    ],
+    "examGuidelines": [
+      "No electronic devices allowed inside the exam hall.",
+      "Follow invigilator instructions strictly."
+    ],
+    "category": "Banking / Officer Grade B",
+    "importantDates": {
+      "notificationDate": "10 September 2025",
+      "applicationStart": "10 September 2025",
+      "lastDateApply": "30 September 2025",
+      "PrelimsAdmitCardDate": "12 October 2025",
+      "PrelimsExamDate": "18–19 October 2025",
+      "MainsAdmitCardDate": "November 2025",
+      "MainsExamDate": "06–07 December 2025",
+      "PrelimsResultDate": "To be notified",
+      "MainsResultDate": "To be notified"
+    },
+    "Salary": [
+      {
+        "postName": "RBI Officer Grade B (all streams)",
+        "level": "As per RBI pay scale",
+        "initialPay": "₹78,450 (starting pay)"
+      }
+    ],
+    "cutoff": [
+      {
+        "category": "General (UR)",
+        "range": "To be announced"
+      },
+      {
+        "category": "OBC",
+        "range": "To be announced"
+      },
+      {
+        "category": "SC",
+        "range": "To be announced"
+      },
+      {
+        "category": "ST",
+        "range": "To be announced"
+      },
+      {
+        "category": "EWS",
+        "range": "To be announced"
+      }
+    ],
+    "salaryDetails": [
+      {
+        "allowance": "Basic Pay",
+        "amount": "₹78,450 to onward as per increments"
+      },
+      {
+        "allowance": "Allowances",
+        "amount": "DA, HRA, Medical, Other Govt Norms"
+      }
+    ],
+    "vacancy": [
+      {
+        "postName": "Officer Grade B – General",
+        "category": "General / Reserved",
+        "total": "83",
+        "eligibility": "Graduate with minimum 60% (50% for SC/ST/PwBD) or Master’s 55% (pass marks for SC/ST/PwBD)."
+      },
+      {
+        "postName": "Officer Grade B – DEPR",
+        "category": "DEPR",
+        "total": "17",
+        "eligibility": "Master’s in Economics / related subjects with at least 55% (50% for SC/ST/PwBD)."
+      },
+      {
+        "postName": "Officer Grade B – DSIM",
+        "category": "DSIM",
+        "total": "20",
+        "eligibility": "Master’s in Statistics / Mathematics / relevant fields with 55% (50% for SC/ST/PwBD)."
+      },
+      {
+        "postName": "Total",
+        "category": "-",
+        "total": "120",
+        "eligibility": "Refer official notification."
+      }
+    ],
+    "applicationFee": [
+      {
+        "category": "General / OBC / EWS",
+        "fee": "₹850/-"
+      },
+      {
+        "category": "SC / ST / PH",
+        "fee": "₹100/-"
+      }
+    ],
+    "links": {
+      "admitCard": "https://opportunities.rbi.org.in/Scripts/CallLetters.aspx",
+      "notification": "https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DEPRDSIM10092053DBF9DFDDB224871984F58095857ED88.PDF",
+      "officialWebsite": "https://opportunities.rbi.org.in/Scripts/Vacancies.aspx",
+      "examDate": "https://opportunities.rbi.org.in/Scripts/Vacancies.aspx"
+    }
+  },
+  
+  
+
     {
       "id": "upsc-pre-2025",
       "examName": "UPSC Civil Services Preliminary Exam 2025",

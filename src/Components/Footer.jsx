@@ -83,7 +83,7 @@ const Footer = () => {
           </div> */}
 
           {/* Office Hours */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Office Hours</h3>
             <div className="space-y-2">
               <div className="flex items-start space-x-3">
@@ -95,7 +95,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Section */}
