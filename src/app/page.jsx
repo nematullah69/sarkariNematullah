@@ -68,7 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
-  { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-202" },
+  { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-2025" },
   { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" },
   { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
   { text: "DSSSB Assistant Teacher (Primary) Recruitment 2025", link: "https://governmentexam.online/jobs/dsssb-prt-2025" },
