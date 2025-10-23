@@ -1,4 +1,68 @@
 [
+  {
+    "id": "ssc-delhi-police-constable-2025",
+    "title": "SSC Delhi Police Constable (Executive) Recruitment 2025",
+    "department": "Delhi Police",
+    "organization": "Staff Selection Commission (SSC)",
+    "vacancies": "7565",
+    "eligibility": "Matriculation (10th) Pass or equivalent from a recognized Board. Candidate must possess a valid Driving License for LMV (Motorcycle/Car) as on the closing date for receipt of application. Other physical and medical standards apply.",
+    "applicationStart": "22 September 2025",
+    "applicationEnd": "To be notified",
+    "description": "The Staff Selection Commission (SSC) invites online applications for the post of Constable (Executive) in Delhi Police. This recruitment drive aims to fill a large number of vacancies for male and female candidates. The selection process involves a Computer Based Examination, Physical Endurance and Measurement Test (PE&MT), and Medical Examination.",
+    "responsibilities": [
+      "Maintaining law and order in the assigned area.",
+      "Patrolling and preventing criminal activities.",
+      "Enforcing traffic rules and regulations.",
+      "Responding to emergencies and public calls for assistance.",
+      "Investigation of minor crimes and assisting senior officers.",
+      "Crowd control during public gatherings and events."
+    ],
+    "selectionProcess": [
+      "Computer Based Examination (CBE)",
+      "Physical Endurance and Measurement Test (PE&MT)",
+      "Detailed Medical Examination (DME)",
+      "Final Merit List"
+    ],
+    "salary": "Pay Level-3 (₹21,700 – ₹69,100) as per 7th CPC + allowances as admissible to Delhi Government employees.",
+    "location": "National Capital Territory of Delhi (NCT of Delhi)",
+    "category": "Government Jobs / Police",
+    "officialLink": "https://ssc.nic.in",
+    "publishedDate": "To be notified",
+    "status": "Upcoming",
+    "importantLinks": [
+      { "label": "Apply Online (Once active)", "url": "https://ssc.nic.in" },
+      { "label": "Download Notification (Once released)", "url": "https://ssc.nic.in" },
+      { "label": "Official Website", "url": "https://ssc.nic.in" },
+      { "label": "Delhi Police Website", "url": "https://delhipolice.gov.in" }
+    ],
+    "importantDates": {
+      "NotificationDate" : "22 September 2025",
+      "applicationStart": "22 September 2025",
+      "applicationEnd": "31 October 2025 (Extended)",
+      
+      "correctionDate": "To be notified",
+      "admitCardCBE": "To be notified",
+      "examDate": "December to January 2026",
+      "PEandMTDates": "To be notified",
+      "resultDate": "To be notified",
+      "publishedDate": "To be notified"
+    },
+    "applicationFee": [
+      { "category": "General / OBC / EWS", "fee": "₹100" },
+      { "category": "SC / ST / PH / Female / Ex-servicemen", "fee": "00" }
+    ],
+    "examvacancy": "SSC Delhi Police Constable Vacancy 2025 Details",
+    "vacancy": [
+      { "postName": "Constable (Executive) - Male", "category": "Delhi Police", "total": "Tentative" }
+
+    ],
+    "Salary": [
+      { "postName": "Constable (Executive)", "level": "Level 3", "initialPay": "₹21,700", "maxPay": "₹69,100"
+     }
+    ]
+ 
+  },
+
     {
       "id": "dsssb-prt-2025",
       "title": "DSSSB Assistant Teacher (Primary) Recruitment 2025",

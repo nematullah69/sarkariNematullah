@@ -68,6 +68,8 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-202" },
+  { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" },
   { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
   { text: "DSSSB Assistant Teacher (Primary) Recruitment 2025", link: "https://governmentexam.online/jobs/dsssb-prt-2025" },
   { text: "SSC CPO Paper 2 Result 2025 OUT", link: "https://governmentexam.online/results/ssc-CPO-2024-result" },
@@ -77,6 +79,7 @@ const bannerItems = [
 ];
 
   const latestJobs = [
+    { id: "ssc-delhi-police-constable-2025", title: "SSC Delhi Police Constable (Executive) Recruitment 2025", organization: "SSC", date: "22 September 2025" },
     { id: "dsssb-prt-2025", title: "DSSSB Assistant Teacher (Primary) Recruitment 2025", organization: "DSSSB", date: "10 Sep 2025" },
     { id: "bom-so-2025", title: "Bank of Maharashtra Specialist Officer (SO) Recruitment 2025", organization: "Bank of Maharashtra", date: "10 Sep 2025" },
     { id: "rvunl-technician-2025", title: "RVUNL Technician-III / Operator-III / Plant Attendant-III Recruitment 2025", organization: "RVUNL", date: "10 Sep 2025" },
@@ -103,6 +106,7 @@ const bannerItems = [
   ];
 
   const latestResults = [
+    { id: "Meg-Police-2025-result", title: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", organization: "SLPRB", date: "22 October 2025" },
     { id: "ssc-CPO-2024-result", title: "SSC CPO Paper 2 Result 2025 OUT", organization: "SSC", date: "08 August 2025" },
     { id: "ssc-SG-2024-result", title: "SSC Stenographer Grade C, D Result 2025", organization: "SSC", date: "05 March 2025" },
     { id: "ssc-GD-2024-result", title: "SSC GD Constable Result 2025", organization: "SSC", date: "17 June 2025" },
