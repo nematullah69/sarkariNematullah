@@ -9,7 +9,7 @@
       "courseType": "Class 11th",
       "seats": "Varies by college",
       "fees": "₹350 for General/OBC/EWS/SC/ST",
-      "applicationEnd": "03 May 2025",
+      "applicationEnd": "2025-05-03",
       "overview": "Spot admission for Class 11th in Bihar government and private colleges for academic session 2025-27.",
       "eligibility": [
         "Passed Class 10th examination from recognized board (BSEB, ICSE, CBSE or equivalent)",
@@ -98,7 +98,7 @@
       "courseType": "Certificate Courses",
       "seats": "15,000+ seats",
       "fees": "₹750 for General/OBC/EWS, ₹100 for SC/ST, ₹430 for PH",
-      "applicationEnd": "24 May 2025",
+      "applicationEnd": "2025-05-24",
       "overview": "Mop-up counselling for ITI courses in government and private ITIs across Bihar.",
       "eligibility": [
         "Passed or appearing in Class 10th or equivalent examination",
@@ -208,7 +208,7 @@
       "courseType": "Undergraduate",
       "seats": "5,000+ seats",
       "fees": "₹1,100 for General/OBC/EBC, ₹550 for SC/ST/DQ",
-      "applicationEnd": "18 May 2025",
+      "applicationEnd": "2025-05-18",
       "overview": "Mop-up counselling for engineering, medical, pharmacy, and agriculture courses in Bihar colleges.",
       "eligibility": [
         "Passed or appearing in 10+2 with required subjects",
@@ -307,7 +307,7 @@
       "courseType": "M.Tech/Ph.D",
       "seats": "15,000+ seats",
       "fees": "Phase I: ₹2,000 for General/OBC, ₹1,000 for SC/ST/PWD/Female; Phase II: ₹2,500 for General/OBC, ₹1,500 for SC/ST/PWD/Female",
-      "applicationEnd": "28 September 2025 (without late fee), 09 October 2025 (with late fee)",
+      "applicationEnd": "2025-09-28",
       "overview": "Graduate Aptitude Test in Engineering for admission to M.Tech programs in IITs, NITs, and other institutes.",
       "eligibility": [
         "Passed/appearing BE/B.Tech/B.Pharma/B.Arch/B.Sc. Research/M.Sc./MA/MCA/ME/M.Tech/Dual Degree/Integrated Course",
@@ -413,7 +413,7 @@
       "importantDates": [
         {
           "label": "Registration Start",
-          "value": "1 August 2025",
+          "value": "2025-08-1",
           "highlight": true
         },
         {
@@ -498,7 +498,7 @@
       "courseType": "UG/PG Law",
       "seats": "3,000+ seats",
       "fees": "₹4,000 for General/OBC, ₹3,500 for SC/ST",
-      "applicationEnd": "31 October 2025",
+      "applicationEnd": "2025-10-31",
       "overview": "Common Law Admission Test for undergraduate and postgraduate law programs in NLUs.",
       "eligibility": [
         "For UG: 10+2 with 45% marks (40% for SC/ST)",
@@ -572,8 +572,7 @@
         ]
       },
       "contact": {
-        "phone": "080-47162020",
-        "email": "clat@consortiumofnlus.ac.in",
+      
         "website": "https://consortiumofnlus.ac.in/",
         "address": "CLAT Office, NLSIU Campus, Nagarbhavi, Bangalore"
       },
