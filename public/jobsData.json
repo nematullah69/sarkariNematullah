@@ -1,5 +1,76 @@
 [
   {
+    "id": "Sebi-grade-a-2025",
+    "title": "SEBI Grade A (Assistant Manager) Recruitment 2025",
+    "department": "Not separately specified",
+    "organization": "Securities and Exchange Board of India (SEBI)",
+    "vacancies": "110",
+    "eligibility": "Candidates must possess a Master’s Degree or a 2-year Postgraduate Diploma in any discipline, or a Bachelor’s Degree in Law/Engineering, or hold professional qualifications such as CA, CFA, CS, or CMA from a recognized University or Institution in India.",
+    "applicationStart": "2025-10-08",
+    
+  "description": "The Securities and Exchange Board of India (SEBI) invites online applications for the post of Officer Grade A (Assistant Manager) under various streams including General, Legal, Information Technology, Research, Official Language, and Engineering. This recruitment drive aims to fill a total of 110 vacancies. The selection process includes Phase I and Phase II Online Examinations followed by a Personal Interview.",
+
+    "responsibilities": [
+    "Regulation and supervision in securities market",
+    "Policy & research work in respective stream",
+    "Monitoring of markets & compliance",
+    "Advisory and developmental work in the assigned domain",
+    "Other duties as assigned by SEBI depending on stream"
+    ],
+    "selectionProcess": [
+    "Phase I Online Examination (Screening) :contentReference[oaicite:5]{index=5}",
+    "Phase II Online Examination (Main) :contentReference[oaicite:6]{index=6}",
+    "Phase III Interview (Final) :contentReference[oaicite:7]{index=7}"
+    ],
+    "salary": "Pay Level-3 (₹21,700 – ₹69,100) as per 7th CPC + allowances as admissible to Delhi Government employees.",
+   "location": "All India (Postings at SEBI Offices across India including Mumbai Head Office)",
+
+    "category": "Government Jobs / Regulatory Body",
+    "officialLink": "https://ssc.nic.in",
+    "publishedDate": "To be notified",
+    "status": "Upcoming",
+    "importantLinks": [
+      { "label": "Apply Online (Once active)", "url": "https://ibpsreg.ibps.in/sebisep25/" },
+      { "label": "Download Notification", "url": "https://www.sebi.gov.in/sebiweb/other/careerdetail.jsp?careerId=391" },
+      { "label": "Official Website", "url": "https://www.sebi.gov.in/sebiweb/other/careerdetail.jsp?careerId=391" },
+      { "label": "HomePage", "url": "http://governmentexam.online" }
+    ],
+    "importantDates": {
+      "NotificationDate" : "2025-10-08",
+      "applicationStart": "2025-10-30",
+      "applicationEnd": "To be notified",
+      "phase1Exam": "To be notified",
+      "phase2Exam": "To be notified",
+      "interview": "To be notified",
+      "resultDate": "To be notified",
+      "publishedDate": "2025-10-08"
+      
+      
+      
+    },
+    "applicationFee": [
+      { "category": "Gen/ OBC/ EWS ", "fee": "₹1180" },
+      { "category": "SC/ ST/ PWD", "fee": "118" }
+    ],
+    "examvacancy": "SEBI Grade A Eligibility & Vacancy 2025 Details",
+    "vacancy": [
+      { "postName": "SEBI Grade A General Vacancy 2025", "category": "_", "total": "56" },
+      { "postName": "SEBI Grade A Legal Vacancy 2025", "category": "_", "total": "20" },
+      { "postName": "SEBI Grade A Information Technology Vacancy 2025", "category": "_", "total": "22" },
+      { "postName": "SEBI Grade A Official Language Vacancy 2025", "category": "_", "total": "03" },
+      { "postName": "SEBI Grade A Research Vacancy 2025", "category": "_", "total": "22" },
+      { "postName": "SEBI Grade A Engineering (Electrical) Vacancy 2025", "category": "_", "total": "02" },
+      { "postName": "SEBI Grade A Engineering (Civil) Vacancy 2025", "category": "_", "total": "03" }
+    ],
+    "Salary": [
+    { "postName": "Salary", "level": "Pay Scale as per SEBI Regulations 2025 (Equivalent to Level 10 of 7th CPC)", "initialPay": "₹62500"
+     }
+     
+    
+    ]
+ 
+  },
+  {
     "id": "ssc-delhi-police-constable-2025",
     "title": "SSC Delhi Police Constable (Executive) Recruitment 2025",
     "department": "Delhi Police",

@@ -68,6 +68,8 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "SEBI Grade A (Assistant Manager) Recruitment 2025", link: "https://governmentexam.online/jobs/Sebi-grade-a-2025" },
+  
   { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-2025" },
   { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" },
   { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
@@ -78,7 +80,9 @@ const bannerItems = [
 
 ];
 
+
   const latestJobs = [
+    { id: "Sebi-grade-a-2025", title: "SEBI Grade A (Assistant Manager) Recruitment 2025", organization: "SEBI", date: "2025-10-08" },
     { id: "ssc-delhi-police-constable-2025", title: "SSC Delhi Police Constable (Executive) Recruitment 2025", organization: "SSC", date: "2025-9-22" },
     { id: "dsssb-prt-2025", title: "DSSSB Assistant Teacher (Primary) Recruitment 2025", organization: "DSSSB", date: "2025-9-10" },
     { id: "bom-so-2025", title: "Bank of Maharashtra Specialist Officer (SO) Recruitment 2025", organization: "Bank of Maharashtra", date: "2025-9-10" },
