@@ -1,5 +1,84 @@
 [
   {
+    "id": "indian-army-tgc-143-2025",
+    "title": "Indian Army TGC 143 Recruitment 2025",
+    "department": "Technical Graduate Course (TGC)",
+    "organization": "Indian Army",
+    "vacancies": "30",
+    
+    "eligibility": "Candidates must have completed or be in the final year of an Engineering Degree course in a relevant discipline from a recognized University or Institution in India.",
+    "applicationStart": "2025-10-08",  
+    "applicationEnd": "2025-11-06",
+    
+    "description": "The Indian Army invites online applications from eligible unmarried male Engineering Graduates for the 143rd Technical Graduate Course (TGC-143) commencing in July 2026 at the Indian Military Academy (IMA), Dehradun for Permanent Commission in the Indian Army. The course offers opportunities to serve the nation as a Commissioned Officer in various technical branches.",
+    
+    "responsibilities": [
+      "Serve as a Technical Officer in various engineering branches of the Indian Army",
+      "Lead and manage men and material in assigned technical fields",
+      "Plan, design, and supervise technical and combat engineering operations",
+      "Ensure maintenance and deployment of advanced military technology",
+      "Perform other duties as assigned by the Indian Army"
+    ],
+    
+    "selectionProcess": [
+      "Shortlisting of applications based on academic performance",
+      "SSB Interview (Stage I & Stage II)",
+      "Medical Examination",
+      "Final Merit List based on SSB and medical fitness"
+    ],
+    
+    "salary": "Candidates will receive stipend of ₹56,100 per month during training. On commissioning, officers are placed in the pay matrix Level 10 (₹56,100 – ₹1,77,500) plus Military Service Pay and allowances as per Indian Army rules.",
+    
+
+    
+    "category": "Defence Jobs / Government Jobs",
+    
+    "status": "Active",
+    
+    "importantLinks": [
+      { "label": "Apply Online", "url": "https://joinindianarmy.nic.in" },
+      { "label": "Download Notification", "url": "https://joinindianarmy.nic.in/writereaddata/Portal/NotificationPDF/TGC-143__NOTIFICATION_HINDI_and_ENGLISH_.pdf" },
+      { "label": "Official Website", "url": "https://joinindianarmy.nic.in/Authentication.aspx" },
+      { "label": "HomePage", "url": "http://governmentexam.online" }
+    ],
+    
+    "importantDates": {
+      "NotificationDate": "2025-10-08",
+      "applicationStart": "2025-10-08",
+      "applicationEnd": "2025-11-06",
+      "ssbInterview": "To be notified",
+      "medicalExam": "To be notified",
+      "finalMeritList": "To be notified",
+      "courseCommencement": "July 2026"
+     
+    },
+    
+    "applicationFee": [
+      { "category": "All Candidates", "fee": "No Application Fee" }
+    ],
+    
+    "examvacancy": "Indian Army TGC 143 Eligibility & Vacancy 2025 Details",
+    
+    "vacancy": [
+      { "postName": "Civil Engineering", "category": "_", "total": "08" },
+      { "postName": "Mechanical Engineering", "category": "_", "total": "06" },
+      { "postName": "Electrical Engineering", "category": "_", "total": "02" },
+      { "postName": "Electronics Engineering", "category": "_", "total": "06" },
+      { "postName": "Computer Science Engineering", "category": "_", "total": "06" },
+      { "postName": "Misc Engg Streams", "category": "_", "total": "02" }
+     
+    ],
+    
+    "Salary": [
+      { 
+        "postName": "TGC Officer (Lieutenant after commissioning)",
+        "level": "Level 10 of 7th CPC",
+        "initialPay": "₹56,100 + Military Service Pay + Allowances"
+      }
+    ]
+  },
+  
+  {
     "id": "Sebi-grade-a-2025",
     "title": "SEBI Grade A (Assistant Manager) Recruitment 2025",
     "department": "Not separately specified",
@@ -28,7 +107,7 @@
     "category": "Government Jobs / Regulatory Body",
     "officialLink": "https://ssc.nic.in",
     "publishedDate": "To be notified",
-    "status": "Upcoming",
+    "status": "Active",
     "importantLinks": [
       { "label": "Apply Online (Once active)", "url": "https://ibpsreg.ibps.in/sebisep25/" },
       { "label": "Download Notification", "url": "https://www.sebi.gov.in/sebiweb/other/careerdetail.jsp?careerId=391" },

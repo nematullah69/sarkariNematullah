@@ -47,7 +47,7 @@ interface Job {
   title: string;
   organization: string;
   department?: string;
-  location: string;
+  
   status: 'Active' | 'Closed' | 'Coming Soon';
   category: string;
   vacancies: string | number;
@@ -181,10 +181,7 @@ const JobDetailsPage = () => {
                     <Building className="h-4 w-4 text-gray-500" />
                     <span className="text-gray-700">{job.organization}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm">
-                    <MapPin className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-700">{job.location}</span>
-                  </div>
+                 
                 </div>
                 <div className="flex flex-col items-end space-y-1">
                   <span className={`text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(job.status)}`}>{job.status}</span>

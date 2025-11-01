@@ -68,6 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "Indian Army TGC 143 Recruitment 2025", link: "https://governmentexam.online/jobs/indian-army-tgc-143-2025" },
   { text: "SEBI Grade A (Assistant Manager) Recruitment 2025", link: "https://governmentexam.online/jobs/Sebi-grade-a-2025" },
   
   { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-2025" },
@@ -82,6 +83,7 @@ const bannerItems = [
 
 
   const latestJobs = [
+    { id: "indian-army-tgc-143-2025", title: "Indian Army TGC 143 Recruitment 2025", organization: "TGC", date: "2025-10-08" },
     { id: "Sebi-grade-a-2025", title: "SEBI Grade A (Assistant Manager) Recruitment 2025", organization: "SEBI", date: "2025-10-08" },
     { id: "ssc-delhi-police-constable-2025", title: "SSC Delhi Police Constable (Executive) Recruitment 2025", organization: "SSC", date: "2025-9-22" },
     { id: "dsssb-prt-2025", title: "DSSSB Assistant Teacher (Primary) Recruitment 2025", organization: "DSSSB", date: "2025-9-10" },
