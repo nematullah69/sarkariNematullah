@@ -68,6 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", link: "https://governmentexam.online/jobs/pnb-lbo-2025" },
   { text: "Indian Army TGC 143 Recruitment 2025", link: "https://governmentexam.online/jobs/indian-army-tgc-143-2025" },
   { text: "SEBI Grade A (Assistant Manager) Recruitment 2025", link: "https://governmentexam.online/jobs/Sebi-grade-a-2025" },
   
@@ -76,13 +77,14 @@ const bannerItems = [
   { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
   { text: "DSSSB Assistant Teacher (Primary) Recruitment 2025", link: "https://governmentexam.online/jobs/dsssb-prt-2025" },
   { text: "SSC CPO Paper 2 Result 2025 OUT", link: "https://governmentexam.online/results/ssc-CPO-2024-result" },
-  { text: "MPESB Excise Constable Admit Card 2025", link: "https://governmentexam.online/admit-card/MPESB-EXC-2025" },
-  { text: "CLAT 2026 Admission Online Form – Start", link: "https://governmentexam.online/admission/clat-2026" },
+  
+  
 
 ];
 
 
   const latestJobs = [
+    { id: "pnb-lbo-2025", title: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", organization: "PNB", date: "2025-11-23" },
     { id: "indian-army-tgc-143-2025", title: "Indian Army TGC 143 Recruitment 2025", organization: "TGC", date: "2025-10-08" },
     { id: "Sebi-grade-a-2025", title: "SEBI Grade A (Assistant Manager) Recruitment 2025", organization: "SEBI", date: "2025-10-08" },
     { id: "ssc-delhi-police-constable-2025", title: "SSC Delhi Police Constable (Executive) Recruitment 2025", organization: "SSC", date: "2025-9-22" },

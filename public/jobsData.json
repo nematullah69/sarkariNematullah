@@ -1,5 +1,63 @@
 [
   {
+    "id": "pnb-lbo-2025",
+    "title": "PNB Local Bank Officer (LBO) Recruitment 2025-2026",
+    "department": "Human Resources Department",
+    "organization": "Punjab National Bank (PNB)",
+    "vacancies": "750",
+    "eligibility": "Graduates from any accredited university are eligible to apply for the Local Bank Officer (LBO) posts.",
+    "applicationStart": "2025-11-03",
+    
+    "description": "Punjab National Bank (PNB) has announced the recruitment of 750 Local Bank Officers (LBO) for the year 2025–2026. This recruitment offers an excellent opportunity for graduates who wish to work in the banking sector. The application process will be conducted online from November 3, 2025, to November 23, 2025. Interested candidates must complete the online registration before the deadline by visiting the official PNB website.",
+
+    "responsibilities": [
+      "Managing branch-level banking operations.",
+      "Assisting in customer relationship and financial product sales.",
+      "Ensuring compliance with banking regulations and internal policies.",
+      "Supporting local banking activities and community outreach.",
+      "Other duties as assigned by branch management."
+    ],
+
+    "selectionProcess": [
+      "Online Examination",
+      "Interview",
+      "Document Verification"
+    ],
+
+    "salary": "Expected pay scale: Approx. ₹36,000 – ₹63,840 per month (as per PNB Officer Scale). Exact pay details will be mentioned in the official notification.",
+    "category": "Government Jobs / Banking Sector",
+    "officialLink": "https://www.pnbindia.in",
+    "publishedDate": "2025-11-03",
+    "applicationEnd": "2025-11-23",
+    "status": "Active",
+    "importantLinks": [
+    { "label": "Apply Online", "url": "https://www.pnbindia.in/Recruitments.aspx" },
+    { "label": "Download Notification", "url": "https://www.pnbindia.in/Recruitments.aspx" },
+    { "label": "Official Website", "url": "https://www.pnbindia.in" },
+    { "label": "HomePage", "url": "http://governmentexam.online" }
+  ],
+  "importantDates": {
+    "NotificationDate": "2025-11-03",
+    "applicationStart": "2025-11-03",
+    "applicationEnd": "2025-11-23",
+    "examDate": "To be notified",
+    "interview": "To be notified",
+    "resultDate": "To be notified"
+  },
+   "applicationFee": [
+    { "category": "Gen/ OBC/ EWS", "fee": "To be notified" },
+    { "category": "SC/ ST/ PWD", "fee": "To be notified" }
+  ],
+  "examvacancy": "PNB Local Bank Officer (LBO) Vacancy 2025 Details",
+    "vacancy": [
+    { "postName": "Local Bank Officer (LBO)", "category": "All Categories", "total": "750" }
+  ],
+  "Salary": [
+    { "postName": "Local Bank Officer (LBO)", "level": "Officer Scale – as per PNB Bank Rules 2025", "initialPay": "Approx. ₹36,000" }
+  ]
+ 
+  },
+  {
     "id": "indian-army-tgc-143-2025",
     "title": "Indian Army TGC 143 Recruitment 2025",
     "department": "Technical Graduate Course (TGC)",
