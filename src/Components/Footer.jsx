@@ -24,7 +24,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/answer-keys" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/answer-key" className="text-gray-300 hover:text-white transition-colors">
                   Answer Keys
                 </Link>
               </li>
