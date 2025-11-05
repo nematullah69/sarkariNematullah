@@ -135,22 +135,41 @@ function ResultJsonLd({ result }: { result: Result }) {
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org/",
-          "@type": "Exam",
+          "@type": "CreativeWork", // ✅ Changed to valid type
           name: result.examName,
           description: result.resultDetails,
           datePublished: result.year,
-          provider: {
+          inLanguage: "en",
+          educationalCredentialAwarded: "Result",
+          publisher: {
             "@type": "Organization",
             name: result.organization,
             sameAs: result.officialWebsite,
           },
-          educationalCredentialAwarded: "Result",
-          numberOfResults: result.totalPosts,
+          // ✅ Optional metadata for better SEO
+          about: {
+            "@type": "EducationalOccupationalProgram",
+            name: result.examName,
+            provider: {
+              "@type": "Organization",
+              name: result.organization,
+              sameAs: result.officialWebsite,
+            },
+          },
+          // ✅ Added optional numeric metadata
+          interactionStatistic: {
+            "@type": "InteractionCounter",
+            interactionType: "https://schema.org/ViewAction",
+            userInteractionCount: result.totalPosts || 0,
+          },
+          // ✅ Canonical URL for clarity
+          mainEntityOfPage: `https://governmentexam.online/results/${result.id}`,
         }),
       }}
     />
   );
 }
+
 
 // ✅ Default Export
 // 🎯 FINAL FIX: Use 'any' to bypass the strict type check

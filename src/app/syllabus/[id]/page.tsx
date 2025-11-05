@@ -132,16 +132,37 @@ function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
           "@context": "https://schema.org",
           "@type": "EducationalOccupationalProgram",
           name: syllabus.examName,
+          description: syllabus.syllabusOverview,
+          educationalProgramMode: syllabus.examType,
+          startDate: syllabus.year,
+          educationalCredentialAwarded: "Syllabus Completion",
+
+          // ✅ Official page URL (recommended)
+          url: `https://governmentexam.online/syllabus/${syllabus.id}`,
+
+          // ✅ Provider details
           provider: {
             "@type": "Organization",
             name: syllabus.organization,
             sameAs: syllabus.officialWebsite,
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "IN",
+            },
           },
-          educationalProgramMode: syllabus.examType,
-          startDate: syllabus.year,
-          description: syllabus.syllabusOverview,
-          educationalCredentialAwarded: "Syllabus Completion",
-          hasCourse: syllabus.subjects.map((sub) => ({ "@type": "Course", name: sub })),
+
+          // ✅ Recommended extras (optional but help remove warnings)
+          timeToComplete: {
+            "@type": "Duration",
+            name: "Varies by exam",
+          },
+          programPrerequisites: "Eligible candidates as per exam rules",
+
+          // ✅ Syllabus subjects list
+          hasCourse: syllabus.subjects?.map((sub) => ({
+            "@type": "Course",
+            name: sub,
+          })),
         }),
       }}
     />

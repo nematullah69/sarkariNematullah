@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Script from "next/script";
 import {
   ArrowLeft,
   Building,
@@ -79,6 +80,48 @@ interface Result {
   cutoff?: CutoffItem[];
   rrbResultsData?: RrbResultData[];
   applicationFee?: FeeItem[];
+}
+
+function ResultJsonLd({ result }: { result: Result }) {
+  return (
+    <Script
+      id="result-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "CreativeWork",
+          name: result.examName,
+          description:
+            result.resultDetails ||
+            `${result.examName} result published by ${result.organization}.`,
+          datePublished: result.resultDate || new Date().toISOString(),
+          inLanguage: "en",
+          educationalCredentialAwarded: "Result",
+          publisher: {
+            "@type": "Organization",
+            name: result.organization,
+            sameAs: result.officialWebsite || "",
+          },
+          about: {
+            "@type": "EducationalOccupationalProgram",
+            name: result.examName,
+            provider: {
+              "@type": "Organization",
+              name: result.organization,
+              sameAs: result.officialWebsite || "",
+            },
+          },
+          interactionStatistic: {
+            "@type": "InteractionCounter",
+            interactionType: "https://schema.org/ViewAction",
+            userInteractionCount: Number(result.totalPosts) || 0,
+          },
+          mainEntityOfPage: `https://governmentexam.online/results/${result.id}`,
+        }),
+      }}
+    />
+  );
 }
 
 // --- END OF TYPESCRIPT FIXES ---

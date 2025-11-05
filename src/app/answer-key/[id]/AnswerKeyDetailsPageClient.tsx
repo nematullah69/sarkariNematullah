@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Script from "next/script"; 
 import { 
   ArrowLeft, 
   Building, 
@@ -58,6 +59,31 @@ interface AnswerKey {
 }
 
 // --- END OF TYPESCRIPT FIX ---
+function AnswerKeyJsonLd({ answerKey }: { answerKey: AnswerKey }) {
+  return (
+    <Script
+      id="answerkey-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOccupationalProgram",
+          name: answerKey.examName || "Answer Key",
+          description: answerKey.details || "Official exam answer key with question-wise solutions.",
+          datePublished: answerKey.releaseDate || "",
+          educationalProgramMode: "Online",
+          url: `https://governmentexam.online/answer-key/${answerKey.id}`,
+          provider: {
+            "@type": "Organization",
+            name: answerKey.organization || "Government Exam",
+            sameAs: answerKey.officialWebsite || "https://governmentexam.online",
+          },
+        }),
+      }}
+    />
+  );
+}
+
 
 // 3. Define the function component props to extract 'id' correctly
 const AnswerKeyDetailsPage = () => {

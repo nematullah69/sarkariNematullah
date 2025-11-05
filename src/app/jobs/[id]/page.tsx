@@ -9,6 +9,7 @@ interface Job {
   // ... (Interface remains unchanged)
   id: string;
   title: string;
+  
   department: string;
   organization: string;
   vacancies: string;
@@ -109,6 +110,9 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   const seoKeywords = trimText(
     [
       job.title,
+
+      
+     
       `${job.organization} Recruitment`,
       `${job.department} Jobs`,
       job.category,
@@ -151,48 +155,50 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   };
 }
 
-// ✅ JSON-LD Schema for Google Jobs (Remains unchanged)
+// ✅ JSON-LD Schema for Google Jobs (added optional fields fix)
 function JobJsonLd({ job }: { job: Job }) {
-  return (
-    <Script
-      id="jobposting-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org/",
-          "@type": "JobPosting",
-          title: job.title,
-          description: job.description,
-          datePosted: job.publishedDate,
-          validThrough: job.applicationEnd,
-          employmentType: "FULL_TIME",
-          hiringOrganization: {
-            "@type": "Organization",
-            name: job.organization,
-            sameAs: job.officialLink,
-          },
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: job.location,
-              addressCountry: "IN",
-            },
-          },
-          // NOTE: The salary parsing here is basic and assumes job.salary contains a number. 
-          baseSalary: {
-            "@type": "MonetaryAmount",
-            currency: "INR",
-            value: {
-              "@type": "QuantitativeValue",
-              value: job.salary.replace(/[^\d]/g, ""), // extract numbers only
-              unitText: "MONTH",
-            },
-          },
-        }),
-      }}
-    />
-  );
+  return (
+    <Script
+      id="jobposting-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "JobPosting",
+          title: job.title,
+          description: job.description,
+          datePosted: job.publishedDate,
+          validThrough: job.applicationEnd,
+          employmentType: "FULL_TIME",
+          hiringOrganization: {
+            "@type": "Organization",
+            name: job.organization,
+            sameAs: job.officialLink,
+          },
+          jobLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Head Office, Bhikaji Cama Place",
+              addressLocality: job.location || "New Delhi",
+              addressRegion: "Delhi",
+              postalCode: "110066",
+              addressCountry: "IN",
+            },
+          },
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: "INR",
+            value: {
+              "@type": "QuantitativeValue",
+              value: job.salary.replace(/[^\d]/g, ""), // extract numbers only
+              unitText: "MONTH",
+            },
+          },
+        }),
+      }}
+    />
+  );
 }
 
 // ✅ Default Export (The main Page component)

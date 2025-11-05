@@ -1,6 +1,7 @@
 // app/notifications/[id]/page.tsx
 import { Metadata } from "next";
 import Script from "next/script";
+
 import NotificationDetailsPageClient from "./NotificationDetailsPageClient";
 import * as fs from 'fs/promises'; 
 import * as path from 'path';     
@@ -111,27 +112,37 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 
 // ✅ JSON-LD Schema (Remains unchanged)
 function NotificationJsonLd({ notification }: { notification: Notification }) {
-  return (
-    <Script
-      id="notification-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "NewsArticle",
-          headline: notification.title,
-          description: notification.details,
-          datePublished: notification.releaseDate,
-          url: `https://governmentexam.online/notifications/${notification.id}`,
-          publisher: {
-            "@type": "Organization",
-            name: notification.organization,
-            url: notification.officialLink,
-          },
-        }),
-      }}
-    />
-  );
+  return (
+    <Script
+      id="notification-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          headline: notification.title,
+          description:
+            notification.details ||
+            `${notification.title} released by ${notification.organization || "official source"}.`,
+          datePublished:
+            notification.releaseDate || new Date().toISOString(),
+          dateModified:
+            notification.releaseDate || new Date().toISOString(),
+          url: `https://governmentexam.online/notifications/${notification.id}`,
+          publisher: {
+            "@type": "Organization",
+            name: notification.organization || "Government Exam Online",
+            url: notification.officialLink || "https://governmentexam.online",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://governmentexam.online/logo.png", // optional if you have a logo
+            },
+          },
+          mainEntityOfPage: `https://governmentexam.online/notifications/${notification.id}`,
+        }),
+      }}
+    />
+  );
 }
 
 // ✅ Default Page

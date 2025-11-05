@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Script from "next/script";
+
 import { 
   ArrowLeft, 
   Building, 
@@ -47,17 +49,14 @@ interface Job {
   title: string;
   organization: string;
   department?: string;
-  
-  status: 'Active' | 'Closed' | 'Coming Soon';
+  status: "Active" | "Closed" | "Coming Soon";
   category: string;
   vacancies: string | number;
-  salary: string; 
+  salary: string;
   description: string;
-  publishedDate: string; 
+  publishedDate: string;
   applicationStart: string;
   applicationEnd: string;
-  
-  // Arrays
   responsibilities: string[];
   selectionProcess: string[];
   vacancy?: VacancyItem[];
@@ -65,15 +64,67 @@ interface Job {
   salaryDetails?: SalaryDetail[];
   applicationFee?: FeeItem[];
   importantLinks?: ImportantLink[];
+  keboard?: string[];
+  eligibility?: string;
+  examvacancy1?: string;
+  examNameS?: string;
+  importantDates?: Record<string, string>;
+  location?: string;
+  officialLink?: string;
+}
 
-  // Optional/Misc fields
-  eligibility?: string; 
-  examvacancy1?: string; // Table header
-  examNameS?: string; // Salary table header
-  importantDates?: Record<string, string>; // { key: value } structure
+/* =======================
+   ✅ Job JSON-LD Component
+   ======================= */
+function JobJsonLd({ job }: { job: Job }) {
+  return (
+    <Script
+      id="jobposting-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "JobPosting",
+          title: job.title,
+          description: job.description,
+          datePosted: job.publishedDate,
+          validThrough: job.applicationEnd,
+          employmentType: "FULL_TIME",
+          hiringOrganization: {
+            "@type": "Organization",
+            name: job.organization,
+            sameAs: job.officialLink || "",
+          },
+          jobLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Plot No. 4, Sector 10, Dwarka",
+              addressLocality: "New Delhi",
+              addressRegion: "Delhi",
+              postalCode: "110075",
+              addressCountry: "IN",
+            },
+          },
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: "INR",
+            value: {
+              "@type": "QuantitativeValue",
+              value: job.salary.replace(/[^\d]/g, "") || "0",
+              unitText: "MONTH",
+            },
+          },
+        }),
+      }}
+    />
+  );
 }
 
 // --- END OF TYPESCRIPT FIXES ---
+
+
+
 
 
 const JobDetailsPage = () => {
@@ -176,7 +227,7 @@ const JobDetailsPage = () => {
             <div className="bg-white rounded-lg shadow-md p-4">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h1 className="text-xl font-bold text-gray-800 mb-1">{job.title}</h1>
+                  <h2 className="text-xl font-bold text-gray-800 mb-1">{job.title}</h2>
                   <div className="flex items-center space-x-2 text-sm mb-1">
                     <Building className="h-4 w-4 text-gray-500" />
                     <span className="text-gray-700">{job.organization}</span>
@@ -188,6 +239,20 @@ const JobDetailsPage = () => {
                   <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">{job.category}</span>
                 </div>
               </div>
+
+                   {/* ✅ Dynamic Keywords Section */}
+                {job.keboard && job.keboard.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {job.keboard.map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="bg-blue-100 text-blue-700 text-sm font-medium px-3 py-1 rounded-full"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
               {/* Quick Info */}
               <div className="grid grid-cols-2 gap-3">

@@ -133,25 +133,54 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 }
 
 // ✅ JSON-LD Schema (Kept for SEO, still needs the 'admission' object)
+// ✅ JSON-LD Schema (Fixed for Google Warnings)
 function AdmissionJsonLd({ admission }: { admission: Admission }) {
-  return (
-    <Script id="admission-schema" type="application/ld+json" dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "EducationalOccupationalProgram",
-        name: admission.title,
-        description: admission.overview,
-        educationalProgramMode: "Full-time",
-        provider: { "@type": "EducationalOrganization", name: admission.university, sameAs: admission.contact.website },
-        programPrerequisites: admission.eligibility,
-        endDate: admission.applicationEnd,
-        courseMode: admission.courseType,
-        numberOfCredits: admission.seats,
-        programType: admission.category,
-        url: `https://governmentexam.online/admission/${admission.id}`,
-      })
-    }} />
-  );
+  return (
+    <Script
+      id="admission-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOccupationalProgram",
+          name: admission.title,
+          description: admission.overview || "Admission details for the program.",
+          educationalProgramMode: admission.courseType || "Full-time",
+          provider: {
+            "@type": "EducationalOrganization",
+            name: admission.university,
+            sameAs: admission.contact?.website,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: admission.contact?.address || "",
+              addressCountry: "IN",
+            },
+          },
+          programPrerequisites: admission.eligibility || [],
+          startDate: admission.applicationStart || "",
+          endDate: admission.applicationEnd || "",
+          numberOfCredits: admission.seats || "",
+          programType: admission.category,
+          educationalCredentialAwarded: admission.courseName || "Degree/Certificate Program",
+          hasCourse: {
+            "@type": "Course",
+            name: admission.courseDetails?.structure || "Course Curriculum",
+            description: admission.courseDetails?.duration || "",
+          },
+          offers: {
+            "@type": "Offer",
+            url: `https://governmentexam.online/admission/${admission.id}`,
+            availability: admission.status === "Open"
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
+            price: admission.fees || "0",
+            priceCurrency: "INR",
+          },
+          url: `https://governmentexam.online/admission/${admission.id}`,
+        }),
+      }}
+    />
+  );
 }
 
 // ✅ Page Component (Server Component) 

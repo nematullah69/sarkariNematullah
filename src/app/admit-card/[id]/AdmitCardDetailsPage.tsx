@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Script from "next/script";
 import {
   Calendar,
   FileText,
@@ -68,6 +69,58 @@ interface AdmitCard {
 }
 
 // --- END OF TYPESCRIPT FIX ---
+
+// ✅ JSON-LD for Google (no warnings)
+function AdmitCardJsonLd({ admitCard }: { admitCard: AdmitCard }) {
+  return (
+    <>
+      {/* ✅ JSON-LD for SEO */}
+      <Script
+        id="admit-card-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalOccupationalProgram",
+            name: admitCard.examName,
+            description:
+              admitCard.instructions?.[0] ||
+              "Download your admit card and check exam details.",
+            provider: {
+              "@type": "Organization",
+              name: admitCard.organization,
+              sameAs:
+                admitCard.links?.officialWebsite ||
+                "https://governmentexam.online",
+            },
+            startDate: admitCard.importantDates?.applicationStart || "",
+            endDate: admitCard.importantDates?.examDate || "",
+            programType: admitCard.category || "Recruitment Examination",
+            numberOfCredits: admitCard.totalPosts || 0,
+            programPrerequisites: admitCard.eligibility || "Eligible candidates only",
+            educationalLevel: "Graduate",
+            inLanguage: "en-IN",
+            identifier: {
+              "@type": "PropertyValue",
+              name: admitCard.examName,
+              value: admitCard.id,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Government Exam Online",
+              url: "https://governmentexam.online",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://governmentexam.online/logo.png",
+              },
+            },
+            url: `https://governmentexam.online/admit-card/${admitCard.id}`,
+          }),
+        }}
+      />
+    </>
+  );
+}
 
 
 const AdmitCardDetailsPage = () => {

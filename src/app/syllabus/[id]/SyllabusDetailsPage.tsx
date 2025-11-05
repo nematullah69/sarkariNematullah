@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Script from "next/script";
 import { 
   ArrowLeft, 
   Building, 
@@ -62,6 +63,37 @@ interface Syllabus {
 }
 
 // --- END OF TYPESCRIPT FIXES ---
+function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
+  return (
+    <Script
+      id="syllabus-schema"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOccupationalProgram",
+          name: syllabus.examName,
+          description: syllabus.syllabusOverview,
+          provider: {
+            "@type": "Organization",
+            name: syllabus.organization,
+            sameAs: syllabus.officialWebsite,
+          },
+          educationalProgramMode: syllabus.examType,
+          startDate: syllabus.year,
+          dateModified: syllabus.lastUpdated,
+          url: `https://governmentexam.online/syllabus/${syllabus.id}`,
+          educationalCredentialAwarded: "Syllabus Completion",
+          hasCourse: syllabus.subjects.map((sub) => ({
+            "@type": "Course",
+            name: sub,
+          })),
+        }),
+      }}
+    />
+  );
+}
+
 
 
 const SyllabusDetailsPage = () => {

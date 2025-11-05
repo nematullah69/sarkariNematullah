@@ -112,34 +112,58 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   };
 }
 
-// ✅ JSON-LD for Google
+// ✅ JSON-LD for Google (Warning-Free)
 function AdmitCardJsonLd({ admitCard }: { admitCard: AdmitCard }) {
-  return (
-    <Script
-      id="admit-card-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "EducationalOccupationalProgram",
-          name: admitCard.examName,
-          description: admitCard.instructions[0] || "Download your admit card online.", 
-          provider: {
-            "@type": "Organization",
-            name: admitCard.organization,
-            sameAs: admitCard.links?.officialWebsite,
-          },
-          startDate: admitCard.importantDates?.applicationStart,
-          endDate: admitCard.importantDates?.examDate,
-          programType: admitCard.category,
-          numberOfCredits: admitCard.totalPosts,
-          programPrerequisites: admitCard.eligibility,
-          url: `https://governmentexam.online/admit-card/${admitCard.id}`, 
-        }),
-      }}
-    />
-  );
+  return (
+    <>
+      {/* ✅ JSON-LD for SEO */}
+      <Script
+        id="admit-card-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalOccupationalProgram",
+            name: admitCard.examName,
+            description:
+              admitCard.instructions?.[0] ||
+              "Download your admit card and check exam details.",
+            provider: {
+              "@type": "Organization",
+              name: admitCard.organization,
+              sameAs:
+                admitCard.links?.officialWebsite ||
+                "https://governmentexam.online",
+            },
+            startDate: admitCard.importantDates?.applicationStart || "",
+            endDate: admitCard.importantDates?.examDate || "",
+            programType: admitCard.category || "Recruitment Examination",
+            numberOfCredits: admitCard.totalPosts || 0,
+            programPrerequisites: admitCard.eligibility || "Eligible candidates only",
+            educationalLevel: "Graduate",
+            inLanguage: "en-IN",
+            identifier: {
+              "@type": "PropertyValue",
+              name: admitCard.examName,
+              value: admitCard.id,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Government Exam Online",
+              url: "https://governmentexam.online",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://governmentexam.online/logo.png",
+              },
+            },
+            url: `https://governmentexam.online/admit-card/${admitCard.id}`,
+          }),
+        }}
+      />
+    </>
+  );
 }
+
 
 // ✅ Page Component
 // 🎯 FINAL FIX: Use 'any' and STOP PASSING THE PROP.
