@@ -68,6 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", link: "https://governmentexam.online/jobs/bssc-inter-level-2025" },
   { text: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", link: "https://governmentexam.online/jobs/pnb-lbo-2025" },
   { text: "Indian Army TGC 143 Recruitment 2025", link: "https://governmentexam.online/jobs/indian-army-tgc-143-2025" },
   { text: "SEBI Grade A (Assistant Manager) Recruitment 2025", link: "https://governmentexam.online/jobs/Sebi-grade-a-2025" },
@@ -84,6 +85,7 @@ const bannerItems = [
 
 
   const latestJobs = [
+    { id: "bssc-inter-level-2025", title: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", organization: "BSSC", date: "2025-11-25" },
     { id: "pnb-lbo-2025", title: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", organization: "PNB", date: "2025-11-23" },
     { id: "indian-army-tgc-143-2025", title: "Indian Army TGC 143 Recruitment 2025", organization: "TGC", date: "2025-10-08" },
     { id: "Sebi-grade-a-2025", title: "SEBI Grade A (Assistant Manager) Recruitment 2025", organization: "SEBI", date: "2025-10-08" },

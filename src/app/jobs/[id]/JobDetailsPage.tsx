@@ -65,6 +65,7 @@ interface Job {
   applicationFee?: FeeItem[];
   importantLinks?: ImportantLink[];
   keboard?: string[];
+  keywords2?: string[];
   eligibility?: string;
   examvacancy1?: string;
   examNameS?: string;
@@ -240,19 +241,7 @@ const JobDetailsPage = () => {
                 </div>
               </div>
 
-                   {/* ✅ Dynamic Keywords Section */}
-                {job.keboard && job.keboard.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    {job.keboard.map((keyword, index) => (
-                      <span
-                        key={index}
-                        className="bg-blue-100 text-blue-700 text-sm font-medium px-3 py-1 rounded-full"
-                      >
-                        {keyword}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                
 
               {/* Quick Info */}
               <div className="grid grid-cols-2 gap-3">
@@ -299,6 +288,9 @@ const JobDetailsPage = () => {
                 ))}
               </ul>
             </div>
+
+    
+
 
             {/* Selection Process */}
             <div className="bg-white rounded-lg shadow-md p-5">
@@ -370,6 +362,7 @@ const JobDetailsPage = () => {
                 </table>
               </div>
             )}
+            
 
             {/* Total Vacancies */}
             {job.vacancies && (
@@ -443,6 +436,43 @@ const JobDetailsPage = () => {
                 </p>
               </div>
             )}
+{/* age section */}
+     <h2 className="text-lg font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-2">
+  Age Limit and Relaxation Details (As per Bihar Government Rules)
+</h2>
+
+<table className="table-auto w-full border">
+  <tbody>
+    <tr>
+      <td className="border px-4 py-2 font-medium">Minimum Age</td>
+      <td className="border px-4 py-2">21 Years</td>
+    </tr>
+    <tr>
+      <td className="border px-4 py-2 font-medium">Maximum Age (Male, General)</td>
+      <td className="border px-4 py-2">37 Years</td>
+    </tr>
+    <tr className="bg-gray-100">
+      <td className="border px-4 py-2 font-medium">OBC Category</td>
+      <td className="border px-4 py-2">+3 Years (40 Years Total)</td>
+    </tr>
+    <tr className="bg-gray-100">
+      <td className="border px-4 py-2 font-medium">Female Category</td>
+      <td className="border px-4 py-2">+3 Years (40 Years Total)</td>
+    </tr>
+    <tr className="bg-gray-100">
+      <td className="border px-4 py-2 font-medium">SC / ST Category</td>
+      <td className="border px-4 py-2">+5 Years (42 Years Total)</td>
+    </tr>
+    <tr>
+      <td className="border px-4 py-2 font-medium">Note</td>
+      <td className="border px-4 py-2">
+        Age relaxation is applicable as per Bihar Government rules.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 
             {/* Important Links */}
             {job.importantLinks && (
@@ -472,8 +502,12 @@ const JobDetailsPage = () => {
             )}
           </div>
 
+          
+
           {/* Sidebar */}
           <div className="space-y-5">
+
+
             <div className="bg-white rounded-lg shadow-md p-5">
               <h3 className="text-md font-bold text-gray-800 mb-3 flex items-center">
                 <Calendar className="h-5 w-5 mr-2" /> Important Dates
@@ -493,8 +527,37 @@ const JobDetailsPage = () => {
                 </div>
               </div>
             </div>
+               {/* ✅ Dynamic Keywords Section */}
+                {job.keboard && job.keboard.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {job.keboard.map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="bg-blue-100 text-blue-700 text-sm font-medium px-3 py-1 rounded-full"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+            
+
+ 
+
+
+
+
+
+
+            
+            
           </div>
+ 
+
         </div>
+        
+        
       </div>
     </div>
     </>

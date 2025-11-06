@@ -1,5 +1,121 @@
 [
   {
+    "id": "bssc-inter-level-2025",
+    "title": "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts",
+    "department": "Bihar Staff Selection Commission (BSSC)",
+    "organization": "Bihar Staff Selection Commission",
+    "vacancies": "23175",
+    "eligibility": "12th Class (Intermediate) Exam Passed OR Equivalent Eligibility from Any Recognized Board/Institution in India.",
+    "applicationStart": "2025-10-15",
+    "description": "Bihar Staff Selection Commission (BSSC) has released the notification for BSSC Inter Level Recruitment 2025 for 23175 Posts. The online application process started on 15 October 2025 and will continue till 25 November 2025. Interested candidates can apply online through the official BSSC website. The recruitment process includes Prelims, Mains, and Skill Test (if applicable), followed by Document Verification and Medical Examination.",
+    "responsibilities": [
+      "Assist in administrative tasks under Bihar Government departments.",
+      "Maintain departmental records and documentation.",
+      "Support higher officers in daily office work and public dealing.",
+      "Perform clerical and data entry duties as per assigned post.",
+      "Follow government procedures and maintain confidentiality of official data."
+    ],
+    "selectionProcess": [
+      "Prelims Written Exam",
+      "Mains Written Exam",
+      "Skill Test (If Applicable)",
+      "Document Verification",
+      "Medical Examination"
+    ],
+    "salary": "Pay Scale: ₹5,200 to ₹20,200 per month + Grade Pay ₹1,900 to ₹2,400 as per government norms.",
+    "category": "Government Jobs / State Recruitment",
+   
+    "publishedDate": "2025-09-27",
+    "applicationEnd": "2025-11-25",
+    "status": "Active",
+    "importantLinks": [
+      { "label": "Apply Online", "url": "https://bssc.bihar.gov.in" },
+      { "label": "Download Notification", "url": "https://bssc.bihar.gov.in" },
+      { "label": "Official Website", "url": "https://bssc.bihar.gov.in" },
+      { "label": "HomePage", "url": "http://governmentexam.online" }
+    ],
+    "importantDates": {
+      "NotificationDate": "2025-09-27",
+      "applicationStart": "2025-10-15",
+      "applicationEnd": "2025-11-25",
+      "feePaymentDate": "2025-11-25",
+      "finalSubmitDate": "2025-11-27",
+      "correctionDate": "As Per Schedule",
+      "admitCard": "Notify Later",
+      "examDate": "Notify Later",
+      "resultDate": "Notify Later"
+    },
+    "applicationFee": [
+      { "category": "Gen/ OBC/ EWS", "fee": "₹100" },
+      { "category": "SC/ ST/ PWD", "fee": "₹100" }
+    ],
+    "ageLimit": {
+      "asOn": "2025-08-01",
+      "minimumAge": "21 Years",
+      "maximumAge": "37/40/42 Years (Category Wise)"
+    },
+    "examvacancy": "BSSC Inter Level Vacancy 2025 Details",
+    "vacancy": [
+      { "postName": "BSSC Inter Level Vacancy 2025", "category": "All Categories", "total": "23175" }
+    ],
+    "Salary": [
+      {
+        "postName": "Inter Level Various Posts",
+        "level": "Pay Level - As Per BSSC Rules",
+        "initialPay": "₹5,200 - ₹20,200"
+        
+      },
+      {
+        "postName": "allowances",
+        "level": "",
+        "initialPay": "As Per Government Norms"
+        
+      }
+    ],
+    "keboard": [
+      "BSSC Inter Level Recruitment 2025",
+      "Bihar SSC Inter Level Vacancy 2025",
+      "BSSC 10+2 Level Bharti 2025",
+      "BSSC Inter Level Apply Online 2025",
+      "BSSC Inter Level Notification 2025",
+      "BSSC Inter Level Recruitment 2025 Apply Online",
+      "BSSC Inter Level Vacancy 2025 Notification",
+      "BSSC 10+2 Level Recruitment 2025",
+      "BSSC Inter Level Application Form 2025",
+      "BSSC Inter Level Eligibility Criteria 2025",
+      "BSSC Inter Level Exam Date 2025",
+      "Bihar SSC Inter Level 2025 Vacancy Details",
+      "BSSC Inter Level Salary 2025",
+      "BSSC Inter Level Age Limit 2025",
+      "BSSC Inter Level Syllabus 2025 PDF",
+      "BSSC Inter Level Selection Process 2025",
+      "BSSC Inter Level Admit Card 2025",
+      "BSSC Inter Level Result 2025",
+      "Bihar SSC Inter Level Online Registration 2025",
+      "BSSC Inter Level Important Dates 2025",
+      "Bihar Staff Selection Commission Recruitment 2025",
+      "BSSC Inter Level Total Posts 2025",
+      "BSSC Inter Level Vacancy Notification PDF",
+      "Bihar SSC Jobs 2025",
+      "Latest BSSC Inter Level Bharti 2025"
+    ],
+    "agelimit":"Age  Limit (as on 01-08-2025)",
+    "ageSection": {
+      "asOn": "01-08-2025",
+      "minimumAge": "21 Years",
+      "maximumAge": "37 Years (Male, General Category)",
+      "relaxation": {
+        "OBC": "+3 Years (40 Years Total)",
+        "Female": "+3 Years (40 Years Total)",
+        "SC/ST": "+5 Years (42 Years Total)"
+      },
+      "note": "Age relaxation is applicable as per Bihar Government rules."
+  
+
+    }
+  },
+  
+  {
     "id": "pnb-lbo-2025",
     "title": "PNB Local Bank Officer (LBO) Recruitment 2025-2026",
     "department": "Human Resources Department",
