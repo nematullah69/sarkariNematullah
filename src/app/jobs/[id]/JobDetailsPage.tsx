@@ -42,6 +42,10 @@ interface ImportantLink {
   label: string;
   url: string;
 }
+interface AgeLimitItem {
+  label: string;
+  value: string;
+}
 
 // Define the main Job Interface (based on component usage)
 interface Job {
@@ -72,6 +76,7 @@ interface Job {
   importantDates?: Record<string, string>;
   location?: string;
   officialLink?: string;
+  ageLimit?: AgeLimitItem[];
 }
 
 /* =======================
@@ -436,41 +441,29 @@ const JobDetailsPage = () => {
                 </p>
               </div>
             )}
-{/* age section */}
-     <h2 className="text-lg font-bold text-blue-600 mb-3 border-l-4 border-blue-500 pl-2">
-  Age Limit and Relaxation Details (As per Bihar Government Rules)
-</h2>
+{/* ✅ Auto-Change Age Limit Table (Dynamic) */}
+{job.ageLimit && job.ageLimit.length > 0 && (
+  <div className="bg-white rounded-lg shadow-md p-5 mt-6">
+    <h2 className="text-lg font-bold text-gray-800 mb-3">
+      Age Limit and Relaxation Details
+    </h2>
 
-<table className="table-auto w-full border">
-  <tbody>
-    <tr>
-      <td className="border px-4 py-2 font-medium">Minimum Age</td>
-      <td className="border px-4 py-2">21 Years</td>
-    </tr>
-    <tr>
-      <td className="border px-4 py-2 font-medium">Maximum Age (Male, General)</td>
-      <td className="border px-4 py-2">37 Years</td>
-    </tr>
-    <tr className="bg-gray-100">
-      <td className="border px-4 py-2 font-medium">OBC Category</td>
-      <td className="border px-4 py-2">+3 Years (40 Years Total)</td>
-    </tr>
-    <tr className="bg-gray-100">
-      <td className="border px-4 py-2 font-medium">Female Category</td>
-      <td className="border px-4 py-2">+3 Years (40 Years Total)</td>
-    </tr>
-    <tr className="bg-gray-100">
-      <td className="border px-4 py-2 font-medium">SC / ST Category</td>
-      <td className="border px-4 py-2">+5 Years (42 Years Total)</td>
-    </tr>
-    <tr>
-      <td className="border px-4 py-2 font-medium">Note</td>
-      <td className="border px-4 py-2">
-        Age relaxation is applicable as per Bihar Government rules.
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <table className="table-auto w-full border text-sm">
+      <tbody>
+        {job.ageLimit.map((item, index) => (
+          <tr
+            key={index}
+            className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+          >
+            <td className="border px-4 py-2 font-medium">{item.label}</td>
+            <td className="border px-4 py-2">{item.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
 
 
 

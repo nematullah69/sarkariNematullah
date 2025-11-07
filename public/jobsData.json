@@ -99,21 +99,39 @@
       "Bihar SSC Jobs 2025",
       "Latest BSSC Inter Level Bharti 2025"
     ],
-    "agelimit":"Age  Limit (as on 01-08-2025)",
-    "ageSection": {
-      "asOn": "01-08-2025",
-      "minimumAge": "21 Years",
-      "maximumAge": "37 Years (Male, General Category)",
-      "relaxation": {
-        "OBC": "+3 Years (40 Years Total)",
-        "Female": "+3 Years (40 Years Total)",
-        "SC/ST": "+5 Years (42 Years Total)"
-      },
-      "note": "Age relaxation is applicable as per Bihar Government rules."
+    
+      
+      
+      
+      "ageLimit": [
+        {
+          "label": "Minimum Age",
+          "value": "21 Years"
+        },
+        {
+          "label": "Maximum Age (Male, General)",
+          "value": "37 Years"
+        },
+        {
+          "label": "OBC Category",
+          "value": "+3 Years (40 Years Total)"
+        },
+        {
+          "label": "Female Category",
+          "value": "+3 Years (40 Years Total)"
+        },
+        {
+          "label": "SC / ST Category",
+          "value": "+5 Years (42 Years Total)"
+        },
+        {
+          "label": "Note",
+          "value": "Age relaxation is applicable as per Bihar Government rules."
+        }
+      ]
+    },
+    
   
-
-    }
-  },
   
   {
     "id": "pnb-lbo-2025",
