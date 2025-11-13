@@ -68,6 +68,8 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", link: "https://governmentexam.online/jobs/kvs-nvs-teaching-non-teaching-2025" },
+  { text: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", link: "https://governmentexam.online/jobs/nabard-grade-a-2025" },
   { text: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", link: "https://governmentexam.online/jobs/bssc-inter-level-2025" },
   { text: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", link: "https://governmentexam.online/jobs/pnb-lbo-2025" },
   { text: "Indian Army TGC 143 Recruitment 2025", link: "https://governmentexam.online/jobs/indian-army-tgc-143-2025" },
@@ -76,8 +78,7 @@ const bannerItems = [
   { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-2025" },
   { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" },
   { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
-  { text: "DSSSB Assistant Teacher (Primary) Recruitment 2025", link: "https://governmentexam.online/jobs/dsssb-prt-2025" },
-  { text: "SSC CPO Paper 2 Result 2025 OUT", link: "https://governmentexam.online/results/ssc-CPO-2024-result" },
+
   
   
 
@@ -85,6 +86,8 @@ const bannerItems = [
 
 
   const latestJobs = [
+    { id: "kvs-nvs-teaching-non-teaching-2025", title: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", organization: "CBSE, KVS, and NVS", date: "2025-12-04" },
+    { id: "nabard-grade-a-2025", title: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", organization: "NABARD", date: "2025-11-30" },
     { id: "bssc-inter-level-2025", title: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", organization: "BSSC", date: "2025-11-25" },
     { id: "pnb-lbo-2025", title: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", organization: "PNB", date: "2025-11-23" },
     { id: "indian-army-tgc-143-2025", title: "Indian Army TGC 143 Recruitment 2025", organization: "TGC", date: "2025-10-08" },

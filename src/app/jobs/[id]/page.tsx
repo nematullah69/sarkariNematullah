@@ -167,7 +167,8 @@ function JobJsonLd({ job }: { job: Job }) {
           "@type": "JobPosting",
           title: job.title,
           description: job.description,
-          datePosted: job.publishedDate,
+          
+          datePosted: job.publishedDate || "2025-10-15", // ✅ Ensure datePosted exists
           validThrough: job.applicationEnd,
           employmentType: "FULL_TIME",
           hiringOrganization: {
