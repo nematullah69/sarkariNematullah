@@ -1,4 +1,14 @@
 [
+  
+    
+    
+    
+  
+
+   
+   
+  
+  
 
   {
     "id": "kvs-nvs-teaching-non-teaching-2025",
@@ -72,15 +82,174 @@
       }
     ],
     "keboard": [
-      "KVS Recruitment 2025",
-      "NVS Recruitment 2025",
-      "KVS NVS Teaching Non-Teaching Vacancy 2025",
-      "KVS NVS Apply Online 2025",
-      "KVS NVS Eligibility 2025",
-      "KVS NVS Exam Date 2025",
-      "KVS NVS Result 2025"
+    "kvs recruitment",
+    "KVS Recruitment 2025",
+    "NVS Recruitment 2025",
+    "KVS NVS Teaching Non-Teaching Vacancy 2025",
+    "KVS NVS Apply Online 2025",
+    "KVS NVS Eligibility 2025",
+    "KVS NVS Exam Date 2025",
+    "KVS NVS Result 2025",
+    "KVS Vacancy 2025 Notification",
+    "NVS Vacancy 2025 Notification",
+    "KVS Online Form 2025",
+    "NVS Online Form 2025",
+    "KVS PRT TGT PGT Recruitment 2025",
+    "NVS Teaching Recruitment 2025",
+    "KVS Non-Teaching Recruitment 2025",
+    "NVS Non-Teaching Posts 2025",
+    "KVS Teacher Bharti 2025",
+    "NVS Teacher Bharti 2025",
+    "KVS PGT TGT PRT Vacancy 2025",
+    "KVS Application Form Last Date 2025",
+    "NVS Application Form Last Date 2025",
+    "KVS NVS Salary Details 2025",
+    "KVS Age Limit 2025",
+    "NVS Age Limit 2025",
+    "KVS NVS Selection Process 2025",
+    "KVS Admit Card 2025",
+    "NVS Admit Card 2025",
+    "KVS Exam Pattern 2025",
+    "NVS Exam Pattern 2025",
+    "KVS Syllabus 2025 PDF",
+    "NVS Syllabus 2025 PDF",
+    "KVS NVS Recruitment Notification PDF 2025",
+    "KVS Result Date 2025",
+    "NVS Result Date 2025",
+    "KVS NVS Vacancy Details 2025",
+    "KVS and NVS Latest Jobs 2025",
+    "KVS NVS Official Website",
+    "KVS NVS Exam Centres 2025",
+    "KVS NVS Cut Off 2025",
+    "KVS NVS Merit List 2025",
+    "KVS NVS Final Selection 2025"
     ]
   },
+
+  {
+    "id": "bank-of-baroda-apprentice-2025",
+    "title": "Bank of Baroda Apprentice 2025: Apply Online for 2700 Posts – Notification Out",
+    "department": "Bank of Baroda",
+    "organization": "Bank of Baroda (BOB)",
+    "vacancies": "2700",
+    "eligibility": "Bachelor’s Degree in Any Stream OR Equivalent Eligibility from Any Recognized University/Institution in India.",
+    "applicationStart": "2025-11-11",
+    "applicationEnd": "2025-12-01",
+    "description": "Bank of Baroda has released the notification for Apprentice Recruitment 2025 for 2700 posts. Online applications are open from 11 November 2025 to 01 December 2025. Candidates must read the official notification before applying. Selection will involve Written Exam, Language Test, Document Verification, and Medical Examination.",
+    "selectionProcess": [
+      "Online Written Examination",
+      "Document Verification",
+      "Language Proficiency Test",
+      "Medical Examination",
+      "Final Merit List"
+    ],
+    "responsibilities": [
+      "The online written examination for Bank of Baroda Apprentice Recruitment 2025 will be conducted in Computer-Based Test (CBT) mode.",
+      "The exam will include subjects such as General Awareness, General English, Quantitative Aptitude, Reasoning Ability, and Local Language (as applicable).",
+      "All questions will carry equal marks. Negative marking (if applicable) will follow the official Bank of Baroda Apprentice guidelines.",
+      "Candidates who qualify in the written examination will be called for the Local Language Proficiency Test and Document Verification.",
+      "Final selection will be based on performance in the Online Written Exam, Language Test, Document Verification, and Medical Examination."
+],
+
+   "salary": "Selected apprentices will receive a monthly stipend as per Bank of Baroda Apprentice norms. No additional allowances or benefits are provided.",
+
+    "category": "Government Jobs / Banking Apprentice Recruitment",
+    "publishedDate": "2025-11-13",
+    "status": "Active",
+    "importantLinks": [
+      { "label": "Apply Online", "url": "https://nats.education.gov.in/student_type.php" },
+      { "label": "Download Notification", "url": "https://bankofbaroda.bank.in/-/media/Project/BOB/CountryWebsites/India/Career/2025/25-11/11-11-2025-Advertisement-Apprenticeship-10-34.pdf" },
+      { "label": "Official Website", "url": "https://bankofbaroda.bank.in/career/current-opportunities" },
+      { "label": "HomePage", "url": "https://governmentexam.online" }
+    ],
+    "importantDates": {
+      "notificationDate": "2025-11-10",
+      "applicationStart": "2025-11-11",
+      "applicationEnd": "2025-12-01",
+      "feePaymentLastDate": "2025-12-01",
+      "correctionDate": "As Per Schedule",
+      "admitCard": "Notify Soon",
+      "examDate": "Notify Soon",
+      "resultDate": "Notify Soon"
+    },
+    "applicationFee": [
+      { "category": "Gen / OBC / EWS", "fee": "₹800/-" },
+      { "category": "PwBD", "fee": "₹400/-" },
+      { "category": "SC / ST", "fee": "₹00/-" }
+    ],
+   "examvacancy": "Bank of Baroda Apprentice Vacancy 2025 Details",
+"vacancy": [
+  { "postName": "Bank of Baroda Apprentice", "category": "General", "total": "941" },
+  { "postName": "Bank of Baroda Apprentice", "category": "EWS", "total": "258" },
+  { "postName": "Bank of Baroda Apprentice", "category": "OBC", "total": "811" },
+  { "postName": "Bank of Baroda Apprentice", "category": "SC", "total": "412" },
+  { "postName": "Bank of Baroda Apprentice", "category": "ST", "total": "278" }
+],
+"Salary": [
+  {
+    "postName": "Bank of Baroda Apprentice",
+    "level": "",
+    "initialPay": "₹15000"
+  },
+  {
+    "postName": "Allowances",
+    "level": "",
+    "initialPay": "Allowances As Per Government Norms."
+  }
+],
+
+
+   
+   "ageLimit": [
+  {
+    "label": "Minimum Age Limit",
+    "value": "20 Years"
+  },
+  {
+    "label": "Maximum Age Limit",
+    "value": "28 Years"
+  },
+  {
+    "label": "Note",
+    "value": "Age relaxation will be applicable as per Government and Bank of Baroda Apprentice Rules."
+  }
+],
+
+    "keboard": [
+      "Bank of Baroda Apprentice Recruitment",
+      "Bank of Baroda Apprentice 2025",
+      "BOB Apprentice Recruitment 2025",
+      "Bank of Baroda Apprentice Apply Online",
+      "BOB Apprentice Apply Online 2025",
+      "Bank of Baroda Apprentice Notification 2025",
+      "BOB Apprentice Vacancy 2025",
+      "Bank of Baroda Apprentice Eligibility 2025",
+      "BOB Apprentice Age Limit 2025",
+      "BOB Apprentice Selection Process 2025",
+      "Bank of Baroda Apprentice Exam Date 2025",
+      "BOB Apprentice Syllabus 2025",
+      "Bank of Baroda Apprentice Salary 2025",
+      "Bank of Baroda Apprentice Stipend",
+      "BOB Apprentice Online Form 2025",
+      "Bank of Baroda Recruitment 2025",
+      "BOB Apprentice Last Date 2025",
+      "Bank of Baroda Apprentice Admit Card 2025",
+      "Bank of Baroda Apprentice Result 2025",
+      "BOB Apprentice Merit List 2025",
+      "Bank of Baroda Apprentice 2700 Posts",
+      "Bank of Baroda Latest Jobs 2025",
+      "BOB Apprentice Official Website",
+      "Bank of Baroda Apprentice Exam Centres",
+      "Bank of Baroda Apprentice Cut Off 2025",
+      "BOB Apprentice Training 2025",
+      "Bank of Baroda Apprentice Vacancy Details 2025"
+    ]
+  },
+  
+
+  
+  
+  
   
 
   {
@@ -155,7 +324,37 @@
       "NABARD Grade A Eligibility 2025",
       "NABARD Grade A Exam Date 2025",
       "NABARD Grade A Result 2025",
-      "NABARD Officer Jobs 2025"
+      "NABARD Officer Jobs 2025",
+      "NABARD Recruitment 2025",
+      "NABARD Grade A Vacancy 2025",
+      "NABARD Assistant Manager Apply Online",
+      "NABARD Grade A Notification PDF 2025",
+      "NABARD Grade A Syllabus 2025",
+      "NABARD Grade A Exam Pattern 2025",
+      "NABARD Grade A Admit Card 2025",
+      "NABARD Grade A Cut Off 2025",
+      "NABARD Grade A Previous Year Paper",
+      "NABARD Grade A Online Form 2025",
+      "NABARD Grade A Age Limit 2025",
+      "NABARD Grade A Selection Process 2025",
+      "NABARD Grade A Exam Centres 2025",
+      "NABARD Grade A Application Fees 2025",
+      "NABARD Grade A Interview Date 2025",
+      "NABARD Grade A Phase 1 Exam 2025",
+      "NABARD Grade A Phase 2 Exam 2025",
+      "NABARD Grade A Mains Exam Date 2025",
+      "NABARD Grade A Final Result 2025",
+      "NABARD Assistant Manager Vacancy Details 2025",
+      "NABARD Officer Recruitment 2025 Notification",
+      "NABARD Grade A Online Registration 2025",
+      "NABARD Grade A Important Dates 2025",
+      "NABARD Grade A Latest Jobs 2025",
+      "NABARD Grade A Government Jobs 2025",
+      "NABARD Grade A Official Website",
+      "NABARD Grade A Career Opportunities 2025",
+      "NABARD Grade A Job Profile 2025",
+      "NABARD Grade A Promotion and Salary",
+      "NABARD Grade A Apply Link 2025"
     ],
     "ageLimit": [
   {

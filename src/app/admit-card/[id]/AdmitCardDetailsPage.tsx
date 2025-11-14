@@ -65,6 +65,7 @@ interface AdmitCard {
   Salary?: SalaryItem[]; // Note the capital 'S' based on your usage
   instructions: string[];
   examGuidelines: string[];
+  keboard?: string[];
   links?: LinkUrls;
 }
 
@@ -408,6 +409,8 @@ const AdmitCardDetailsPage = () => {
           </div>
         </div>
 
+        
+
         {/* Sidebar */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -425,6 +428,27 @@ const AdmitCardDetailsPage = () => {
               Please carry a valid photo ID proof along with your admit card to the exam center.
             </p>
           </div>
+
+
+
+
+{/* ✅ Dynamic Keywords Section */}
+                {admitCard.keboard && admitCard.keboard.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {admitCard.keboard.map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="bg-blue-100 text-blue-700 text-sm font-medium px-3 py-1 rounded-full"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+
+
+
         </div>
       </div>
     </div>

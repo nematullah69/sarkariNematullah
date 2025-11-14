@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import Header from "@/Components/Header";
 import Footer from "@/Components/Footer";
 
@@ -79,9 +80,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+  
+    
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+       {/* ✅ Google Analytics (GA4) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-MRWG0TTSTS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-MRWG0TTSTS');
+
+          `}
+        </Script>
+        
         <Header />
         {children}
         <Footer />

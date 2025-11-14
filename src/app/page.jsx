@@ -68,7 +68,9 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "Bank of Baroda Apprentice 2025: Apply Online for 2700 Posts – Notification Out", link: "https://governmentexam.online/jobs/bank-of-baroda-apprentice-2025" },
   { text: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", link: "https://governmentexam.online/jobs/kvs-nvs-teaching-non-teaching-2025" },
+  { text: "Bihar JEEViKA Admit Card 2025 Released – Download Hall Ticket Now", link: "https://governmentexam.online/admit-card/bihar-jeevika-admit-card-2025" },
   { text: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", link: "https://governmentexam.online/jobs/nabard-grade-a-2025" },
   { text: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", link: "https://governmentexam.online/jobs/bssc-inter-level-2025" },
   { text: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", link: "https://governmentexam.online/jobs/pnb-lbo-2025" },
@@ -76,8 +78,8 @@ const bannerItems = [
   { text: "SEBI Grade A (Assistant Manager) Recruitment 2025", link: "https://governmentexam.online/jobs/Sebi-grade-a-2025" },
   
   { text: "SSC Delhi Police Constable (Executive) Recruitment 2025", link: "https://governmentexam.online/jobs/ssc-delhi-police-constable-2025" },
-  { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" },
-  { text: "RBI Officer Grade B Prelims 2025 Admid-card", link: "https://governmentexam.online/admit-card/rbi-gradeb-prelims-2025" },
+  { text: "Meghalaya Police Result 2025 {OUT} Merit List PDF Download", link: "https://governmentexam.online/results/Meg-Police-2025-result" }
+ 
 
   
   
@@ -86,9 +88,10 @@ const bannerItems = [
 
 
   const latestJobs = [
+    { id: "bank-of-baroda-apprentice-2025", title: "Bank of Baroda Apprentice 2025: Apply Online for 2700 Posts – Notification Out", organization: "BOB", date: "2025-12-01" },
     { id: "kvs-nvs-teaching-non-teaching-2025", title: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", organization: "CBSE, KVS, and NVS", date: "2025-12-04" },
     { id: "nabard-grade-a-2025", title: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", organization: "NABARD", date: "2025-11-30" },
-    { id: "bssc-inter-level-2025", title: "BSSC Inter Level Vacancy 2025 – Online Application for 23,175 Posts", organization: "BSSC", date: "2025-11-25" },
+    { id: "bssc-inter-level-2025", title: "BSSC Inter Level Vacancy 2025 – Online Application for 23175 Posts", organization: "BSSC", date: "2025-11-25" },
     { id: "pnb-lbo-2025", title: "PNB Local Bank Officer (LBO) Recruitment 2025-2026", organization: "PNB", date: "2025-11-23" },
     { id: "indian-army-tgc-143-2025", title: "Indian Army TGC 143 Recruitment 2025", organization: "TGC", date: "2025-10-08" },
     { id: "Sebi-grade-a-2025", title: "SEBI Grade A (Assistant Manager) Recruitment 2025", organization: "SEBI", date: "2025-10-08" },
@@ -143,6 +146,8 @@ const bannerItems = [
   ];
 
   const latestAdmitCards = [
+
+    { id: "bihar-jeevika-admit-card-2025", title: "Bihar JEEViKA Admit Card 2025 Released – Download Hall Ticket Now", organization: "BRLPS", date: "2025-11-19" },
     { id: "rbi-gradeb-prelims-2025", title: "RBI Officer Grade B Prelims 2025 Admid-card", organization: "Reserve Bank of India (RBI)", date: "2025-10-12" },
     { id: "upsc-pre-2025", title: "UPSC Civil Services Preliminary Exam 2025", organization: "UPSC", date: "2025-5-1" },
     { id: "IB-ACIO-2025", title: "IB ACIO Admit Card 2025", organization: "Intelligence Bureau", date: "3-4 Days Before Exam" },
