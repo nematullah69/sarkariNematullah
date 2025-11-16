@@ -68,7 +68,8 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
-  { text: "Bank of Baroda Apprentice 2025: Apply Online for 2700 Posts – Notification Out", link: "https://governmentexam.online/jobs/bank-of-baroda-apprentice-2025" },
+  { text: "WBSSC Recruitment 2025 — 8477 Group C & D Vacancies | Apply Online", link: "https://governmentexam.online/jobs/wbssc-group-c-d-recruitment-2025" },
+  { text: "BOB Apprentice 2025 Notification Out – 2700 Posts, Apply Now", link: "https://governmentexam.online/jobs/bank-of-baroda-apprentice-2025" },
   { text: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", link: "https://governmentexam.online/jobs/kvs-nvs-teaching-non-teaching-2025" },
   { text: "Bihar JEEViKA Admit Card 2025 Released – Download Hall Ticket Now", link: "https://governmentexam.online/admit-card/bihar-jeevika-admit-card-2025" },
   { text: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", link: "https://governmentexam.online/jobs/nabard-grade-a-2025" },
@@ -88,7 +89,8 @@ const bannerItems = [
 
 
   const latestJobs = [
-    { id: "bank-of-baroda-apprentice-2025", title: "Bank of Baroda Apprentice 2025: Apply Online for 2700 Posts – Notification Out", organization: "BOB", date: "2025-12-01" },
+    { id: "wbssc-group-c-d-recruitment-2025", title: "WBSSC Recruitment 2025 — 8477 Group C & D Vacancies | Apply Online", organization: "WBSSC", date: "2025-12-03" },
+    { id: "bank-of-baroda-apprentice-2025", title: "BOB Apprentice 2025 Notification Out – 2700 Posts, Apply Now", organization: "BOB", date: "2025-12-01" },
     { id: "kvs-nvs-teaching-non-teaching-2025", title: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", organization: "CBSE, KVS, and NVS", date: "2025-12-04" },
     { id: "nabard-grade-a-2025", title: "NABARD Grade A Officer Recruitment 2025 – Apply Online for 91 Assistant Manager Posts", organization: "NABARD", date: "2025-11-30" },
     { id: "bssc-inter-level-2025", title: "BSSC Inter Level Vacancy 2025 – Online Application for 23175 Posts", organization: "BSSC", date: "2025-11-25" },
