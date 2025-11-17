@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Script from "next/script";
+import Image from "next/image";
+
 
 import { 
   ArrowLeft, 
@@ -38,6 +40,9 @@ interface SalaryDetail {
   amount: string | number;
 }
 
+
+
+
 interface ImportantLink {
   label: string;
   url: string;
@@ -46,17 +51,32 @@ interface AgeLimitItem {
   label: string;
   value: string;
 }
+interface BlockItem {
+  type: "heading" | "paragraph" | "list" | "image";
+  title?: string;
+  content?: string;
+  items?: string[];
+  url?: string;
+  alt?: string;
+}
+
+
+
+
 
 // Define the main Job Interface (based on component usage)
 interface Job {
   id: string;
   title: string;
   organization: string;
+  image?: string;
   department?: string;
   status: "Active" | "Closed" | "Coming Soon";
   category: string;
   vacancies: string | number;
   salary: string;
+ blocks: BlockItem[];
+
   description: string;
   publishedDate: string;
   applicationStart: string;
@@ -69,7 +89,7 @@ interface Job {
   applicationFee?: FeeItem[];
   importantLinks?: ImportantLink[];
   keboard?: string[];
-  keywords2?: string[];
+  
   eligibility?: string;
   examvacancy1?: string;
   examNameS?: string;
@@ -128,6 +148,10 @@ function JobJsonLd({ job }: { job: Job }) {
 }
 
 // --- END OF TYPESCRIPT FIXES ---
+
+
+
+
 
 
 
@@ -294,7 +318,28 @@ const JobDetailsPage = () => {
               </ul>
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
+   
+
+
+
+
+
 
 
             {/* Selection Process */}
@@ -463,6 +508,19 @@ const JobDetailsPage = () => {
     </table>
   </div>
 )}
+
+ {job.image ? (
+  <Image
+    src={job.image}
+    alt={job.title}
+    width={400}
+    height={300}
+    className="rounded-lg border"
+  />
+) : null}
+
+
+
 
 
 

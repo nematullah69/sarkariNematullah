@@ -68,6 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  {text: "RRB NTPC Inter Level Recruitment 2025 is 3058. Posts", link: "https://governmentexam.online/jobs/rrb-ntpc-inter-level-2025" },
   { text: "WBSSC Recruitment 2025 — 8477 Group C & D Vacancies | Apply Online", link: "https://governmentexam.online/jobs/wbssc-group-c-d-recruitment-2025" },
   { text: "BOB Apprentice 2025 Notification Out – 2700 Posts, Apply Now", link: "https://governmentexam.online/jobs/bank-of-baroda-apprentice-2025" },
   { text: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", link: "https://governmentexam.online/jobs/kvs-nvs-teaching-non-teaching-2025" },
@@ -89,6 +90,7 @@ const bannerItems = [
 
 
   const latestJobs = [
+    { id: "rrb-ntpc-inter-level-2025", title: "RRB NTPC Inter Level Recruitment 2025 is 3058. Posts", organization: "RRB", date: "2025-11-27" },
     { id: "wbssc-group-c-d-recruitment-2025", title: "WBSSC Recruitment 2025 — 8477 Group C & D Vacancies | Apply Online", organization: "WBSSC", date: "2025-12-03" },
     { id: "bank-of-baroda-apprentice-2025", title: "BOB Apprentice 2025 Notification Out – 2700 Posts, Apply Now", organization: "BOB", date: "2025-12-01" },
     { id: "kvs-nvs-teaching-non-teaching-2025", title: "KVS & NVS Mega Recruitment 2025: 10,000+ Teaching & Non-Teaching Vacancies – Apply Now", organization: "CBSE, KVS, and NVS", date: "2025-12-04" },
