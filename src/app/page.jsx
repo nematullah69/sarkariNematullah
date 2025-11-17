@@ -68,6 +68,7 @@ const ScrollingBanner = ({ items }) => {
 };
 
 const bannerItems = [
+  { text: "NVS Class 6 Admit Card 2025 Released – Download Your Hall Ticket Now", link: "https://governmentexam.online/admit-card/navodaya-nvs-class-6-admit-card-2025" },
   {text: "RRB NTPC Inter Level Recruitment 2025 is 3058. Posts", link: "https://governmentexam.online/jobs/rrb-ntpc-inter-level-2025" },
   { text: "WBSSC Recruitment 2025 — 8477 Group C & D Vacancies | Apply Online", link: "https://governmentexam.online/jobs/wbssc-group-c-d-recruitment-2025" },
   { text: "BOB Apprentice 2025 Notification Out – 2700 Posts, Apply Now", link: "https://governmentexam.online/jobs/bank-of-baroda-apprentice-2025" },
@@ -150,6 +151,7 @@ const bannerItems = [
   ];
 
   const latestAdmitCards = [
+    { id: "navodaya-nvs-class-6-admit-card-2025", title: "NVS Class 6 Admit Card 2025 Released – Download Your Hall Ticket Now", organization: "NVS", date: "2025-11-17" },
 
     { id: "bihar-jeevika-admit-card-2025", title: "Bihar JEEViKA Admit Card 2025 Released – Download Hall Ticket Now", organization: "BRLPS", date: "2025-11-19" },
     { id: "rbi-gradeb-prelims-2025", title: "RBI Officer Grade B Prelims 2025 Admid-card", organization: "Reserve Bank of India (RBI)", date: "2025-10-12" },

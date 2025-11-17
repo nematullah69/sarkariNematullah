@@ -44,6 +44,18 @@ interface LinkUrls {
   notification?: string;
   officialWebsite?: string;
 }
+interface ExamPattern {
+  totalQuestions: number | string;
+  totalMarks: number | string;
+  duration: string;
+  negativeMarking: string;
+  sections: {
+    name: string;
+    questions: number | string;
+    marks: number | string;
+  }[];
+}
+
 
 // 2. Define the main data structure (AdmitCard)
 interface AdmitCard {
@@ -53,7 +65,9 @@ interface AdmitCard {
   department: string;
   category: string;
   examDate: string; // Added from the Sidebar content
-  
+  subjects: string[];
+  syllabusOverview: string;
+   examPattern: ExamPattern;
   // Optional complex fields
   importantDates?: Record<string, string>; // e.g., { admitCardRelease: '2025-10-01' }
   applicationFee?: FeeItem[];
@@ -370,6 +384,53 @@ const AdmitCardDetailsPage = () => {
               ))}
             </ul>
           </div>
+
+          {/* Exam Pattern */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-600 font-medium">Total Questions</p>
+                  <p className="text-lg font-bold text-blue-800">{admitCard.examPattern.totalQuestions}</p>
+                </div>
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-sm text-green-600 font-medium">Total Marks</p>
+                  <p className="text-lg font-bold text-green-800">{admitCard.examPattern.totalMarks}</p>
+                </div>
+                <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <p className="text-sm text-purple-600 font-medium">Duration</p>
+                  <p className="text-lg font-bold text-purple-800">{admitCard.examPattern.duration}</p>
+                </div>
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-sm text-red-600 font-medium">Negative Marking</p>
+                  <p className="text-lg font-bold text-red-800">{admitCard.examPattern.negativeMarking}</p>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">Section-wise Breakdown</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-gray-300">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-300 px-4 py-2 text-left">Section</th>
+                      <th className="border border-gray-300 px-4 py-2 text-center">Questions</th>
+                      <th className="border border-gray-300 px-4 py-2 text-center">Marks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {admitCard.examPattern.sections.map((section, index) => (
+                      <tr key={index} className="hover:bg-gray-50">
+                        <td className="border border-gray-300 px-4 py-2 font-medium">{section.name}</td>
+                        <td className="border border-gray-300 px-4 py-2 text-center">{section.questions}</td>
+                        <td className="border border-gray-300 px-4 py-2 text-center">{section.marks}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          
 
           {/* Important Links */}
           <div className="bg-white rounded-lg shadow-md p-6">
