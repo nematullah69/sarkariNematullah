@@ -192,7 +192,8 @@ function JobJsonLd({ job }: { job: Job }) {
             currency: "INR",
             value: {
               "@type": "QuantitativeValue",
-              value: job.salary.replace(/[^\d]/g, ""), // extract numbers only
+              value: job.salary ? job.salary.replace(/[^\d]/g, "") : "0",
+ // extract numbers only
               unitText: "MONTH",
             },
           },

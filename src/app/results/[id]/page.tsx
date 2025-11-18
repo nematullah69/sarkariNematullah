@@ -1,4 +1,5 @@
 // app/results/[id]/page.tsx
+
 import { Metadata } from "next";
 import Script from "next/script";
 import ResultDetailsPageClient from "./ResultDetailsPageClient";
@@ -73,10 +74,10 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     };
   }
 
-  const desc =
-    result.resultDetails?.trim().length > 0
-      ? result.resultDetails
-      : `Check ${result.examName} result released by ${result.organization}.`;
+  const desc = result.resultDetails?.trim()
+  ? result.resultDetails
+  : `Check ${result.examName} result released by ${result.organization}.`;
+
 
   // ✅ Apply Safe Limits
   const seoTitle = trimText(`${result.examName} | ${result.organization} ${result.year}`, 60);
