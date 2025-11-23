@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Script from "next/script"; 
+import Head from "next/head";
+
 import { 
   ArrowLeft, 
   Building, 
@@ -40,6 +42,7 @@ interface AnswerKey {
   officialWebsite: string;
   objectionLink?: string;
   notificationLink?: string;
+  keywords?: string[];
   
   // Date and Fee details
   releaseDate: string;
@@ -140,6 +143,24 @@ const AnswerKeyDetailsPage = () => {
     
   return (
     <div className="min-h-screen bg-gray-50">
+    <Head>
+  <title>{answerKey.examName} Answer Key</title>
+
+  <meta
+    name="keywords"
+    content={
+      answerKey.keywords
+        ? answerKey.keywords.join(", ")
+        : `${answerKey.examName}, ${answerKey.organization}, Answer Key, PDF Download`
+    }
+  />
+
+  <meta
+    name="description"
+    content={`Download ${answerKey.examName} Answer Key, objection dates, exam details, and PDF.`}
+  />
+</Head>
+
       {/* Notification Banner */}
       <div className="bg-yellow-50 border-b border-yellow-200">
         <div className="container mx-auto px-4 py-3">
@@ -431,6 +452,25 @@ const AnswerKeyDetailsPage = () => {
                 )}
               </div>
             </div>
+
+            {/* Keywords Section */}
+<div className="bg-white rounded-lg shadow-md p-6">
+  <h2 className="text-xl font-bold text-gray-800 mb-4">
+    
+  </h2>
+
+  <div className="flex flex-wrap gap-3">
+    {answerKey.keywords?.map((keyword, index) => (
+      <span
+        key={index}
+        className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm cursor-default"
+      >
+        {keyword}
+      </span>
+    ))}
+  </div>
+</div>
+
 
             {/* Related Answer Keys */}
             {relatedAnswerKeys.length > 0 && (

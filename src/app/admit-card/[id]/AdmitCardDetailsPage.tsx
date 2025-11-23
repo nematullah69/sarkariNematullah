@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Script from "next/script";
 import Image from "next/image";
+import Head from "next/head";
 import {
   Calendar,
   FileText,
@@ -149,22 +150,30 @@ const AdmitCardDetailsPage = () => {
   const [admitCardsData, setAdmitCardsData] = useState<AdmitCard[]>([]); 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/admitCardsData.json");
-        if (!res.ok) throw new Error("Failed to fetch data");
-        // Cast the fetched data to the correct type
-        const data: AdmitCard[] = await res.json(); 
-        setAdmitCardsData(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`/api/admitcards/${id}`, {
+        cache: "no-store",
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch data");
+
+      const response = await res.json();
+      setAdmitCardsData([response.data]); // single document array me
+    } catch (error) {
+      console.error("Fetch Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (id) {
     fetchData();
-  }, []);
+  }
+}, [id]);
+
+
 
   if (loading) {
     return (
@@ -214,6 +223,20 @@ const AdmitCardDetailsPage = () => {
               <span>Back to Admit Cards</span>
             </button>
           </div>
+          
+ <Head>
+      <meta
+        name="keboard"
+        content={
+          admitCard.keboard
+            ? admitCard.keboard.join(", ")
+            : `${admitCard.examName}, ${admitCard.organization}, ${admitCard.department}, Admit Card`
+        }
+      />
+    </Head>
+
+
+
 
           {/* Header */}
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -516,6 +539,9 @@ const AdmitCardDetailsPage = () => {
               </tbody>
             </table>
           </div>
+
+
+
         </div>
 
         

@@ -2,123 +2,101 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Search, Bell, Calendar } from "lucide-react";
-
-// --- START OF TYPESCRIPT FIX ---
+import { Search, Loader2 } from "lucide-react";
 
 interface Notification {
   id: string;
   title: string;
   publishedDate: string;
-  // Note: Add other fields here if they exist in notificationsData.json
 }
-
-// --- END OF TYPESCRIPT FIX ---
-
 
 const NotificationsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  // Apply Notification interface to state
   const [notificationsData, setNotificationsData] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/notificationsData.json") // fetch from public folder
+    fetch("/api/notifications")
       .then((res) => res.json())
-      // Cast fetched data
-      .then((data: Notification[]) => setNotificationsData(data)) 
-      .catch((err) => console.error(err));
+      .then((res) => {
+        const data = res.data || [];
+        if (Array.isArray(data)) {
+          // Data ko reverse kiya taaki Newest Upar aaye
+          setNotificationsData(data.reverse());
+        } else {
+          setNotificationsData([]);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  // --- FIX APPLIED HERE (Lines 32-37) ---
   const filteredNotifications = notificationsData
-    .filter(notification => notification && notification.id) // Filter out items missing an 'id'
-    .filter((notification) => {
-      // Safely get the title, defaulting to an empty string if null/undefined.
-      const titleToSearch = (notification?.title || "").toLowerCase();
-      const searchLower = searchTerm.toLowerCase();
-
-      // Perform the inclusion check safely
-      return titleToSearch.includes(searchLower);
-    });
-  // ----------------------------------------
+    .filter((n) => n && n.id)
+    .filter((n) =>
+      (n.title || "").toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   return (
-    <div className="min-h-[80vh] bg-gray-50">
-      {/* Header */}
-      <div className="bg-purple-800 text-white py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-3 mb-1">
-            <Bell className="h-6 w-6" />
-            <h1 className="text-2xl font-bold">Notifications Portal</h1>
+    <div className="min-h-screen bg-[#f0f0f0] py-8 px-4 font-sans">
+      <div className="max-w-5xl mx-auto">
+        
+        {/* Search Bar */}
+        <div className="mb-6 flex justify-center">
+          <div className="relative w-full max-w-md">
+            <input
+              type="text"
+              placeholder="Search Notifications..."
+              className="w-full p-3 pl-10 border border-gray-400 rounded shadow-sm focus:outline-none focus:border-blue-600"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
           </div>
-          <p className="text-purple-200 text-sm">
-            Stay updated with latest notifications & circulars
-          </p>
         </div>
-      </div>
 
-      <div className="container mx-auto px-6 py-6 flex justify-center">
-        <div className="w-full max-w-4xl">
-          <h1 className="text-2xl font-bold text-purple-800 mb-2 text-center">
-            Notifications
-          </h1>
-
-          {/* Search */}
-          <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search by notification title..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg 
-                                focus:ring-2 focus:ring-purple-500 focus:border-transparent 
-                                pl-8 text-sm"
-              />
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-            </div>
+        {/* --- MAIN CLASSIC UI CONTAINER --- */}
+        <div className="border border-gray-400 bg-white shadow-md">
+          
+          {/* 👇 YAHAN CHANGE KIYA HAI: Red ko Green kar diya 👇 */}
+          <div className="bg-green-800 py-2 border-b border-green-900">
+            <h1 className="text-white text-center font-bold text-2xl tracking-wide">
+              Notifications
+            </h1>
           </div>
 
-          {/* Notifications List */}
-          <div className="space-y-4">
-            {filteredNotifications.map((notification) => (
-              <div
-                key={notification.id}
-                className="bg-white rounded-lg shadow-md p-5 flex items-center justify-between hover:shadow-lg transition-shadow"
-              >
-                <Link href={`/notifications/${notification.id}`} className="flex-1">
-                  <h3 className="text-purple-700 font-semibold text-sm mb-1 hover:underline">
-                    {notification.title}
-                  </h3>
-                  <div className="flex items-center text-xs text-gray-600">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    <span>Published: {notification.publishedDate}</span>
-                  </div>
-                </Link>
-
-                <Link
-                  href={`/notifications/${notification.id}`}
-                  className="ml-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-xs font-medium"
-                >
-                  View Notification
-                </Link>
+          {/* List Content */}
+          <div className="p-6 md:p-8 min-h-[400px]">
+            {loading ? (
+              <div className="flex justify-center items-center h-40">
+                {/* Loader ka color bhi match kar diya */}
+                <Loader2 className="animate-spin text-green-800 h-8 w-8" />
               </div>
-            ))}
+            ) : filteredNotifications.length > 0 ? (
+              <ul className="list-disc pl-5 md:pl-10 space-y-4">
+                {filteredNotifications.map((notification) => (
+                  <li key={notification.id} className="pl-2">
+                    <Link 
+                      href={`/notifications/${notification.id}`} 
+                      // Hover effect abhi bhi Red rakha hai classic look ke liye.
+                      // Agar ise bhi Green karna ho to 'hover:text-[#FF0000]' ko 'hover:text-green-700' kar dena.
+                      className="text-[#0000EE] text-lg md:text-xl font-medium hover:underline hover:text-[#FF0000] transition-colors"
+                    >
+                      {notification.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-center text-gray-500 mt-10">No notifications found.</p>
+            )}
           </div>
-
-          {/* Empty State */}
-          {filteredNotifications.length === 0 && (
-            <div className="text-center py-12 text-sm text-gray-500">
-              <Bell className="h-12 w-12 mx-auto mb-2 text-gray-400" />
-              <h3 className="font-medium mb-1">No notifications found</h3>
-              <p>Try searching with another keyword.</p>
-            </div>
-          )}
         </div>
+        {/* --- END CLASSIC UI --- */}
+
       </div>
     </div>
   );
 };
 
 export default NotificationsPage;
-

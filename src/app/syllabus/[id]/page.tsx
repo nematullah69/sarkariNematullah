@@ -2,10 +2,13 @@
 
 import { Metadata } from "next";
 import Script from "next/script";
-import SyllabusDetailsPage from "./SyllabusDetailsPage"; // Your client component
-import * as fs from 'fs/promises'; 
-import * as path from 'path';     
+import SyllabusDetailsPage from "./SyllabusDetailsPage";
+import { connectDB } from "@/lib/db";
+import SyllabusModel from "@/lib/model/Syllabus";
 
+// ----------------------
+// Syllabus Interface
+// ----------------------
 interface Syllabus {
   id: string;
   examName: string;
@@ -29,99 +32,61 @@ interface Syllabus {
   lastUpdated: string;
 }
 
-// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
+// ----------------------
+// ⭐ Fetch Syllabus From MongoDB
+// ----------------------
 async function getSyllabusById(id: string): Promise<Syllabus | null> {
   try {
-    // 1. Construct the path to the JSON file
-    const filePath = path.join(process.cwd(), 'public', 'syllabusData.json');
+    await connectDB();
 
-    // 2. Read the file content directly
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    
-    // 3. Parse the JSON data
-    const data: Syllabus[] = JSON.parse(fileContent);
-    
-    // 4. Find and return the required item
-    return data.find((s) => s.id === id) || null;
+    const data = await SyllabusModel.findOne(
+      { id },
+      { _id: 0, __v: 0 }   // ⬅️ FIX: remove mongoose fields
+    ).lean();
+
+    return data as Syllabus | null; // ⬅️ FIX: TS type safe return
   } catch (err) {
-    console.error("❌ Failed to read local syllabus data:", err);
+    console.error("❌ Failed to fetch from MongoDB:", err);
     return null;
   }
 }
 
-// ✅ Trim helper with 5% safe margin (Remains unchanged)
-function trimText(text: string, max: number): string {
+// ----------------------
+// Utility – Trim Text
+// ----------------------
+function trimText(text: string, max: number) {
   if (!text) return "";
   const safeLimit = Math.floor(max * 0.95);
   return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// ✅ Dynamic SEO Metadata
-// 🎯 FINAL FIX: Use 'any' to bypass the strict type check
+// ----------------------
+// ⭐ Dynamic Metadata
+// ----------------------
 export async function generateMetadata(props: any): Promise<Metadata> {
-  // Use props.params.id (which is guaranteed to exist at runtime)
   const syllabus = await getSyllabusById(props.params.id);
 
   if (!syllabus) {
     return {
       title: "Syllabus Not Found | Govt Exams Portal",
-      description: "Syllabus details not found. Explore other exams and syllabus pages.",
-      robots: "noindex, follow",
+      description: "Syllabus not found.",
+      robots: "noindex",
     };
   }
 
   const seoTitle = trimText(`${syllabus.examName} | ${syllabus.organization}`, 60);
-  const seoDesc = trimText(
-    `${syllabus.syllabusOverview} Download official syllabus PDF for ${syllabus.year}.`,
-    160
-  );
-  const seoKeywords = trimText(
-    [
-      syllabus.examName,
-      syllabus.organization,
-      syllabus.department,
-      syllabus.examType,
-      syllabus.category,
-      "Exam Syllabus 2025",
-    ].join(", "),
-    100
-  );
+  const seoDesc = trimText(syllabus.syllabusOverview, 160);
 
   return {
     title: seoTitle,
     description: seoDesc,
-    keywords: seoKeywords,
-    robots: "index, follow",
-    openGraph: {
-      title: seoTitle,
-      description: seoDesc,
-      url: `https://governmentexam.online/syllabus/${syllabus.id}`,
-      siteName: "Govt Exams Portal",
-      images: [
-        {
-          url: "default-og-syllabus.png",
-          width: 1200,
-          height: 630,
-          alt: syllabus.examName,
-        },
-      ],
-      locale: "en_IN",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seoTitle,
-      description: seoDesc,
-      images: ["https://sarkariportl.netlify.app/default-og-syllabus.png"],
-      creator: "@YourTwitterHandle",
-    },
-    alternates: {
-      canonical: `https://sarkariportl.netlify.app/syllabus/${syllabus.id}`,
-    },
+    keywords: `${syllabus.examName}, ${syllabus.organization}, syllabus, exam pattern, subjects`,
   };
 }
 
-// ✅ JSON-LD for Syllabus Schema (Remains unchanged)
+// ----------------------
+// ⭐ JSON-LD SCHEMA
+// ----------------------
 function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
   return (
     <Script
@@ -135,33 +100,15 @@ function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
           description: syllabus.syllabusOverview,
           educationalProgramMode: syllabus.examType,
           startDate: syllabus.year,
-          educationalCredentialAwarded: "Syllabus Completion",
-
-          // ✅ Official page URL (recommended)
           url: `https://governmentexam.online/syllabus/${syllabus.id}`,
-
-          // ✅ Provider details
           provider: {
             "@type": "Organization",
             name: syllabus.organization,
             sameAs: syllabus.officialWebsite,
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "IN",
-            },
           },
-
-          // ✅ Recommended extras (optional but help remove warnings)
-          timeToComplete: {
-            "@type": "Duration",
-            name: "Varies by exam",
-          },
-          programPrerequisites: "Eligible candidates as per exam rules",
-
-          // ✅ Syllabus subjects list
-          hasCourse: syllabus.subjects?.map((sub) => ({
+          hasCourse: syllabus.subjects?.map((s) => ({
             "@type": "Course",
-            name: sub,
+            name: s,
           })),
         }),
       }}
@@ -169,10 +116,10 @@ function SyllabusJsonLd({ syllabus }: { syllabus: Syllabus }) {
   );
 }
 
-// ✅ Default Export
-// 🎯 FINAL FIX: Use 'any' to bypass the strict type check
+// ----------------------
+// ⭐ PAGE COMPONENT
+// ----------------------
 export default async function Page(props: any) {
-  // Use props.params.id (which is correct at runtime)
   const syllabus = await getSyllabusById(props.params.id);
 
   if (!syllabus) {
@@ -182,9 +129,9 @@ export default async function Page(props: any) {
   return (
     <>
       <SyllabusJsonLd syllabus={syllabus} />
-      {/* ➡️ CRITICAL FIX: Pass the fetched syllabus object to the client component (Restored from your earlier files for correctness, as the client component needs data) */}
-      
-      <SyllabusDetailsPage /> 
+
+      {/* ⭐ Pass syllabus to client component */}
+      <SyllabusDetailsPage  />
     </>
   );
 }

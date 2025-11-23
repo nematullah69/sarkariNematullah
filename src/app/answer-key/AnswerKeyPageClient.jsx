@@ -2,17 +2,27 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Key, Search, Calendar } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 
 const AnswerKeyPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [answerKeysData, setAnswerKeysData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/answerKeysData.json")
       .then((res) => res.json())
-      .then((data) => setAnswerKeysData(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        // 👇 YAHAN CHANGE KIYA HAI:
+        // Data ko reverse kiya taaki Newest Answer Key Upar aaye
+        if (Array.isArray(data)) {
+          setAnswerKeysData(data.reverse());
+        } else {
+          setAnswerKeysData([]);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   const filteredAnswerKeys = answerKeysData.filter((key) =>
@@ -20,72 +30,65 @@ const AnswerKeyPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center">
-      {/* Header */}
-      <div className="bg-red-800 text-white w-full py-6">
-        <div className="w-full md:w-7/10 mx-auto px-4">
-          <div className="flex items-center space-x-3 mb-2">
-            <Key className="h-7 w-7" />
-            <h1 className="text-2xl font-bold">Answer Keys Portal</h1>
-          </div>
-          <p className="text-red-200 text-sm">
-            Download official answer keys for government examinations
-          </p>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="w-full md:w-7/10 mx-auto px-4 py-6">
-        {/* Search */}
-        <div className="bg-white p-4 rounded-lg shadow mb-6">
-          <div className="relative">
+    <div className="min-h-screen bg-[#f0f0f0] py-8 px-4 font-sans">
+      <div className="max-w-5xl mx-auto">
+        
+        {/* Search Bar */}
+        <div className="mb-6 flex justify-center">
+          <div className="relative w-full max-w-md">
             <input
               type="text"
-              placeholder="Search by exam name..."
+              placeholder="Search Answer Key..."
+              className="w-full p-3 pl-10 border border-gray-400 rounded shadow-sm focus:outline-none focus:border-pink-600"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent pl-9 text-sm"
             />
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
           </div>
         </div>
 
-        {/* Answer Keys List */}
-        <div className="space-y-4">
-          {filteredAnswerKeys.map((key) => (
-            <Link
-              key={key.id}
-              href={`/answer-key/${key.id}`}
-              className="block bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-base font-semibold text-red-700 hover:underline">
-                    {key.examName}
-                  </h3>
-                  <div className="flex items-center text-gray-600 text-xs mt-1">
-                    <Calendar className="h-3.5 w-3.5 mr-1" />
-                    <span>Release Date: {key.releaseDate}</span>
-                  </div>
-                </div>
-                <span className="bg-red-600 text-white px-3 py-1.5 rounded-md text-xs font-medium hover:bg-red-700 transition-colors">
-                  Check Answer Key
-                </span>
+        {/* --- MAIN CLASSIC UI CONTAINER --- */}
+        <div className="border border-gray-400 bg-white shadow-md">
+          
+          {/* 👇 Header Color: Dark Pink (Red nahi hai) 👇 */}
+          <div className="bg-pink-700 py-2 border-b border-pink-900">
+            <h1 className="text-white text-center font-bold text-2xl tracking-wide">
+              Answer Key
+            </h1>
+          </div>
+
+          {/* List Content */}
+          <div className="p-6 md:p-8 min-h-[400px]">
+            {loading ? (
+              <div className="flex justify-center items-center h-40">
+                <Loader2 className="animate-spin text-pink-700 h-8 w-8" />
               </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredAnswerKeys.length === 0 && (
-          <div className="text-center py-10">
-            <Key className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-            <h3 className="text-base font-medium mb-1">No answer keys found</h3>
-            <p className="text-gray-500 text-sm">
-              Try adjusting your search or check back later for new answer keys.
-            </p>
+            ) : filteredAnswerKeys.length > 0 ? (
+              <ul className="list-disc pl-5 md:pl-10 space-y-4">
+                {filteredAnswerKeys.map((key) => (
+                  <li key={key.id} className="pl-2">
+                    <Link 
+                      href={`/answer-key/${key.id}`} 
+                      // Classic Style: Text Blue, Hover Pink
+                      className="text-[#0000EE] text-lg md:text-xl font-medium hover:underline hover:text-pink-800 transition-colors"
+                    >
+                      {key.examName}
+                    </Link>
+                    
+                    {/* Optional: Release Date show karni ho to uncomment karein */}
+                    {/* <span className="text-gray-500 text-sm ml-2">
+                       (Released: {key.releaseDate})
+                    </span> */}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-center text-gray-500 mt-10">No answer keys found.</p>
+            )}
           </div>
-        )}
+        </div>
+        {/* --- END CLASSIC UI --- */}
+
       </div>
     </div>
   );

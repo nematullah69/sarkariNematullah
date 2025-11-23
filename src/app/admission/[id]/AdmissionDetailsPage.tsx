@@ -1,6 +1,8 @@
 "use client" // This remains as you need hooks like useState, useEffect, useParams
 
 import { useState, useEffect } from "react";
+import Head from "next/head"; 
+
 import { useParams } from "next/navigation"; // useParams is from next/navigation for client components
 import Link from "next/link";
 // --- Removed unused imports: FileText, UserCheck, AdmissionPageProps ---
@@ -47,6 +49,7 @@ interface Admission {
   courseType: string;
   seats: string;
   fees: string;
+   keywords?: string[];
   overview: string;
   courseName: string;
   applicationStart: string;
@@ -125,6 +128,35 @@ const AdmissionDetailsContent = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+    {admission && (
+  <Head>
+    <title>{admission.title} | {admission.university}</title>
+
+    <meta 
+      name="description" 
+      content={`${admission.title} admission details. Eligibility, dates, fees, apply link, course details & more.`} 
+    />
+
+    <meta 
+      name="keywords" 
+      content={admission.keywords?.join(", ")} 
+    />
+
+    <meta name="robots" content="index, follow" />
+
+    {/* OG Tags */}
+    <meta property="og:title" content={admission.title} />
+    <meta 
+      property="og:description" 
+      content={`${admission.title} - ${admission.university} admission information.`} 
+    />
+    <meta property="og:type" content="website" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+  </Head>
+)}
+
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
@@ -403,6 +435,22 @@ const AdmissionDetailsContent = () => {
                 </div>
               </div>
             </div>
+
+{/* Keywords Section */}
+<div className="bg-white rounded-lg shadow-md p-6">
+  
+
+  <div className="flex flex-wrap gap-3">
+    {admission.keywords?.map((keyword, index) => (
+      <span
+        key={index}
+        className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm cursor-default"
+      >
+        {keyword}
+      </span>
+    ))}
+  </div>
+</div>
 
             {/* Deadline Alert */}
             <div className="bg-red-50 border border-red-200 rounded-lg p-4">

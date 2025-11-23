@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.14.7",
     "lucide-react": "^0.544.0",
+    "mongoose": "^8.20.0",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0"

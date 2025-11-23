@@ -1,117 +1,178 @@
 // app/notifications/[id]/page.tsx
+
 import { Metadata } from "next";
 import Script from "next/script";
-
 import NotificationDetailsPageClient from "./NotificationDetailsPageClient";
-import * as fs from 'fs/promises'; 
-import * as path from 'path';     
 
-interface Notification {
-  id: string;
-  title: string;
-  organization: string;
-  department: string;
-  category: string;
-  status: string;
-  eligibility: string;
-  importantDates: { label: string; value: string; highlight?: boolean }[];
-  details: string;
-  officialLink: string;
-  releaseDate: string;
-  applicationStart?: string;
-  applicationEnd?: string;
-  examDate?: string;
-  imageUrl?: string;
+// DB + Model
+import { connectDB } from "@/lib/db";
+import Notification from "@/lib/model/Notification";
+
+// ----------------------
+// 🔹 TYPES
+// ----------------------
+interface NotificationType {
+  _id: string;
+  id: string;
+  title: string;
+  organization: string;
+  department: string;
+  category: string;
+  status: string;
+  eligibility: string;
+  importantDates: { label: string; value: string; highlight?: boolean }[];
+  details: string;
+  officialLink: string;
+  releaseDate: string;
+  applicationStart?: string;
+  applicationEnd?: string;
+  examDate?: string;
+  imageUrl?: string;
 }
 
-// 🛠️ CRITICAL FIX: Changed from network fetch to direct file system read
-async function getNotification(id: string): Promise<Notification | null> {
-  try {
-    // 1. Construct the path to the JSON file
-    const filePath = path.join(process.cwd(), 'public', 'notificationsData.json');
-    
-    // 2. Read the file content directly
-    const fileContent = await fs.readFile(filePath, 'utf-8');
+// MongoDB returned object type
+type NotificationDoc = {
+  _id: any;
+  id?: string;
+  title?: string;
+  organization?: string;
+  department?: string;
+  category?: string;
+  status?: string;
+  eligibility?: string;
+  importantDates?: any[];
+  details?: string;
+  officialLink?: string;
+  releaseDate?: string;
+  applicationStart?: string;
+  applicationEnd?: string;
+  examDate?: string;
+  imageUrl?: string;
+};
 
-    // 3. Parse the JSON data
-    const data: Notification[] = JSON.parse(fileContent);
-    
-    // 4. Find and return the required item
-    return data.find((n) => n.id === id) || null;
-  } catch (err) {
-    console.error("❌ Failed to read local notification data:", err); 
-    return null;
-  }
+// ----------------------
+// 🔹 Fetch Single Notification
+// ----------------------
+async function getNotification(id: string): Promise<NotificationType | null> {
+  try {
+    await connectDB();
+
+    const doc = (await Notification.findOne({ id }).lean()) as NotificationDoc | null;
+
+    if (!doc) return null;
+
+    return {
+      _id: String(doc._id),
+      id: doc.id || "",
+      title: doc.title || "",
+      organization: doc.organization || "",
+      department: doc.department || "",
+      category: doc.category || "",
+      status: doc.status || "",
+      eligibility: doc.eligibility || "",
+      importantDates: doc.importantDates || [],
+      details: doc.details || "",
+      officialLink: doc.officialLink || "",
+      releaseDate: doc.releaseDate || "",
+      applicationStart: doc.applicationStart || "",
+      applicationEnd: doc.applicationEnd || "",
+      examDate: doc.examDate || "",
+      imageUrl: doc.imageUrl || "",
+    };
+  } catch (error) {
+    console.error("❌ MongoDB Fetch Error:", error);
+    return null;
+  }
 }
 
-// ✅ Helper → Trim text with safe margin (Remains unchanged)
+// ----------------------
+// 🔹 Trim Helper
+// ----------------------
 function trimText(text: string, max: number): string {
-  if (!text) return "";
-  const safeLimit = Math.floor(max * 0.95);
-  return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
+  if (!text) return "";
+  const safeLimit = Math.floor(max * 0.95);
+  return text.length > safeLimit ? text.slice(0, safeLimit - 3) + "..." : text;
 }
 
-// ✅ Dynamic Metadata
-// 🎯 FINAL FIX: Use 'any' to bypass the strict type check
+// ----------------------
+// 🔹 Dynamic Metadata
+// ----------------------
 export async function generateMetadata(props: any): Promise<Metadata> {
-  // Use props.params.id (which is correct at runtime)
-  const notification = await getNotification(props.params.id);
+  const notification = await getNotification(props.params.id);
 
-  if (!notification) {
-    return {
-      title: "Notification Not Found | Government Exam",
-      description: "Notification details not found. Check other government job notifications and recruitment alerts.",
-      robots: "noindex, follow",
-    };
-  }
+  if (!notification) {
+    return {
+      title: "Notification Not Found | Government Exam",
+      description: "Notification details not found.",
+      robots: "noindex, follow",
+    };
+  }
 
-  const seoTitle = trimText(`${notification.title} | ${notification.organization} Notification 2025`, 60);
-  const seoDesc = trimText(
-    `${notification.details} Official notification released on ${notification.releaseDate}. Apply from ${notification.applicationStart} to ${notification.applicationEnd}.`,
-    160
-  );
-  const seoKeywords = trimText(
-    [notification.title, notification.organization, notification.department, notification.category, "Sarkari Notification 2025"].join(
-      ", "
-    ),
-    100
-  );
+  const seoTitle = trimText(
+    `${notification.title} | ${notification.organization} Notification 2025`,
+    60
+  );
 
-  return {
-    title: seoTitle,
-    description: seoDesc,
-    keywords: seoKeywords,
-    openGraph: {
-      title: seoTitle,
-      description: seoDesc,
-      url: `https://governmentexam.online/notifications/${notification.id}`,
-      siteName: "Government Exam", 
-      images: [
-        {
-          url: notification.imageUrl || "https://governmentexam.online/default-og-notification.png",
-          width: 1200,
-          height: 630,
-          alt: notification.title,
-        },
-      ],
-      locale: "en_IN",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seoTitle,
-      description: seoDesc,
-      images: [notification.imageUrl || "https://governmentexam.online/default-og-notification.png"],
-      creator: "@YourTwitterHandle",
-    },
-    alternates: {
-      canonical: `https://governmentexam.online/notifications/${notification.id}`,
-    },
-  };
+  const seoDesc = trimText(
+    `${notification.details} Official notification released on ${notification.releaseDate}.`,
+    160
+  );
+
+  const seoKeywords = trimText(
+    [
+      notification.title,
+      notification.organization,
+      notification.department,
+      notification.category,
+      "Sarkari Notification 2025",
+    ].join(", "),
+    100
+  );
+
+  return {
+    title: seoTitle,
+    description: seoDesc,
+    keywords: seoKeywords,
+
+    openGraph: {
+      title: seoTitle,
+      description: seoDesc,
+      url: `https://governmentexam.online/notifications/${notification.id}`,
+      siteName: "Government Exam",
+      images: [
+        {
+          url:
+            notification.imageUrl ||
+            "https://governmentexam.online/default-og-notification.png",
+          width: 1200,
+          height: 630,
+          alt: notification.title,
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDesc,
+      images: [
+        notification.imageUrl ||
+          "https://governmentexam.online/default-og-notification.png",
+      ],
+    },
+
+    alternates: {
+      canonical: `https://governmentexam.online/notifications/${notification.id}`,
+    },
+  };
 }
 
-// ✅ JSON-LD Schema (Remains unchanged)
-function NotificationJsonLd({ notification }: { notification: Notification }) {
+// ----------------------
+// 🔹 JSON-LD Schema
+// ----------------------
+function NotificationJsonLd({ notification }: { notification: NotificationType }) {
   return (
     <Script
       id="notification-schema"
@@ -121,22 +182,13 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
           "@context": "https://schema.org",
           "@type": "NewsArticle",
           headline: notification.title,
-          description:
-            notification.details ||
-            `${notification.title} released by ${notification.organization || "official source"}.`,
-          datePublished:
-            notification.releaseDate || new Date().toISOString(),
-          dateModified:
-            notification.releaseDate || new Date().toISOString(),
+          description: notification.details,
+          datePublished: notification.releaseDate,
+          dateModified: notification.releaseDate,
           url: `https://governmentexam.online/notifications/${notification.id}`,
           publisher: {
             "@type": "Organization",
-            name: notification.organization || "Government Exam Online",
-            url: notification.officialLink || "https://governmentexam.online",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://governmentexam.online/logo.png", // optional if you have a logo
-            },
+            name: notification.organization,
           },
           mainEntityOfPage: `https://governmentexam.online/notifications/${notification.id}`,
         }),
@@ -145,21 +197,23 @@ function NotificationJsonLd({ notification }: { notification: Notification }) {
   );
 }
 
-// ✅ Default Page
-// 🎯 FINAL FIX: Use 'any' and STOP PASSING THE PROP.
+// ----------------------
+// 🔹 MAIN PAGE COMPONENT
+// ----------------------
 export default async function Page(props: any) {
-  // Fetch is still done here for Metadata and JSON-LD
-  const notification = await getNotification(props.params.id);
+  const notification = await getNotification(props.params.id);
 
-  if (!notification) {
-    return <div className="p-6 text-red-600">Notification not found.</div>;
-  }
+  if (!notification) {
+    return <div className="p-6 text-red-600">Notification not found.</div>;
+  }
 
-  return (
-    <>
-      <NotificationJsonLd notification={notification} />
-      {/* ❌ CRITICAL CHANGE: Component rendered WITHOUT the prop */}
-      <NotificationDetailsPageClient /> 
-    </>
-  );
+  return (
+    <>
+      <NotificationJsonLd notification={notification} />
+
+      {/* You can pass the data here if required */}
+      
+      <NotificationDetailsPageClient /> 
+    </>
+  );
 }

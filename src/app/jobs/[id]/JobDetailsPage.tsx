@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import Script from "next/script";
 import Image from "next/image";
+import Head from "next/head";
 
 
 import { 
@@ -166,21 +167,27 @@ const JobDetailsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchJob = async () => {
-      try {
-        const res = await fetch("/jobsData.json");
-        if (!res.ok) throw new Error("Failed to fetch jobs data");
-        const data: Job[] = await res.json(); // Cast the fetched data
-        const foundJob = data.find(j => j.id === id);
-        setJob(foundJob || null);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+  const fetchJob = async () => {
+    try {
+      const res = await fetch(`/api/jobs/${id}`);
+      const result = await res.json();
+
+      if (result.success) {
+        setJob(result.data);
+      } else {
+        setJob(null);
       }
-    };
-    fetchJob();
-  }, [id]);
+    } catch (error) {
+      console.error(error);
+      setJob(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchJob();
+}, [id]);
+
 
   if (loading) {
     return (
@@ -228,6 +235,16 @@ const JobDetailsPage = () => {
     
 
     <div className="min-h-screen bg-gray-50">
+    <Head>
+  <meta
+    name="keboard"
+    content={
+      job.keboard
+        ? job.keboard.join(", ")
+        : `${job.title}, ${job.organization}, ${job.department}`
+    }
+  />
+</Head>
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-2">
@@ -329,17 +346,8 @@ const JobDetailsPage = () => {
 
 
 
-    
-
-
-
-
+  
    
-
-
-
-
-
 
 
             {/* Selection Process */}
@@ -388,30 +396,7 @@ const JobDetailsPage = () => {
               </div>
             )}
 
-            {/* Salary Table */}
-            {job.Salary && (
-              <div className="bg-white rounded-lg shadow-md p-6 overflow-x-auto">
-                <h2 className="text-xl font-bold mb-4 text-center text-pink-600">Post-wise Salary Structure</h2>
-                <table className="w-full border border-gray-200">
-                  <thead>
-                    <tr className="bg-gray-100 text-left">
-                      <th className="p-3 font-bold text-purple-700">Post Name</th>
-                      <th className="p-3 font-bold text-purple-700">Level</th>
-                      <th className="p-3 font-bold text-purple-700">Initial Pay</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {job.Salary.map((item, index) => (
-                      <tr key={index} className="border-t hover:bg-gray-50">
-                        <td className="p-3">{item.postName}</td>
-                        <td className="p-3">{item.level}</td>
-                        <td className="p-3">{item.initialPay}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+           
             
 
             {/* Total Vacancies */}

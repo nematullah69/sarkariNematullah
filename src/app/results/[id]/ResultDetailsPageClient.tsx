@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Script from "next/script";
+import Head from "next/head";
+
 import {
   ArrowLeft,
   Building,
@@ -69,6 +71,8 @@ interface Result {
   resultDetails?: string;
   resultDate?: string;
   totalPosts?: string | number;
+  keywords?: string[];
+
 
   // Optional complex fields
   importantDates?: Record<string, string>; // { key: value } structure
@@ -134,29 +138,30 @@ const ResultDetailsPage = () => {
   const [results, setResults] = useState<Result[]>([]); 
   const [loading, setLoading] = useState(true);
 
-  // Fetch JSON data from /public/resultsData.json
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const res = await fetch("/resultsData.json");
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        const data: Result[] = await res.json(); // Cast the fetched data
-        setResults(data);
-      } catch (err) {
-        console.error("Error loading results data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
+  const loadData = async () => {
+    try {
+      const res = await fetch(`/api/results/${id}`);
+      const json = await res.json();
+
+      // Ensure we always store an array, so .find() works
+      setResults(Array.isArray(json.data) ? json.data : [json.data]);
+
+    } catch (err) {
+      console.error("Error loading result:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  loadData();
+}, [id]);
+
+
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-600">
-        Loading...
+        .
       </div>
     );
   }
@@ -218,30 +223,40 @@ const ResultDetailsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumbs */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 py-3">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link
-              href="/"
-              className="flex items-center hover:text-blue-600 transition-colors"
-            >
-              <Home className="h-4 w-4 mr-1" />
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link
-              href="/results"
-              className="hover:text-blue-600 transition-colors"
-            >
-              Results
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-gray-800 font-medium truncate">
-              {result.examName}
-            </span>
-          </nav>
-        </div>
-      </div>
+      <>
+     <Head>
+          <meta
+            name="keywords"
+            content={result.keywords ? result.keywords.join(", ") : ""}
+          />
+        </Head>
+
+  <div className="bg-white border-b">
+    <div className="container mx-auto px-4 py-3">
+      <nav className="flex items-center space-x-2 text-sm text-gray-600">
+        <Link
+          href="/"
+          className="flex items-center hover:text-blue-600 transition-colors"
+        >
+          <Home className="h-4 w-4 mr-1" />
+          Home
+        </Link>
+        <ChevronRight className="h-4 w-4" />
+        <Link
+          href="/results"
+          className="hover:text-blue-600 transition-colors"
+        >
+          Results
+        </Link>
+        <ChevronRight className="h-4 w-4" />
+        <span className="text-gray-800 font-medium truncate">
+          {result.examName}
+        </span>
+      </nav>
+    </div>
+  </div>
+</>
+
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
@@ -305,8 +320,11 @@ const ResultDetailsPage = () => {
                   Exam Important Dates
                 </h2>
                 <ul className="space-y-2 text-gray-700">
-                  {Object.entries(result.importantDates).map(
-                    ([key, value], index) => (
+                      {Object.entries(result.importantDates)
+  .filter(([key]) => key !== "_id")
+  .map(([key, value], index) => (
+
+                  
                       <li
                         key={index}
                         className="flex justify-between border-b border-gray-100 py-2"
@@ -325,43 +343,36 @@ const ResultDetailsPage = () => {
               </div>
             )}
             
-            {/* 5. Vacancy Table (if available) */}
-            {result.vacancy && result.vacancy.length > 0 && (
-              <div className="bg-white rounded-lg shadow-md p-6 overflow-x-auto">
-                <h2 className="text-xl font-bold mb-4 text-center text-green-700 flex items-center justify-center">
-                    <Award className="h-5 w-5 mr-2" />
-                    {result.examvacancy || "Vacancy Details"}
-                </h2>
-                <table className="w-full border border-gray-200 min-w-[600px]">
-                  <thead>
-                    <tr className="bg-green-50 text-left">
-                      {Object.keys(result.vacancy[0]).map((key, index) => (
-                        <th
-                          key={index}
-                          className="p-3 font-bold text-green-800"
-                        >
-                          {formatKey(key)}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.vacancy.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="border-t hover:bg-gray-50"
-                      >
-                        <td className="p-3 font-medium">{item.postName}</td>
-                        {/* Only render category if it exists on the item type */}
-                        {item.category && <td className="p-3">{item.category}</td>}
-                        <td className="p-3 text-center font-bold">{item.total}</td>
-                        <td className="p-3 text-sm text-gray-600">{item.eligibility}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+           {/* 5. Vacancy Table Fixed */}
+{result.vacancy && result.vacancy.length > 0 && (
+  <div className="bg-white rounded-lg shadow-md p-6 overflow-x-auto">
+    <h2 className="text-xl font-bold mb-4 text-center text-green-700 flex items-center justify-center">
+      <Award className="h-5 w-5 mr-2" />
+      {result.examvacancy || "Vacancy Details"}
+    </h2>
+    <table className="w-full border border-gray-200 min-w-[600px]">
+      <thead>
+        <tr className="bg-green-50 text-left">
+          {/* FIXED: Headers manually set to match data columns */}
+          <th className="p-3 font-bold text-green-800">Post Name</th>
+          <th className="p-3 font-bold text-green-800">Category</th>
+          <th className="p-3 font-bold text-center text-green-800">Total Vacancies</th>
+          <th className="p-3 font-bold text-green-800">Eligibility Criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {result.vacancy.map((item, index) => (
+          <tr key={index} className="border-t hover:bg-gray-50">
+            <td className="p-3 font-medium">{item.postName}</td>
+            <td className="p-3">{item.category}</td>
+            <td className="p-3 text-center font-bold">{item.total}</td>
+            <td className="p-3 text-sm text-gray-600">{item.eligibility}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
 
             {/* 6. Salary Section (combine both structures) */}
 
@@ -636,6 +647,23 @@ const ResultDetailsPage = () => {
                 )}
               </div>
             </div>
+            
+                      {/* Keywords Section */}
+{result.keywords && result.keywords.length > 0 && (
+  <div className="bg-white p-4 rounded-lg shadow mt-4">
+    
+    <div className="flex flex-wrap gap-2">
+      {result.keywords.map((keyword: string, index: number) => (
+        <span
+          key={index}
+          className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+        >
+          {keyword}
+        </span>
+      ))}
+    </div>
+  </div>
+)}
           </div>
         </div>
       </div>
@@ -644,3 +672,4 @@ const ResultDetailsPage = () => {
 };
 
 export default ResultDetailsPage;
+

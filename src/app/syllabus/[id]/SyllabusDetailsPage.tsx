@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Script from "next/script";
+import Head from "next/head";
+import { connectDB } from "@/lib/db";
+import SyllabusModel from "@/lib/model/Syllabus";
+
 import { 
   ArrowLeft, 
   Building, 
@@ -41,6 +45,7 @@ interface ExamPattern {
 interface Syllabus {
   id: string;
   examName: string;
+  keywords?: string[];
   organization: string;
   department: string;
   examType: string;
@@ -103,30 +108,25 @@ const SyllabusDetailsPage = () => {
   // Use the Syllabus interface for state initialization
   const [syllabiData, setSyllabiData] = useState<Syllabus[]>([]);
   const [syllabus, setSyllabus] = useState<Syllabus | null>(null);
+useEffect(() => {
+  fetch("/api/syllabus")
+    .then(res => res.json())
+    .then((resData) => {
+      const data = resData.data; 
 
-  useEffect(() => {
-    fetch("/syllabusData.json")
-      .then(res => res.json())
-      .then((data: Syllabus[]) => { // Cast the fetched data
-        setSyllabiData(data);
-        const found = data.find(s => s.id === id);
-        setSyllabus(found || null);
-      })
-      .catch(err => console.error(err));
-  }, [id]);
+      setSyllabiData(data);
+
+      const found = data.find((s: Syllabus) => s.id === id);
+      setSyllabus(found || null);
+    })
+    .catch(err => console.error(err));
+}, [id]);
+
 
   if (!syllabus) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Syllabus Not Found</h2>
-          <Link 
-            href="/syllabus"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Back to Syllabus
-          </Link>
-        </div>
+        
       </div>
     );
   }
@@ -141,6 +141,24 @@ const SyllabusDetailsPage = () => {
     .slice(0, 3);
 
   return (
+   <>
+    <Head>
+      <title>{`${syllabus.examName} Syllabus ${syllabus.year} | ${syllabus.organization}`}</title>
+
+      <meta
+        name="description"
+        content={syllabus.syllabusOverview.substring(0, 160)}
+      />
+
+      <meta
+        name="keywords"
+        content={
+          `${syllabus.examName}, ${syllabus.examName} Syllabus, ${syllabus.examName} ${syllabus.year}, ` +
+          `${syllabus.category} syllabus, ${syllabus.organization}, govt syllabus, exam syllabus, ` +
+          syllabus.subjects.join(", ")
+        }
+      />
+    </Head>
     <div className="min-h-screen bg-gray-50">
       {/* Notification Banner */}
       {/* Added check to ensure objection dates are present before showing banner */}
@@ -371,6 +389,24 @@ const SyllabusDetailsPage = () => {
               </div>
             )}
 
+ {/* Keywords Section */}
+<div className="bg-white rounded-lg shadow-md p-6">
+  
+
+  <div className="flex flex-wrap gap-3">
+    {syllabus.keywords?.map((keyword, index) => (
+      <span
+        key={index}
+        className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm cursor-default"
+      >
+        {keyword}
+      </span>
+    ))}
+  </div>
+</div>
+
+
+
             {/* Quick Download */}
             <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
               <div className="flex items-start space-x-3">
@@ -396,6 +432,7 @@ const SyllabusDetailsPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
