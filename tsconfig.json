@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -19,10 +23,39 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-      
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/results/page.jsx", "src/app/results/ResultDetailsPage.jsx", "src/app/layout.tsx", "src/app/syllabus/page.jsx", "src/app/admission/AdmissionPage.jsx", "src/app/admission/[id]/page.tsx", "src/app/admission/page.jsx", "src/app/about/page.tsx", "src/app/contact/ContactPageClient.jsx", "src/app/api/notifications/route.js", "src/lib/db.ts", "src/model/ageModel.ts", "src/lib/model/Notification.js", "src/app/api/notifications/[id]/route.js", "src/app/api/jobs/[id]/route.js", "src/app/api/admitcards/route.js", "src/app/api/admitcards/[id]/route.js", "src/lib/model/Result.js", "src/app/api/results/[id]/route.js", "src/app/api/syllabus/[id]/route.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/results/page.jsx",
+    "src/app/results/ResultDetailsPage.jsx",
+    "src/app/layout.tsx",
+    "src/app/syllabus/page.jsx",
+    "src/app/admission/AdmissionPage.jsx",
+    "src/app/admission/[id]/page.tsx",
+    "src/app/admission/page.jsx",
+    "src/app/about/page.tsx",
+    "src/app/contact/ContactPageClient.jsx",
+    "src/app/api/notifications/route.js",
+    "src/lib/db.ts",
+    "src/model/ageModel.ts",
+    "src/lib/model/Notification.js",
+    "src/app/api/notifications/[id]/route.js",
+    "src/app/api/jobs/[id]/route.js",
+    "src/app/api/admitcards/route.js",
+    "src/app/api/admitcards/[id]/route.js",
+    "src/lib/model/Result.js",
+    "src/app/api/results/[id]/route.js",
+    "src/app/api/syllabus/[id]/route.js",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
