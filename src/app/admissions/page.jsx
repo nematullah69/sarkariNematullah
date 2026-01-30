@@ -1,6 +1,6 @@
 
-import AdmissionsPage from "../../components/pages/AdmissionsPage";
 
+import AdmissionsPage from '../../components/pages/AdmissionsPage';
 const Page = () => {
     return <AdmissionsPage/>
 }

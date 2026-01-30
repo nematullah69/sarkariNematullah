@@ -1,10 +1,10 @@
 // "use client"
 export const runtime = "nodejs";
-
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema'
 import React from 'react';
 import Link from 'next/link';
-import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
-import HowToSchema from '../../../../components/seo/HowToSchema';
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
+import HowToSchema from '../../../components/seo/HowToSchema';
 // The original react-router-dom imports are commented out, as they should be.
 // import { useParams, Link } from 'react-router-dom';
 

@@ -3,8 +3,8 @@ export const runtime = "nodejs";
 
 import React from 'react';
 import Link from 'next/link';
-import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
-import HowToSchema from '../../../../components/seo/HowToSchema';
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
+import HowToSchema from '../../../components/seo/HowToSchema';
 
 import {
   ArrowLeft, Users, CheckCircle, ExternalLink, Briefcase, CalendarDays,

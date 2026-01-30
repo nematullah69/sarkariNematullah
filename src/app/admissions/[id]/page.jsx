@@ -14,8 +14,8 @@ import {
   CheckCircle // ADDED THIS IMPORT
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
-import HowToSchema from '../../../../components/seo/HowToSchema';
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
+import HowToSchema from '../../../components/seo/HowToSchema';
 
 
 
