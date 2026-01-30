@@ -1,6 +1,6 @@
 // "use client"
 export const runtime = "nodejs";
-import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema'
+
 import React from 'react';
 import Link from 'next/link';
 import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
