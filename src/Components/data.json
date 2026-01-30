@@ -1,0 +1,179 @@
+[
+  {
+    "jobId": "123",
+    "jobTitle": "SSC CGL 2024",
+    "cutoffTrends": {
+      "overallAnalysis": {
+        "year": 2024,
+        "examStages": [
+          "Tier 1",
+          "Tier 2",
+          "Final"
+        ],
+        "totalMarks": {
+          "tier1": 200,
+          "tier2": 450,
+          "final": 650
+        },
+        "trend": "Increasing",
+        "yearOverYearChange": "+5.2%"
+      },
+      "categoryWiseCutoff": {
+        "2024": {
+          "tier1": {
+            "general": 145,
+            "obc": 140,
+            "sc": 130,
+            "st": 125,
+            "ews": 135,
+            "pwd": 115
+          },
+          "tier2": {
+            "general": 360,
+            "obc": 350,
+            "sc": 330,
+            "st": 320,
+            "ews": 345,
+            "pwd": 300
+          },
+          "final": {
+            "general": 660,
+            "obc": 645,
+            "sc": 620,
+            "st": 600,
+            "ews": 655,
+            "pwd": 570
+          }
+        },
+        "2023": {
+          "tier1": {
+            "general": 140,
+            "obc": 135,
+            "sc": 125,
+            "st": 120,
+            "ews": 130,
+            "pwd": 110
+          },
+          "tier2": {
+            "general": 350,
+            "obc": 340,
+            "sc": 320,
+            "st": 310,
+            "ews": 335,
+            "pwd": 290
+          },
+          "final": {
+            "general": 650,
+            "obc": 630,
+            "sc": 600,
+            "st": 580,
+            "ews": 640,
+            "pwd": 550
+          }
+        },
+        "2022": {
+          "tier1": {
+            "general": 135,
+            "obc": 130,
+            "sc": 120,
+            "st": 115,
+            "ews": 125,
+            "pwd": 105
+          },
+          "tier2": {
+            "general": 340,
+            "obc": 330,
+            "sc": 310,
+            "st": 300,
+            "ews": 325,
+            "pwd": 280
+          },
+          "final": {
+            "general": 640,
+            "obc": 620,
+            "sc": 590,
+            "st": 570,
+            "ews": 630,
+            "pwd": 540
+          }
+        }
+      },
+      "sectionalCutoff": {
+        "tier1": {
+          "quantitativeAptitude": 35,
+          "englishLanguage": 30,
+          "generalAwareness": 40,
+          "reasoning": 35
+        },
+        "tier2": {
+          "paper1": 150,
+          "paper2": 100,
+          "paper3": 100,
+          "paper4": 100
+        }
+      },
+      "cutoffVariations": {
+        "yearlyIncrease": {
+          "2022_2023": {
+            "general": "+10",
+            "obc": "+10",
+            "sc": "+10",
+            "st": "+10",
+            "ews": "+10",
+            "pwd": "+10"
+          },
+          "2023_2024": {
+            "general": "+10",
+            "obc": "+10",
+            "sc": "+10",
+            "st": "+10",
+            "ews": "+10",
+            "pwd": "+10"
+          }
+        },
+        "percentageIncrease": {
+          "last3Years": 7.8,
+          "last5Years": 15.2
+        }
+      },
+      "expectedCutoff2025": {
+        "tier1": {
+          "general": 150,
+          "obc": 145,
+          "sc": 135,
+          "st": 130,
+          "ews": 140,
+          "pwd": 120
+        },
+        "tier2": {
+          "general": 370,
+          "obc": 360,
+          "sc": 340,
+          "st": 330,
+          "ews": 355,
+          "pwd": 310
+        },
+        "final": {
+          "general": 675,
+          "obc": 660,
+          "sc": 635,
+          "st": 615,
+          "ews": 670,
+          "pwd": 590
+        },
+        "basis": "Based on 3-year trend analysis and expected difficulty level"
+      },
+      "comparativeAnalysis": {
+        "highestCutoffCategory": "General",
+        "lowestCutoffCategory": "PWD",
+        "mostStableCategory": "OBC",
+        "mostVolatileCategory": "EWS"
+      },
+      "cutoffPredictions": {
+        "basedOnApplications": "Increase by 5-8 marks",
+        "basedOnDifficulty": "Decrease by 3-5 marks if paper is tough",
+        "finalPrediction": "650-670 for General Category"
+      }
+    }
+  }
+]

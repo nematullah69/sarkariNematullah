@@ -5,12 +5,12 @@
   --foreground: #171717;
 }
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -23,4 +23,52 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+/* Base animation - slower speed */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.marquee-content {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 60s linear infinite; /* Slower base speed: 60s */
+  animation-play-state: running;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+/* Mobile devices - 30% slower */
+@media (max-width: 768px) {
+  .marquee-content {
+    animation: marquee 78s linear infinite; /* 60s + 30% = 78s */
+  }
+}
+
+/* Small mobile devices - even slower */
+@media (max-width: 480px) {
+  .marquee-content {
+    animation: marquee 90s linear infinite; /* 60s + 50% = 90s */
+  }
+}
+
+/* Add clock to each item */
+.marquee-content a::before {
+  content: ' ';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.9em;
 }
