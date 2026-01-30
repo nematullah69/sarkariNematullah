@@ -1,3 +1,4 @@
+
 import AdmissionsPage from "../../components/pages/AdmissionsPage";
 
 const Page = () => {

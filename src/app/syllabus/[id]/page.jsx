@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Download, BookOpen, Clock, FileText, CheckCircle, BarChart3 } from "lucide-react";
-import BreadcrumbSchema from "../../../components/seo/BreadcrumbSchema";
+import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
+
 export const runtime = "nodejs";
 
 async function getData(id) {

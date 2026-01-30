@@ -15,8 +15,8 @@ async function getResultData(id) {
 }
 
 import React from 'react';
-import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
-import HowToSchema from '../../../components/seo/HowToSchema';
+import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
+import HowToSchema from '../../../../components/seo/HowToSchema';
 import Link from 'next/link';
 import {
   ArrowLeft,

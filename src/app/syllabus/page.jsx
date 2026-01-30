@@ -1,6 +1,7 @@
 import SyllabusPage from "../../components/pages/SyllabusPage";
 
 const Page = async () => {
-    return <SyllabusPage/>
-}
+  return <SyllabusPage />;
+};
+
 export default Page;

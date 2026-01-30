@@ -14,8 +14,11 @@ import {
   CheckCircle // ADDED THIS IMPORT
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema';
-import HowToSchema from '../../../components/seo/HowToSchema';
+import BreadcrumbSchema from '../../../../components/seo/BreadcrumbSchema';
+import HowToSchema from '../../../../components/seo/HowToSchema';
+
+
+
 
 async function getAdmissionData(id) {
   const res = await fetch('https://gist.githubusercontent.com/shahidafridi-collab/2203569eeb7046f824f7eddb7613d065/raw/gistfile1.txt', { 
