@@ -5,6 +5,28 @@ import Script from "next/script";
 import BreadcrumbSchema from "../components/seo/BreadcrumbSchema";
 import { Calendar, FileText, CreditCard, Key, BookOpen, GraduationCap, TrendingUp, Clock, Bell, Users, Briefcase, Download, Award, CheckCircle } from 'lucide-react';
 
+// Type definitions
+interface PostItem {
+  title: string;
+  link: string;
+  latest?: boolean;
+  trend?: string;
+  subtitle?: string;
+  date?: string;
+}
+
+interface Category {
+  title: string;
+  link?: string;
+  borderColor?: string;
+  items: PostItem[];
+}
+
+interface HomeData {
+  categories: Category[];
+  latestPosts: any; // You can define a more specific type if needed
+}
+
 export const metadata = {
   title: "GovernmentExam.online: Latest Govt Jobs, Results, Admit Card & Syllabus",
   description:
@@ -35,7 +57,7 @@ export const metadata = {
   }
 };
 
-async function getHomeData() {
+async function getHomeData(): Promise<HomeData> {
   const res = await fetch('https://gist.githubusercontent.com/shahidafridi-collab/13807508220c46402eb6dcc6629e1b86/raw/homePage', { 
     cache: "no-cache" 
   });
@@ -61,7 +83,7 @@ export default async function Home() {
     Briefcase: Briefcase,
   };
 
-  const BORDER_COLORS = {
+  const BORDER_COLORS: Record<string, string> = {
     blue: "border-blue-500",
     green: "border-green-500",
     red: "border-red-500",
@@ -70,7 +92,7 @@ export default async function Home() {
     orange: "border-orange-500",
   };
 
-  const CATEGORY_ICONS = {
+  const CATEGORY_ICONS: Record<string, React.ComponentType<any>> = {
     "Latest Jobs": Briefcase,
     "Admit Cards": Download,
     "Results": Award,
@@ -139,7 +161,7 @@ export default async function Home() {
             </div>
             <div className="marquee-container flex-1">
               <div className="marquee-content animate-marquee whitespace-nowrap">
-                {categories.flatMap(post =>
+                {categories.flatMap((post: Category) =>
                   post.items
                     .filter(item => item.latest)
                     .map((item) => (
@@ -166,7 +188,7 @@ export default async function Home() {
               if (!category) return null;
               
               const IconComponent = Icon;
-              const borderColor = BORDER_COLORS[category.borderColor] || "border-blue-500";
+              const borderColor = BORDER_COLORS[category.borderColor || 'blue'] || "border-blue-500";
               
               return (
                 <Link key={title} href={category.link || "#"}>
@@ -191,7 +213,7 @@ export default async function Home() {
               Trending Updates
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {categories.flatMap(post =>
+              {categories.flatMap((post: Category) =>
                 post.items
                   .filter(item => item.trend === 'true')
                   .slice(0, 8)
@@ -218,9 +240,9 @@ export default async function Home() {
 
           {/* Main Categories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => {
+            {categories.map((category: Category, index: number) => {
               const IconComponent = CATEGORY_ICONS[category.title] || FileText;
-              const borderColor = BORDER_COLORS[category.borderColor] || "border-blue-500";
+              const borderColor = BORDER_COLORS[category.borderColor || 'blue'] || "border-blue-500";
               
               return (
                 <div
@@ -242,7 +264,7 @@ export default async function Home() {
 
                   {/* Items List */}
                   <div className="divide-y divide-gray-100">
-                    {category.items.slice(0, 5).map((item, idx) => (
+                    {category.items.slice(0, 5).map((item: PostItem, idx: number) => (
                       <Link
                         key={idx}
                         href={item.link}

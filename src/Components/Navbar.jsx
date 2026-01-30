@@ -22,7 +22,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-4 group transition-transform hover:scale-[1.01]">
           <div className="relative overflow-hidden rounded-xl border-2 border-indigo-400/30 shadow-inner">
             <Image
-              src="/sarkariresult.jpg"
+              src="/gove.jpg"
               alt="Govt Exam Online"
               width={55}
               height={55}
